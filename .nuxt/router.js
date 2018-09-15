@@ -6,7 +6,9 @@ Vue.use(Router)
 const _7251d7ce = () => import('../src/pages/cases.vue' /* webpackChunkName: "pages/cases" */).then(m => m.default || m)
 const _9b36685e = () => import('../src/pages/cases/index.vue' /* webpackChunkName: "pages/cases/index" */).then(m => m.default || m)
 const _2226e3b3 = () => import('../src/pages/cases/mint.vue' /* webpackChunkName: "pages/cases/mint" */).then(m => m.default || m)
-const _55a58e79 = () => import('../src/pages/cases/_id.vue' /* webpackChunkName: "pages/cases/_id" */).then(m => m.default || m)
+const _82a75a56 = () => import('../src/pages/cases/lobaloba.vue' /* webpackChunkName: "pages/cases/lobaloba" */).then(m => m.default || m)
+const _6d138969 = () => import('../src/pages/cases/caseNaming.vue' /* webpackChunkName: "pages/cases/caseNaming" */).then(m => m.default || m)
+const _04e007f2 = () => import('../src/pages/cases/lobalobaTest.vue' /* webpackChunkName: "pages/cases/lobalobaTest" */).then(m => m.default || m)
 const _1924b5dd = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
@@ -82,9 +84,19 @@ export function createRouter () {
 					name: "cases-mint"
 				},
 				{
-					path: ":id",
-					component: _55a58e79,
-					name: "cases-id"
+					path: "lobaloba",
+					component: _82a75a56,
+					name: "cases-lobaloba"
+				},
+				{
+					path: "caseNaming",
+					component: _6d138969,
+					name: "cases-caseNaming"
+				},
+				{
+					path: "lobalobaTest",
+					component: _04e007f2,
+					name: "cases-lobalobaTest"
 				}
 			]
 		},

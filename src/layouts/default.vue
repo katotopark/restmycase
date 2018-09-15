@@ -4,7 +4,8 @@
   </div>
 </template>
 
-
+<style src="element-ui/lib/theme-chalk/index.css">
+</style>
 <style>
 html {
 	font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',

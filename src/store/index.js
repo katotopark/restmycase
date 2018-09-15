@@ -4,9 +4,10 @@ import web3Abi from 'web3-eth-abi'
 import NonFungibleCase from '../../build/contracts/NonFungibleCase'
 
 const IPFS = require('ipfs-api')
-const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
+// const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
+const ipfs = IPFS()
 
-const tokenAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10'
+const tokenAddress = '0xf204a4ef082f5c04bb89f7d5e6568b796096735a'
 const aCase = new web3.eth.Contract(NonFungibleCase.abi, tokenAddress)
 
 let account
@@ -15,17 +16,16 @@ web3.eth.getAccounts().then(res => {
 })
 
 const createStore = () => {
-	return new Vuex.Store({
+	const store = new Vuex.Store({
 		state: {
 			formObj: {
 				caseName: '',
 				caseDescription: '',
 				tDistance: '',
 				tDuration: '',
-				loba_d1: '',
-				loba_d2: '',
-				loba_d3: ''
+				lobas: []
 			},
+			totalLoba: 0,
 			ipfsHash: '',
 			txHash: '',
 			caseArray: [],
@@ -33,6 +33,13 @@ const createStore = () => {
 			userArray: [] // ERC721 => js filter for ownerOf
 		},
 		mutations: {
+			initializeStore(state) {
+				if (process.browser && localStorage.getItem('store')) {
+					this.replaceState(
+						Object.assign(state, JSON.parse(localStorage.getItem('store')))
+					)
+				}
+			},
 			addCase(state) {
 				ipfs.files.add(
 					Buffer.from(JSON.stringify(state.formObj)),
@@ -43,7 +50,6 @@ const createStore = () => {
 						res.forEach(function(file) {
 							if (file && file.hash) {
 								state.ipfsHash = file.hash
-								// console.log('ipfsHash: ', state.ipfsHash)
 								state.caseArray.push(state.ipfsHash)
 								return state.ipfsHash
 							}
@@ -58,6 +64,14 @@ const createStore = () => {
 			randomNum(state) {
 				state.formObj.tDistance = (Math.random() * 10).toFixed(2)
 				state.formObj.tDuration = (Math.random() * 5).toFixed(2)
+			},
+			calculateLobas(state, payload) {
+				state.formObj.lobas = payload
+				console.log(state.formObj)
+			},
+			describeCase(state, payload) {
+				state.formObj.caseName = payload.caseName
+				state.formObj.caseDescription = payload.caseDescription
 			}
 		},
 		actions: {
@@ -75,6 +89,13 @@ const createStore = () => {
 			},
 			randomNum(context) {
 				context.commit('randomNum')
+			},
+			async calculateLobas(context, payload) {
+				await context.commit('calculateLobas', payload)
+			},
+			async describeCase(context, payload) {
+				await context.commit('describeCase', payload)
+				console.log(context.state.formObj)
 			},
 			async addCase(context) {
 				await context.commit('addCase')
@@ -137,6 +158,13 @@ const createStore = () => {
 			}
 		}
 	})
+
+	store.subscribe((mutation, state) => {
+		if (process.browser) {
+			localStorage.setItem('createStore', JSON.stringify(state))
+		}
+	})
+	return store
 }
 
 export default createStore
