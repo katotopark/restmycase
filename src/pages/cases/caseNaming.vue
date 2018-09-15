@@ -41,6 +41,7 @@ export default {
 					caseName: this.textarea2,
 					caseDescription: this.textarea3
 				})
+
 				this.mintCase()
 			}
 		},

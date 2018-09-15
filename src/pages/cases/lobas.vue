@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import LobaTest from '../../components/LobaTest.vue'
+import LobaTest from '../../components/LobaComponent.vue'
 import { mapState } from 'vuex'
 
 export default {

@@ -23,7 +23,7 @@ const createStore = () => {
 				caseDescription: '',
 				tDistance: '',
 				tDuration: '',
-				lobas: []
+				lobas: {}
 			},
 			totalLoba: 0,
 			ipfsHash: '',
@@ -65,9 +65,8 @@ const createStore = () => {
 				state.formObj.tDistance = (Math.random() * 10).toFixed(2)
 				state.formObj.tDuration = (Math.random() * 5).toFixed(2)
 			},
-			calculateLobas(state, payload) {
-				state.formObj.lobas = payload
-				console.log(state.formObj)
+			setLobas(state, payload) {
+				state.formObj.lobas[payload.id] = payload.score
 			},
 			describeCase(state, payload) {
 				state.formObj.caseName = payload.caseName
@@ -90,12 +89,11 @@ const createStore = () => {
 			randomNum(context) {
 				context.commit('randomNum')
 			},
-			async calculateLobas(context, payload) {
-				await context.commit('calculateLobas', payload)
+			async setLobas(context, payload) {
+				await context.commit('setLobas', payload)
 			},
 			async describeCase(context, payload) {
 				await context.commit('describeCase', payload)
-				console.log(context.state.formObj)
 			},
 			async addCase(context) {
 				await context.commit('addCase')
@@ -131,7 +129,12 @@ const createStore = () => {
 
 				await context.commit('confirmTx', receipt.transactionHash)
 
-				console.log('Transaction successful! txHash: ' + context.state.txHash)
+				console.log(
+					`Transaction successful! txHash: ${context.state.txHash}, ipfsHash: ${
+						context.state.ipfsHash
+					}`,
+					context.state.formObj
+				)
 				return receipt
 			},
 			async ipfsHashToData(context) {
