@@ -14,16 +14,16 @@ export default {
 		return {
 			qArray: [
 				{
-					id: 'q1',
-					value: 'aah?'
+					id: 'Q1',
+					value: 'Commute/Access to the building'
 				},
 				{
-					id: 'q2',
-					value: 'yiyo?'
+					id: 'Q2',
+					value: 'Interactivity within the space'
 				},
 				{
-					id: 'q3',
-					value: 'asd?'
+					id: 'Q3',
+					value: 'Interior space'
 				}
 			]
 		}

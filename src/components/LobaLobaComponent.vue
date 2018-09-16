@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <el-col :span="12" :offset="6">
     <loba-component v-for="(elem, i) in lobaObj" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
-    <el-button type="info" icon="el-icon-check" circle @click="onSubmit"/>
+    <el-button plain @click="onSubmit">Submit!</el-button>
     <ul>
       <li v-for="err in errors" :key="err.key">{{ err }}</li>
     </ul>
-  </div>
+  </el-col>
 </template>
 <script>
 import LobaComponent from './LobaComponent.vue'
@@ -38,7 +38,7 @@ export default {
 		this.lobaObj = this.questions.map((item, index) => {
 			let output = {}
 			output['group'] = `D${index + 1}`
-			output['title'] = item.value
+			output['title'] = `${item.value}?`
 			output['id'] = item.id
 			output['rated'] = false
 			return output
@@ -64,7 +64,7 @@ export default {
 			this.errors = []
 			this.lobaObj.forEach(item => {
 				if (!item.rated || item.score == 0) {
-					this.errors.push(`Please answer ${item.title}`)
+					this.errors.push(`Answer ${item.id}!`)
 				}
 			})
 		}
@@ -72,4 +72,10 @@ export default {
 }
 </script>
 <style scoped>
+.el-col {
+	border: 2px solid black;
+}
+.el-button {
+	border-radius: 0px;
+}
 </style>

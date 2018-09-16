@@ -1,31 +1,32 @@
 <template>
-  <div>
+  <el-col :span="12" :offset="6">
+    <span>Case name: {{ caseName }}</span>
     <el-input
-      v-model="textarea2"
-      autosize
+      v-model="caseName"
+      :rows="2"
       type="textarea"
-      placeholder="Please input"/>
+      placeholder="e.g., Bureaupanique"/>
     <div style="margin: 20px 0;"/>
+    <span>Case description: </span>
     <el-input
-      v-model="textarea3"
-      :autosize="{ minRows: 2, maxRows: 4}"
+      v-model="caseDescription"
+      :autosize="{ minRows: 4, maxRows: 8}"
       type="textarea"
-      placeholder="Please input"/>
-    <el-button type="info" icon="el-icon-check" circle @click="onSubmit"/>
+      placeholder="e.g., pre-breakfast absolute total shitstorm"/>
+    <el-button plain @click="onSubmit">Mint!</el-button>
     <ul>
       <li v-for="err in errors" :key="err.key">{{ err }}</li>
     </ul>
-  </div>
+  </el-col>
 </template>
-
 <script>
 import { mapState, mapActions } from 'vuex'
 
 export default {
 	data() {
 		return {
-			textarea2: '',
-			textarea3: '',
+			caseName: '',
+			caseDescription: '',
 			errors: []
 		}
 	},
@@ -33,25 +34,27 @@ export default {
 		...mapState(['formObj'])
 	},
 	methods: {
-		...mapActions(['describeCase', 'mintCase']),
+		...mapActions(['describeCase', 'randomNum', 'mintCase']),
 		async onSubmit() {
 			this.checkInput()
 			if (this.errors.length === 0) {
 				await this.describeCase({
-					caseName: this.textarea2,
-					caseDescription: this.textarea3
+					caseName: this.caseName,
+					caseDescription: this.caseDescription
 				})
-
+				await this.randomNum()
 				this.mintCase()
+
+				this.$router.push('mintSucces')
 			}
 		},
 		checkInput() {
 			this.errors = []
 			if (
-				!this.textarea2 ||
-				!this.textarea3 ||
-				this.textarea2.length == 0 ||
-				this.textarea3.length == 0
+				!this.caseName ||
+				!this.caseDescription ||
+				this.caseName.length == 0 ||
+				this.caseDescription.length == 0
 			) {
 				this.errors.push('Fill those!')
 			}
@@ -59,3 +62,14 @@ export default {
 	}
 }
 </script>
+<style scoped>
+span {
+	margin: 50px auto;
+}
+.el-input {
+	border-radius: 0px;
+}
+.el-button {
+	border-radius: 0px;
+}
+</style>

@@ -14,16 +14,16 @@ export default {
 		return {
 			qArray: [
 				{
-					id: 'q7',
-					value: 'nlkdasjdlkjdasjlajdk?'
+					id: 'Q7',
+					value: 'nlkdasjdlkjdasjlajdk'
 				},
 				{
-					id: 'q8',
-					value: 'sjdklsjdkl?'
+					id: 'Q8',
+					value: 'sjdklsjdkl'
 				},
 				{
-					id: 'q9',
-					value: 'hasdhsahaskjd?'
+					id: 'Q9',
+					value: 'hasdhsahaskjd'
 				}
 			]
 		}

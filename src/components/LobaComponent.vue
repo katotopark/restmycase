@@ -1,7 +1,8 @@
 <template>
   <el-form :model="dataObj">
-    <el-form-item :label="dataObj.title">
-      <el-rate v-model="dataObj.score" @change="$emit('catch-input', [dataObj.score])"/>
+    <el-form-item :label="`${dataObj.id}: `">
+      <span>{{ dataObj.title }}</span>
+      <el-rate v-model="dataObj.score" :texts="['oops', 'disappointed', 'normal', 'good', 'great']" show-text @change="$emit('catch-input', dataObj.score)"/>
     </el-form-item>
   </el-form>
 </template>
@@ -9,7 +10,7 @@
 export default {
 	props: {
 		dataObj: {
-			default: null,
+			required: true,
 			type: Object
 		}
 	},
