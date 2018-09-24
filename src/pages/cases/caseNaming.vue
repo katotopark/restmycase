@@ -45,7 +45,7 @@ export default {
 				await this.randomNum()
 				this.mintCase()
 
-				this.$router.push('mintSucces')
+				this.$router.push('mintSuccess')
 			}
 		},
 		checkInput() {

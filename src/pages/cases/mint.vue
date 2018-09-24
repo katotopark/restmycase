@@ -60,7 +60,7 @@ export default {
 	},
 	methods: {
 		...mapActions([
-			'addCase',
+			'addForm',
 			'mintCase',
 			'getTokenName',
 			'getIpfsHash',

@@ -542,12 +542,12 @@
           }
         ],
         "contractDependencies": [
+          608,
           201,
           252,
           459,
           479,
           486,
-          608,
           1156
         ],
         "contractKind": "contract",
@@ -5163,12 +5163,12 @@
           }
         ],
         "contractDependencies": [
+          608,
           201,
           252,
           459,
           479,
           486,
-          608,
           1156
         ],
         "contractKind": "contract",
@@ -9678,5 +9678,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-08-27T09:58:44.829Z"
+  "updatedAt": "2018-09-24T09:21:50.982Z"
 }

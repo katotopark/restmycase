@@ -15,15 +15,15 @@ export default {
 			qArray: [
 				{
 					id: 'Q7',
-					value: 'nlkdasjdlkjdasjlajdk'
+					value: 'Recommend'
 				},
 				{
 					id: 'Q8',
-					value: 'sjdklsjdkl'
+					value: 'Never again'
 				},
 				{
 					id: 'Q9',
-					value: 'hasdhsahaskjd'
+					value: 'Shook'
 				}
 			]
 		}

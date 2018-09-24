@@ -7,10 +7,15 @@
 <style src="element-ui/lib/theme-chalk/index.css">
 </style>
 <style>
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
 html {
-	font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-		Roboto, 'Helvetica Neue', Arial, sans-serif;
+	/* font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+		Roboto, 'Helvetica Neue', Arial, sans-serif; */
+	font-family: 'Inconsolata', monospace;
 	font-size: 16px;
+	background-color: rgb(55, 55, 55);
 	word-spacing: 1px;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;

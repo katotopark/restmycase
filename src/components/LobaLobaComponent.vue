@@ -48,7 +48,7 @@ export default {
 		...mapActions(['setLobas']),
 		onCatchInput(e, i) {
 			this.lobaObj[i].rated = true
-			console.log(e, this.lobaObj[i])
+			console.log(`${this.lobaObj[i].title}: ${this.lobaObj[i].score}`)
 		},
 		onSubmit() {
 			this.checkForm()

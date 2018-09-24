@@ -1,26 +1,32 @@
 <template>
-  <el-form :label-position="labelPosition" :model="formObj" label-width="100px">
-    <el-form-item>
-      <el-button @click="getAllCases">show cases!</el-button>
-      <el-button @click="getTransactions">show transactions!</el-button>
-    </el-form-item>
-  </el-form>
-
+  <div>
+    <el-row>
+      <case-card v-for="elem in 4" :key="elem.key"/>
+    </el-row>
+    <el-row>
+      <case-card v-for="elem in 4" :key="elem.key"/>
+    </el-row>
+  </div>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
+import CaseCard from '../../components/CaseCard.vue'
 
 export default {
+	components: {
+		CaseCard
+	},
 	data() {
 		return {
 			labelPosition: 'right'
 		}
 	},
 	computed: {
-		...mapState(['formObj'])
+		...mapState(['ipfsHash'])
 	},
+	created() {},
 	methods: {
-		...mapActions(['getAllCases', 'getTransactions'])
+		...mapActions(['getUsersCases', 'getCaseHash', 'caseHashToData'])
 	}
 }
 </script>

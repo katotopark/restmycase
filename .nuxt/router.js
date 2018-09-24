@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+const _0c70242d = () => import('../src/pages/pfive.vue' /* webpackChunkName: "pages/pfive" */).then(m => m.default || m)
 const _7251d7ce = () => import('../src/pages/cases.vue' /* webpackChunkName: "pages/cases" */).then(m => m.default || m)
 const _9b36685e = () => import('../src/pages/cases/index.vue' /* webpackChunkName: "pages/cases/index" */).then(m => m.default || m)
 const _dbf36900 = () => import('../src/pages/cases/mintSuccess.vue' /* webpackChunkName: "pages/cases/mintSuccess" */).then(m => m.default || m)
@@ -72,6 +73,11 @@ export function createRouter () {
     linkExactActiveClass: 'nuxt-link-exact-active',
     scrollBehavior,
     routes: [
+		{
+			path: "/pfive",
+			component: _0c70242d,
+			name: "pfive"
+		},
 		{
 			path: "/cases",
 			component: _7251d7ce,

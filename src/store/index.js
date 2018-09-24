@@ -7,8 +7,8 @@ const IPFS = require('ipfs-api')
 // const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
 const ipfs = IPFS()
 
-const tokenAddress = '0xfb88de099e13c3ed21f80a7a1e49f8caecf10df6'
-const aCase = new web3.eth.Contract(NonFungibleCase.abi, tokenAddress)
+const tokenAddress = '0xf08df3efdd854fede77ed3b2e515090eee765154'
+const aNFC = new web3.eth.Contract(NonFungibleCase.abi, tokenAddress)
 
 let account
 web3.eth.getAccounts().then(res => {
@@ -40,7 +40,7 @@ const createStore = () => {
 					)
 				}
 			},
-			addCase(state) {
+			addForm(state) {
 				ipfs.files.add(
 					Buffer.from(JSON.stringify(state.formObj)),
 					(err, res) => {
@@ -95,14 +95,14 @@ const createStore = () => {
 			async describeCase(context, payload) {
 				await context.commit('describeCase', payload)
 			},
-			async addCase(context) {
-				await context.commit('addCase')
+			async addForm(context) {
+				await context.commit('addForm')
 			},
 			async getTokenName() {
-				return await aCase.methods.name().call({ from: account })
+				return await aNFC.methods.name().call({ from: account })
 			},
 			async mintCase(context) {
-				await context.dispatch('addCase')
+				await context.dispatch('addForm')
 
 				const mintMethod = NonFungibleCase.abi.find(method => {
 					return method.name === 'mintCase'
@@ -130,15 +130,30 @@ const createStore = () => {
 				await context.commit('confirmTx', receipt.transactionHash)
 
 				console.log(
-					`Transaction successful! txHash: ${context.state.txHash}, ipfsHash: ${
-						context.state.ipfsHash
-					}`,
-					context.state.formObj
+					'Transaction successful!',
+					context.state.txHash,
+					context.state.ipfsHash
 				)
 				return receipt
 			},
-			async ipfsHashToData(context) {
-				await ipfs.files.cat(context.state.ipfsHash, function(err, file) {
+			async getUsersCases() {
+				const casesArr = await aNFC.methods
+					.tokensOf(tokenAddress)
+					.call({ from: account })
+				console.log(`casesArr: ${casesArr}`)
+				return casesArr
+			},
+			async getCaseHash(payload) {
+				payload = 2
+				const caseHash = await aNFC.methods
+					.getIpfsHash(payload)
+					.call({ from: account })
+				console.log(caseHash)
+				return caseHash
+			},
+			async caseHashToData(payload) {
+				payload = 'QmNsyBaxTHoJtdKcHh85tM2QUE9SBCVxyW8DWVGvDQUdQy'
+				await ipfs.files.cat(payload, function(err, file) {
 					if (err) {
 						throw err
 					}
@@ -146,20 +161,7 @@ const createStore = () => {
 				})
 			}
 		},
-		getters: {
-			getIpfsHash: state => {
-				return state.caseArray[state.caseArray.length - 1]
-			},
-			getAllCases: state => {
-				return state.caseArray
-			},
-			getCaseById: state => id => {
-				return state.caseArray[id]
-			},
-			getTransactions: state => {
-				return state.txArray
-			}
-		}
+		getters: {}
 	})
 
 	store.subscribe((mutation, state) => {
