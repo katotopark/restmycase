@@ -7,7 +7,7 @@ const IPFS = require('ipfs-api')
 // const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
 const ipfs = IPFS()
 
-const tokenAddress = '0xf08df3efdd854fede77ed3b2e515090eee765154'
+const tokenAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10'
 const aNFC = new web3.eth.Contract(NonFungibleCase.abi, tokenAddress)
 
 let account

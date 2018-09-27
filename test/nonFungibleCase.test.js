@@ -1,6 +1,6 @@
 const contractDefinition = artifacts.require('./NonFungibleCase.sol')
 
-contract('NFC', accounts => {
+contract('NonFungibleCase', accounts => {
 	var owner = accounts[0]
 	var user = accounts[1]
 

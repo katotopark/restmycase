@@ -3,16 +3,17 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _0c70242d = () => import('../src/pages/pfive.vue' /* webpackChunkName: "pages/pfive" */).then(m => m.default || m)
+const _0aeb6be7 = () => import('../src/pages/questionPool.vue' /* webpackChunkName: "pages/questionPool" */).then(m => m.default || m)
+const _94c5268c = () => import('../src/pages/participantPool.vue' /* webpackChunkName: "pages/participantPool" */).then(m => m.default || m)
 const _7251d7ce = () => import('../src/pages/cases.vue' /* webpackChunkName: "pages/cases" */).then(m => m.default || m)
 const _9b36685e = () => import('../src/pages/cases/index.vue' /* webpackChunkName: "pages/cases/index" */).then(m => m.default || m)
 const _dbf36900 = () => import('../src/pages/cases/mintSuccess.vue' /* webpackChunkName: "pages/cases/mintSuccess" */).then(m => m.default || m)
-const _662cf730 = () => import('../src/pages/cases/lobas.vue' /* webpackChunkName: "pages/cases/lobas" */).then(m => m.default || m)
-const _6298ff6f = () => import('../src/pages/cases/loba2.vue' /* webpackChunkName: "pages/cases/loba2" */).then(m => m.default || m)
-const _6d138969 = () => import('../src/pages/cases/caseNaming.vue' /* webpackChunkName: "pages/cases/caseNaming" */).then(m => m.default || m)
-const _628ae7ee = () => import('../src/pages/cases/loba1.vue' /* webpackChunkName: "pages/cases/loba1" */).then(m => m.default || m)
 const _62a716f0 = () => import('../src/pages/cases/loba3.vue' /* webpackChunkName: "pages/cases/loba3" */).then(m => m.default || m)
-const _2226e3b3 = () => import('../src/pages/cases/mint.vue' /* webpackChunkName: "pages/cases/mint" */).then(m => m.default || m)
+const _628ae7ee = () => import('../src/pages/cases/loba1.vue' /* webpackChunkName: "pages/cases/loba1" */).then(m => m.default || m)
+const _6d138969 = () => import('../src/pages/cases/caseNaming.vue' /* webpackChunkName: "pages/cases/caseNaming" */).then(m => m.default || m)
+const _6298ff6f = () => import('../src/pages/cases/loba2.vue' /* webpackChunkName: "pages/cases/loba2" */).then(m => m.default || m)
+const _662cf730 = () => import('../src/pages/cases/lobas.vue' /* webpackChunkName: "pages/cases/lobas" */).then(m => m.default || m)
+const _0c70242d = () => import('../src/pages/pfive.vue' /* webpackChunkName: "pages/pfive" */).then(m => m.default || m)
 const _1924b5dd = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
@@ -74,9 +75,14 @@ export function createRouter () {
     scrollBehavior,
     routes: [
 		{
-			path: "/pfive",
-			component: _0c70242d,
-			name: "pfive"
+			path: "/questionPool",
+			component: _0aeb6be7,
+			name: "questionPool"
+		},
+		{
+			path: "/participantPool",
+			component: _94c5268c,
+			name: "participantPool"
 		},
 		{
 			path: "/cases",
@@ -93,19 +99,9 @@ export function createRouter () {
 					name: "cases-mintSuccess"
 				},
 				{
-					path: "lobas",
-					component: _662cf730,
-					name: "cases-lobas"
-				},
-				{
-					path: "loba2",
-					component: _6298ff6f,
-					name: "cases-loba2"
-				},
-				{
-					path: "caseNaming",
-					component: _6d138969,
-					name: "cases-caseNaming"
+					path: "loba3",
+					component: _62a716f0,
+					name: "cases-loba3"
 				},
 				{
 					path: "loba1",
@@ -113,16 +109,26 @@ export function createRouter () {
 					name: "cases-loba1"
 				},
 				{
-					path: "loba3",
-					component: _62a716f0,
-					name: "cases-loba3"
+					path: "caseNaming",
+					component: _6d138969,
+					name: "cases-caseNaming"
 				},
 				{
-					path: "mint",
-					component: _2226e3b3,
-					name: "cases-mint"
+					path: "loba2",
+					component: _6298ff6f,
+					name: "cases-loba2"
+				},
+				{
+					path: "lobas",
+					component: _662cf730,
+					name: "cases-lobas"
 				}
 			]
+		},
+		{
+			path: "/pfive",
+			component: _0c70242d,
+			name: "pfive"
 		},
 		{
 			path: "/",
