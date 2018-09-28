@@ -27,7 +27,7 @@ export default {
 <style scoped>
 .case-card {
 	background-color: rgb(244, 243, 234);
-	border: 0.5rem solid black;
+	/* border: 0.2rem solid black; */
 	/* border-style: dashed; */
 	height: 400px;
 	max-width: 400px;
@@ -40,7 +40,7 @@ img {
 	width: 100%;
 	max-height: 15rem;
 	object-fit: fill;
-	border: 0.2rem solid black;
+	border: 0.5rem solid black;
 }
 #case-description {
 	margin-top: 10px;
@@ -51,8 +51,6 @@ img {
 }
 #case-name {
 	font-size: 18px;
-	/* font-family: 'Heebo', sans-serif; */
-	/* font-style: italic; */
 	font-weight: bold;
 	word-wrap: break-word;
 	hyphens: auto;

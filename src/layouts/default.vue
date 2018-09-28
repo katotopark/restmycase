@@ -15,7 +15,7 @@ html {
 		Roboto, 'Helvetica Neue', Arial, sans-serif; */
 	font-family: 'Inconsolata', monospace;
 	font-size: 16px;
-	background-color: rgb(55, 55, 55);
+	background-color: rgb(113, 110, 110);
 	word-spacing: 1px;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
