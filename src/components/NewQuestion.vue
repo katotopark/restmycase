@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="">
-            <el-input v-model="dataObj.title" type="textarea" placeholder="title" @change="$emit('catch-input', dataObj.title)"/>
+            <el-input v-model="dataObj.title" type="textarea" placeholder="title" @change="$emit('catch-input', dataObj.title)" />
           </el-form-item>
         </el-col>
       </el-row>
@@ -48,7 +48,7 @@ export default {
 <style scoped>
 .el-button {
 	font-family: inherit;
-	font-size: 0.75rem;
+	font-size: 0.85rem;
 	margin-top: 0.1rem;
 	border-radius: 0px;
 }

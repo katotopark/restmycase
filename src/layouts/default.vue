@@ -11,11 +11,9 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata');
 
 html {
-	/* font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-		Roboto, 'Helvetica Neue', Arial, sans-serif; */
 	font-family: 'Inconsolata', monospace;
 	font-size: 16px;
-	background-color: rgb(113, 110, 110);
+	background-color: rgb(0, 0, 0);
 	word-spacing: 1px;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;

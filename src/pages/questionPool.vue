@@ -62,6 +62,7 @@ export default {
 			},
 			newTitle: '',
 			voted: false,
+			qSubmitted: false,
 			errors: []
 		}
 	},
@@ -100,14 +101,19 @@ export default {
 					group: this.newGroup.value,
 					voteCount: 0
 				}
+				this.questionData.push(this.newQ)
 			}
-			this.questionData.push(this.newQ)
+
 			this.newQ = {}
+			this.qSubmitted = true
 		},
 		checkForm() {
 			this.errors = []
-			if (this.newTitle == '' || this.newGroup.value === 0) {
+			if (this.newTitle === '' || this.newGroup.value === 0) {
 				this.errors.push('fill those')
+			}
+			if (this.qSubmitted) {
+				this.errors.push('you already submitted')
 			}
 		},
 		handleClick(index) {
@@ -130,7 +136,7 @@ export default {
 	font-family: inherit;
 	color: inherit;
 }
-li {
+ul > li {
 	color: white;
 	border: 2px solid black;
 }
