@@ -1,6 +1,6 @@
 <template>
-  <transition name="fade" type="transition">
-    <div v-if="show" id="transition">
+  <transition v-if="showMetadata" name="fade" type="transition">
+    <div v-if="fade" id="transition">
       <el-row :gutter="0">
         <el-col :span="20" :offset="2">
           <div class="content">
@@ -18,7 +18,11 @@ import Faker from 'faker'
 
 export default {
 	props: {
-		show: {
+		fade: {
+			required: true,
+			type: Boolean
+		},
+		showMetadata: {
 			required: true,
 			type: Boolean
 		}
@@ -46,7 +50,7 @@ div.content {
 	font-size: 1.1rem;
 }
 p {
-	margin: 20px auto 0px 0%;
+	/* margin: 20px auto 0px 0%; */
 	hyphens: auto;
 }
 p > span {

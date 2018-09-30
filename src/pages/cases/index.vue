@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-row>
-      <case-card v-for="elem in 4" :key="elem.key"/>
+      <case-card v-for="elem in 2" :key="elem.key"/>
     </el-row>
     <el-row>
-      <case-card v-for="elem in 4" :key="elem.key"/>
+      <case-card v-for="elem in 2" :key="elem.key"/>
     </el-row>
   </div>
 </template>

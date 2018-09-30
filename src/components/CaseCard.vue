@@ -1,49 +1,77 @@
 <template>
-  <el-col :xs="20" :sm="10" :md="8" class="case-card">
-    <el-col id="case-img" :span="20" :offset="2">
-      <el-row>
-        <el-col :span="24">
-          <div class="image" @mouseenter="show=true" @mouseleave="show=false">
-            <img v-if="!show" src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-tiffany-blue-solid-color-background.jpg">
-            <meta-data-card :show="show"/>
-          </div>
+  <el-row>
+    <el-row>
+      <el-col class="case-card">
+        <el-col id="case-img" :span="20" :offset="2">
+          <el-row>
+            <el-col :span="24">
+              <div class="image" @mouseenter="fade=true" @mouseleave="fade=false">
+                <img v-if="!fade" src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-tiffany-blue-solid-color-background.jpg">
+                <case-card-metadata :show-metadata="revealMetadata" :fade="fade"/>
+              </div>
+            </el-col>
+          </el-row>
+          <span id="case-name">_{{ fakerName }}</span>
+          <p id="case-description">{{ fakerDescription }}</p>
         </el-col>
-      </el-row>
-      <span id="case-name">_{{ fakerName }}</span>
-      <p id="case-description">{{ fakerDescription }}</p>
-    </el-col>
-  </el-col>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="24" :offset="0">
+        <case-card-buttons :show-buttons="revealButtons" @show-details="showDetails"/>
+      </el-col>
+    </el-row>
+  </el-row>
 </template>
 <script>
 import Faker from 'faker'
-import MetaDataCard from './MetaDataCard.vue'
+import CaseCardMetadata from './CaseCardMetadata.vue'
+// import CaseCardDataVisual from './CaseCardDataVisual.vue'
+import CaseCardButtons from './CaseCardButtons.vue'
 
 export default {
 	components: {
-		MetaDataCard
+		CaseCardMetadata,
+		CaseCardButtons
 	},
 	data() {
 		return {
 			fakerImg: null,
 			fakerName: '',
 			fakerDescription: '',
-			show: false
+			fakerId: 0,
+			fade: false
+		}
+	},
+	computed: {
+		revealButtons() {
+			return this.$router.currentRoute.path !== '/cases/' ? false : true
+		},
+		revealMetadata() {
+			return this.$router.currentRoute.path !== '/cases/' ? false : true
 		}
 	},
 	created() {
 		this.fakerImg = Faker.image.abstract()
 		this.fakerName = Faker.random.words()
 		this.fakerDescription = Faker.lorem.sentence()
+		this.fakerId = Faker.random.number(100)
+	},
+	methods: {
+		showDetails() {
+			this.$router.push(`${this.fakerId}`)
+		}
 	}
 }
 </script>
 <style scoped>
 .case-card {
 	background-color: rgb(244, 243, 234);
-	height: 400px;
+	height: 100%;
 	max-width: 400px;
+	min-width: 200px;
 	color: black;
-	margin: 20px 20px;
+	/* margin: 20px 20px; */
 }
 img {
 	width: 100%;

@@ -13,6 +13,8 @@ const _628ae7ee = () => import('../src/pages/cases/loba1.vue' /* webpackChunkNam
 const _6d138969 = () => import('../src/pages/cases/caseNaming.vue' /* webpackChunkName: "pages/cases/caseNaming" */).then(m => m.default || m)
 const _6298ff6f = () => import('../src/pages/cases/loba2.vue' /* webpackChunkName: "pages/cases/loba2" */).then(m => m.default || m)
 const _662cf730 = () => import('../src/pages/cases/lobas.vue' /* webpackChunkName: "pages/cases/lobas" */).then(m => m.default || m)
+const _55a58e79 = () => import('../src/pages/cases/_id.vue' /* webpackChunkName: "pages/cases/_id" */).then(m => m.default || m)
+const _e13cd388 = () => import('../src/pages/cases/_id/index.vue' /* webpackChunkName: "pages/cases/_id/index" */).then(m => m.default || m)
 const _0c70242d = () => import('../src/pages/pfive.vue' /* webpackChunkName: "pages/pfive" */).then(m => m.default || m)
 const _1924b5dd = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
@@ -122,6 +124,17 @@ export function createRouter () {
 					path: "lobas",
 					component: _662cf730,
 					name: "cases-lobas"
+				},
+				{
+					path: ":id",
+					component: _55a58e79,
+					children: [
+						{
+							path: "",
+							component: _e13cd388,
+							name: "cases-id"
+						}
+					]
 				}
 			]
 		},
