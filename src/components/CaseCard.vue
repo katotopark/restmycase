@@ -1,32 +1,35 @@
 <template>
-  <el-row>
-    <el-row>
-      <el-col class="case-card">
-        <el-col id="case-img" :span="20" :offset="2">
-          <el-row>
-            <el-col :span="24">
-              <div class="image" @mouseenter="fade=true" @mouseleave="fade=false">
-                <img v-if="!fade" src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-tiffany-blue-solid-color-background.jpg">
-                <case-card-metadata :show-metadata="revealMetadata" :fade="fade"/>
-              </div>
-            </el-col>
-          </el-row>
-          <span id="case-name">_{{ fakerName }}</span>
-          <p id="case-description">{{ fakerDescription }}</p>
+  <el-row >
+    <el-col :span="24">
+      <el-row class="case-card">
+        <el-col>
+          <el-col id="case-img" :span="20" :offset="2">
+            <el-row>
+              <el-col :span="24">
+                <div class="image" @mouseenter="fade=true" @mouseleave="fade=false">
+                  <img v-if="!fade" src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-tiffany-blue-solid-color-background.jpg">
+                  <case-card-metadata :show-metadata="revealMetadata" :fade="fade" />
+                </div>
+              </el-col>
+            </el-row>
+            <span id="case-name">_{{ fakerName }}</span>
+            <p id="case-description">{{ fakerDescription }}</p>
+          </el-col>
         </el-col>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="24" :offset="0">
-        <case-card-buttons :show-buttons="revealButtons" @show-details="showDetails"/>
-      </el-col>
-    </el-row>
+      </el-row>
+      <el-row id="case-buttons">
+        <el-col :span="12" :offset="6">
+          <case-card-buttons :show-buttons="revealButtons" @show-details="showDetails"/>
+        </el-col>
+      </el-row>
+    </el-col>
+
   </el-row>
 </template>
 <script>
 import Faker from 'faker'
 import CaseCardMetadata from './CaseCardMetadata.vue'
-// import CaseCardDataVisual from './CaseCardDataVisual.vue'
+// import CaseCardVisual from './CaseCardDataVisual.vue'
 import CaseCardButtons from './CaseCardButtons.vue'
 
 export default {
@@ -56,22 +59,21 @@ export default {
 		this.fakerName = Faker.random.words()
 		this.fakerDescription = Faker.lorem.sentence()
 		this.fakerId = Faker.random.number(100)
+		console.log(this.$router.currentRoute.path)
 	},
 	methods: {
 		showDetails() {
-			this.$router.push(`${this.fakerId}`)
+			this.$router.push(`/cases/${this.fakerId}`)
 		}
 	}
 }
 </script>
 <style scoped>
-.case-card {
+.el-row.case-card {
 	background-color: rgb(244, 243, 234);
-	height: 100%;
-	max-width: 400px;
+	max-height: 500px;
+	max-width: 500px;
 	min-width: 200px;
-	color: black;
-	/* margin: 20px 20px; */
 }
 img {
 	width: 100%;
@@ -85,6 +87,13 @@ div.image {
 	border: 0.1rem solid black;
 	/* background-color: black; */
 }
+#case-name {
+	font-size: 18px;
+	font-weight: bold;
+	word-wrap: break-word;
+	hyphens: auto;
+	max-height: 100%;
+}
 #case-description {
 	margin-top: 10px;
 	word-wrap: break-word;
@@ -92,11 +101,7 @@ div.image {
 	font-size: 14px;
 	max-height: 100%;
 }
-#case-name {
-	font-size: 18px;
-	font-weight: bold;
-	word-wrap: break-word;
-	hyphens: auto;
-	max-height: 100%;
+#case-buttons {
+	margin: 10px auto 20px auto;
 }
 </style>

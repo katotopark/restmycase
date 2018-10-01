@@ -1,14 +1,14 @@
 <template>
   <el-row >
     <el-col :span="16" :offset="4" class="container">
-      <el-col id="top-left" :sm="12" :md="8">
+      <el-col id="top-left" :sm="12" :md="12">
         <el-row>
           <el-col id="image" :span="24">
             <case-card/>
           </el-col>
         </el-row>
       </el-col>
-      <el-col id="top-right" :sm="12" :md="16">
+      <el-col id="top-right" :sm="12" :md="12">
         <el-row id="title">
           <el-col :span="24">
             <span>_my fuckin title</span>
