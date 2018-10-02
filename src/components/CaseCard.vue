@@ -1,6 +1,11 @@
 <template>
   <el-row >
     <el-col :span="24">
+      <el-row v-if="revealComponents">
+        <el-col id="case-id" :span="12" :offset="6">
+          <span>#{{ fakerId }}</span>
+        </el-col>
+      </el-row>
       <el-row class="case-card">
         <el-col>
           <el-col id="case-img" :span="20" :offset="2">
@@ -8,7 +13,7 @@
               <el-col :span="24">
                 <div class="image" @mouseenter="fade=true" @mouseleave="fade=false">
                   <img v-if="!fade" src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-tiffany-blue-solid-color-background.jpg">
-                  <case-card-metadata :show-metadata="revealMetadata" :fade="fade" />
+                  <case-card-metadata :show-metadata="revealComponents" :fade="fade" />
                 </div>
               </el-col>
             </el-row>
@@ -18,8 +23,8 @@
         </el-col>
       </el-row>
       <el-row id="case-buttons">
-        <el-col :span="12" :offset="6">
-          <case-card-buttons :show-buttons="revealButtons" @show-details="showDetails"/>
+        <el-col :offset="6">
+          <case-card-buttons :show-buttons="revealComponents" @show-details="showDetails"/>
         </el-col>
       </el-row>
     </el-col>
@@ -47,10 +52,7 @@ export default {
 		}
 	},
 	computed: {
-		revealButtons() {
-			return this.$router.currentRoute.path !== '/cases/' ? false : true
-		},
-		revealMetadata() {
+		revealComponents() {
 			return this.$router.currentRoute.path !== '/cases/' ? false : true
 		}
 	},
@@ -58,8 +60,8 @@ export default {
 		this.fakerImg = Faker.image.abstract()
 		this.fakerName = Faker.random.words()
 		this.fakerDescription = Faker.lorem.sentence()
-		this.fakerId = Faker.random.number(100)
-		console.log(this.$router.currentRoute.path)
+		this.fakerId = Faker.random.number(500)
+		console.log(`Route: '${this.$router.currentRoute.path}'`)
 	},
 	methods: {
 		showDetails() {
@@ -86,6 +88,12 @@ div.image {
 	object-fit: fill;
 	border: 0.1rem solid black;
 	/* background-color: black; */
+}
+#case-id {
+	color: white;
+	font-size: 1.2rem;
+	margin-top: 10px;
+	margin-bottom: 5px;
 }
 #case-name {
 	font-size: 18px;

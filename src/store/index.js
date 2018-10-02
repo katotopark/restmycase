@@ -2,6 +2,7 @@ import Vuex from 'vuex'
 import web3 from '~/plugins/web3'
 import web3Abi from 'web3-eth-abi'
 import NonFungibleCase from '../../build/contracts/NonFungibleCase'
+import * as qArr from './questionsDefault'
 
 const IPFS = require('ipfs-api')
 // const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
@@ -28,6 +29,7 @@ const createStore = () => {
 			totalLoba: 0,
 			ipfsHash: '',
 			txHash: '',
+			questionsArray: [],
 			caseArray: [],
 			txArray: [],
 			userArray: [] // ERC721 => js filter for ownerOf
@@ -39,6 +41,22 @@ const createStore = () => {
 						Object.assign(state, JSON.parse(localStorage.getItem('store')))
 					)
 				}
+			},
+			setLobaQuestions(state) {
+				state.questionsArray = qArr.map(item => {
+					let output = {
+						value: item.value,
+						group: item.group,
+						voteCount: item.voteCount
+					}
+					return output
+				})
+			},
+			addLobaQuestion(state, payload) {
+				state.questionsArray.push(payload)
+			},
+			voteLobaQuestion(state, payload) {
+				state.questionsArray[payload].voteCount++
 			},
 			addForm(state) {
 				ipfs.files.add(
@@ -85,6 +103,21 @@ const createStore = () => {
 			},
 			getTransactions(context) {
 				return context.state.txArray
+			},
+			setLobaQuestions(context) {
+				context.commit('setLobaQuestions')
+			},
+			addLobaQuestion(context, payload) {
+				context.commit('addLobaQuestion', payload)
+			},
+			voteLobaQuestion(context, payload) {
+				context.commit('voteLobaQuestion', payload)
+			},
+			getQuestionsByVote(context) {
+				return context.getters.getQuestionsByVote
+			},
+			getQuestionsByGroup(context, payload) {
+				return context.getters.getQuestionsByGroup(payload)
 			},
 			randomNum(context) {
 				context.commit('randomNum')
@@ -161,9 +194,25 @@ const createStore = () => {
 				})
 			}
 		},
-		getters: {}
+		getters: {
+			getQuestionsByGroup: state => group => {
+				let output = state.questionsArray.filter(q => q.group === group)
+				return output
+			},
+			getQuestionsByVote: state => {
+				let output = []
+				state.questionsArray.forEach(q => {
+					if (output.length < 5) {
+						output.push(q)
+						output.sort(function(a, b) {
+							return b.voteCount - a.voteCount
+						})
+					}
+				})
+				return output
+			}
+		}
 	})
-
 	store.subscribe((mutation, state) => {
 		if (process.browser) {
 			localStorage.setItem('createStore', JSON.stringify(state))

@@ -5,9 +5,9 @@
         <li v-for="err in errors" :key="err.key" style="list-style-type: none">{{ err }}</li>
       </ul>
       <new-question :data-obj.sync="newQ" :group-options="groups" @catch-input="onCatchInput" @submit="onSubmit" @clear="onClear" @catch-group="onCatchGroup"/>
-      <el-table id="questions-table" ref="singleTable" :data="questionData" highlight-current-row @current-change="handleCurrentChange">
+      <el-table id="questions-table" ref="singleTable" :data="questionsArray" highlight-current-row @current-change="handleCurrentChange">
         <el-table-column width="40" type="index" label="#"/>
-        <el-table-column prop="title" label="QUESTIONS"/>
+        <el-table-column prop="value" label="QUESTIONS"/>
         <el-table-column prop="group" width="60" label="GROUP"/>
         <el-table-column width="60" prop="voteCount" label="VOTES"/>
         <el-table-column
@@ -15,18 +15,20 @@
           label="Up!Up!"
           width="90">
           <template slot-scope="scope">
-            <el-button size="small" type="text" @click="handleClick(scope.$index, questionData)">
+            <el-button size="small" type="text" @click="handleClick(scope.$index, questionsArray)">
               <i class="el-icon-plus"/>
             </el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-col>
+    <!-- <p>{{ filteringByGroup }}</p> -->
   </el-row>
 </template>
 <script>
 import NewQuestion from '../components/NewQuestion.vue'
-import Faker from 'faker'
+// import Faker from 'faker'
+import { mapState, mapActions } from 'vuex'
 
 export default {
 	components: {
@@ -34,49 +36,51 @@ export default {
 	},
 	data() {
 		return {
-			questionData: [],
 			groups: [
 				{
-					value: 1,
+					value: 'A',
 					label: 'space'
 				},
 				{
-					value: 2,
+					value: 'B',
 					label: 'clerk'
 				},
 				{
-					value: 3,
+					value: 'C',
 					label: 'individual'
 				}
 			],
 			newQ: {
-				id: 0,
 				title: '',
-				group: null,
+				group: '',
 				voteCount: 0
 			},
 			currentRow: null,
 			newGroup: {
-				value: 0,
+				value: '',
 				label: ''
 			},
 			newTitle: '',
 			voted: false,
 			qSubmitted: false,
-			errors: []
+			errors: [],
+			filtered: []
 		}
+	},
+	computed: {
+		...mapState(['questionsArray'])
 	},
 	created() {
-		for (let i = 0; i < 3; i++) {
-			this.questionData[i] = {
-				id: 0,
-				title: Faker.lorem.sentence(),
-				group: 1,
-				voteCount: 0
-			}
-		}
+		this.setLobaQuestions()
 	},
 	methods: {
+		...mapActions([
+			'setLobaQuestions',
+			'addLobaQuestion',
+			'voteLobaQuestion',
+			'getQuestionsByVote',
+			'getQuestionsByGroup'
+		]),
 		setCurrent(row) {
 			this.$refs.singleTable.setCurrentRow(row)
 		},
@@ -96,14 +100,12 @@ export default {
 			this.checkForm()
 			if (this.errors.length == 0) {
 				this.newQ = {
-					id: this.questionData.length + 1,
-					title: this.newTitle,
+					value: this.newTitle,
 					group: this.newGroup.value,
 					voteCount: 0
 				}
-				this.questionData.push(this.newQ)
+				this.addLobaQuestion(this.newQ)
 			}
-
 			this.newQ = {}
 			this.qSubmitted = true
 		},
@@ -118,7 +120,7 @@ export default {
 		},
 		handleClick(index) {
 			if (!this.voted) {
-				this.questionData[index].voteCount++
+				this.voteLobaQuestion(index)
 				this.voted = true
 			} else {
 				this.errors.push('you already voted')

@@ -73,7 +73,7 @@ export default {
 </script>
 <style scoped>
 .el-col {
-	border: 2px solid black;
+	border: 1px solid white;
 }
 .el-button {
 	border-radius: 0px;
