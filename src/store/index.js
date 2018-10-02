@@ -2,13 +2,13 @@ import Vuex from 'vuex'
 import web3 from '~/plugins/web3'
 import web3Abi from 'web3-eth-abi'
 import NonFungibleCase from '../../build/contracts/NonFungibleCase'
-import * as qArr from './questionsDefault'
+import * as questions_0 from './questionsDefault'
 
 const IPFS = require('ipfs-api')
 // const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
 const ipfs = IPFS()
 
-const tokenAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10'
+const tokenAddress = '0xfb88de099e13c3ed21f80a7a1e49f8caecf10df6'
 const aNFC = new web3.eth.Contract(NonFungibleCase.abi, tokenAddress)
 
 let account
@@ -43,7 +43,7 @@ const createStore = () => {
 				}
 			},
 			setLobaQuestions(state) {
-				state.questionsArray = qArr.map(item => {
+				state.questionsArray = questions_0.map(item => {
 					let output = {
 						value: item.value,
 						group: item.group,
@@ -115,9 +115,6 @@ const createStore = () => {
 			},
 			getQuestionsByVote(context) {
 				return context.getters.getQuestionsByVote
-			},
-			getQuestionsByGroup(context, payload) {
-				return context.getters.getQuestionsByGroup(payload)
 			},
 			randomNum(context) {
 				context.commit('randomNum')

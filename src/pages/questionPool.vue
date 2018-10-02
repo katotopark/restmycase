@@ -5,7 +5,10 @@
         <li v-for="err in errors" :key="err.key" style="list-style-type: none">{{ err }}</li>
       </ul>
       <new-question :data-obj.sync="newQ" :group-options="groups" @catch-input="onCatchInput" @submit="onSubmit" @clear="onClear" @catch-group="onCatchGroup"/>
-      <el-table id="questions-table" ref="singleTable" :data="questionsArray" highlight-current-row @current-change="handleCurrentChange">
+      <el-select v-model="filterGroup" clearable placeholder="Filter by group" @change="filterByGroup">
+        <el-option v-for="item in groups" :key="item.value" :value="item.value" :label="`${item.value}: ${item.label}`"/>
+      </el-select>
+      <el-table id="questions-table" ref="singleTable" :data="qArr" highlight-current-row @current-change="handleCurrentChange">
         <el-table-column width="40" type="index" label="#"/>
         <el-table-column prop="value" label="QUESTIONS"/>
         <el-table-column prop="group" width="60" label="GROUP"/>
@@ -15,20 +18,18 @@
           label="Up!Up!"
           width="90">
           <template slot-scope="scope">
-            <el-button size="small" type="text" @click="handleClick(scope.$index, questionsArray)">
+            <el-button size="small" type="text" @click="handleClick(scope.$index, qArr)">
               <i class="el-icon-plus"/>
             </el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-col>
-    <!-- <p>{{ filteringByGroup }}</p> -->
   </el-row>
 </template>
 <script>
 import NewQuestion from '../components/NewQuestion.vue'
-// import Faker from 'faker'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
@@ -64,22 +65,24 @@ export default {
 			voted: false,
 			qSubmitted: false,
 			errors: [],
-			filtered: []
+			qArr: [],
+			filterGroup: ''
 		}
 	},
 	computed: {
-		...mapState(['questionsArray'])
+		...mapState(['questionsArray']),
+		...mapGetters(['getQuestionsByGroup'])
 	},
 	created() {
 		this.setLobaQuestions()
+		this.qArr = this.questionsArray
 	},
 	methods: {
 		...mapActions([
 			'setLobaQuestions',
 			'addLobaQuestion',
 			'voteLobaQuestion',
-			'getQuestionsByVote',
-			'getQuestionsByGroup'
+			'getQuestionsByVote'
 		]),
 		setCurrent(row) {
 			this.$refs.singleTable.setCurrentRow(row)
@@ -105,31 +108,51 @@ export default {
 					voteCount: 0
 				}
 				this.addLobaQuestion(this.newQ)
+				this.newQ = {}
+				this.qSubmitted = true
+			} else {
+				this.newQ = {
+					value: this.newTitle,
+					group: this.newGroup.value,
+					voteCount: 0
+				}
+				this.qSubmitted = false
 			}
-			this.newQ = {}
-			this.qSubmitted = true
 		},
 		checkForm() {
 			this.errors = []
-			if (this.newTitle === '' || this.newGroup.value === 0) {
-				this.errors.push('fill those')
+			if (this.newTitle === '' || this.newGroup.value === '') {
+				this.qSubmitted = false
+				this.errors.push("You'll need to fill both fields.")
 			}
 			if (this.qSubmitted) {
-				this.errors.push('you already submitted')
+				this.errors.push("You've already submitted")
 			}
 		},
 		handleClick(index) {
 			if (!this.voted) {
-				this.voteLobaQuestion(index)
 				this.voted = true
+				this.voteLobaQuestion(index)
 			} else {
 				this.errors.push('you already voted')
+			}
+		},
+		filterByGroup(e) {
+			this.filterGroup = e
+			if (this.filterGroup) {
+				this.qArr = this.getQuestionsByGroup(this.filterGroup)
+			} else {
+				this.qArr = this.questionsArray
 			}
 		}
 	}
 }
 </script>
 <style scoped>
+.el-select {
+	border-radius: 0px !important;
+	/* border: 2px solid red; */
+}
 .el-table {
 	margin-top: 20px;
 	color: black;
