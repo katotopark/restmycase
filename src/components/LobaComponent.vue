@@ -2,7 +2,7 @@
   <el-form :model="dataObj">
     <el-form-item>
       <span id="label">{{ dataObj.id }}:</span>
-      <span id="title">{{ dataObj.title }}</span>
+      <span id="title">{{ dataObj.value }}</span>
       <el-rate v-model="dataObj.score" :texts="['oops', 'disappointed', 'normal', 'good', 'great']" show-text @change="$emit('catch-input', dataObj.score)"/>
     </el-form-item>
   </el-form>

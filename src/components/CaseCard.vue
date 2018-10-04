@@ -17,8 +17,17 @@
                 </div>
               </el-col>
             </el-row>
-            <span id="case-name">_{{ fakerName }}</span>
-            <p id="case-description">{{ fakerDescription }}</p>
+            <el-row>
+              <el-col :span="24">
+                <span id="case-name">_{{ fakerName }}</span>
+                <p id="case-description">{{ fakerDescription }}</p>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="6" :offset="6">
+                <div id="case-class">Class: 2</div>
+              </el-col>
+            </el-row>
           </el-col>
         </el-col>
       </el-row>
@@ -109,6 +118,12 @@ div.image {
 	font-size: 14px;
 	max-height: 100%;
 }
+#case-class {
+	/* border: 2px solid red;
+	color: white;
+	background-color: ; */
+}
+
 #case-buttons {
 	margin: 10px auto 20px auto;
 }

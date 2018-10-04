@@ -3,7 +3,7 @@
     <loba-component v-for="(elem, i) in lobaObj" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
     <el-button plain @click="onSubmit">Submit!</el-button>
     <ul>
-      <li v-for="err in errors" :key="err.key">{{ err }}</li>
+      <li v-for="err in errors" :key="err.key" style="color: white;">{{ err }}</li>
     </ul>
   </el-col>
 </template>
@@ -37,18 +37,21 @@ export default {
 	created() {
 		this.lobaObj = this.questions.map((item, index) => {
 			let output = {}
-			output['group'] = `D${index + 1}`
-			output['title'] = `${item.value}?`
-			output['id'] = item.id
+			output['group'] = item.group
+			output['value'] = item.value
+			output['voteCount'] = item.voteCount
+			output['id'] = index + 1
 			output['rated'] = false
+
 			return output
 		})
+		console.log(this.lobaObj)
 	},
 	methods: {
-		...mapActions(['setLobas']),
+		...mapActions(['setLobas', 'setLobaQuestions']),
 		onCatchInput(e, i) {
 			this.lobaObj[i].rated = true
-			console.log(`${this.lobaObj[i].title}: ${this.lobaObj[i].score}`)
+			console.log(`${this.lobaObj[i].value}: ${this.lobaObj[i].score}`)
 		},
 		onSubmit() {
 			this.checkForm()

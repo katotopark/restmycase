@@ -5,6 +5,7 @@
 </template>
 <script>
 import LobaLobaComponent from '../../components/LobaLobaComponent.vue'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
@@ -12,21 +13,19 @@ export default {
 	},
 	data() {
 		return {
-			qArray: [
-				{
-					id: 'Q7',
-					value: 'Recommend'
-				},
-				{
-					id: 'Q8',
-					value: 'Never again'
-				},
-				{
-					id: 'Q9',
-					value: 'Shook'
-				}
-			]
+			qArray: []
 		}
+	},
+	computed: {
+		...mapState(['questionsArray']),
+		...mapGetters(['getQuestionsByGroup'])
+	},
+	created() {
+		this.setLobaQuestions()
+		this.qArray = this.getQuestionsByGroup('C')
+	},
+	methods: {
+		...mapActions(['setLobaQuestions'])
 	}
 }
 </script>
