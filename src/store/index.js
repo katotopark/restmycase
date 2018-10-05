@@ -52,6 +52,12 @@ const createStore = () => {
 					return output
 				})
 			},
+			formatLobaQuestions(state) {
+				const qHeader = 'On a scale from 1 to 5, '
+				state.questionsArray.forEach(item => {
+					item.value = `${qHeader} ${item.value}?`
+				})
+			},
 			addLobaQuestion(state, payload) {
 				state.questionsArray.push(payload)
 			},
@@ -106,6 +112,9 @@ const createStore = () => {
 			},
 			setLobaQuestions(context) {
 				context.commit('setLobaQuestions')
+			},
+			formatLobaQuestions(context) {
+				context.commit('formatLobaQuestions')
 			},
 			addLobaQuestion(context, payload) {
 				context.commit('addLobaQuestion', payload)

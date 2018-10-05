@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loba-loba-component :questions="qArray" next="caseNaming"/>
+    <loba-loba-component :questions="qArray" :group="group" next="caseNaming"/>
   </div>
 </template>
 <script>
@@ -13,7 +13,11 @@ export default {
 	},
 	data() {
 		return {
-			qArray: []
+			qArray: [],
+			group: {
+				value: 'C',
+				label: 'individual'
+			}
 		}
 	},
 	computed: {
@@ -22,10 +26,11 @@ export default {
 	},
 	created() {
 		this.setLobaQuestions()
-		this.qArray = this.getQuestionsByGroup('C')
+		this.formatLobaQuestions()
+		this.qArray = this.getQuestionsByGroup(this.group.value)
 	},
 	methods: {
-		...mapActions(['setLobaQuestions'])
+		...mapActions(['setLobaQuestions', 'formatLobaQuestions'])
 	}
 }
 </script>

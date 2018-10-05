@@ -1,5 +1,6 @@
 <template>
   <el-col :span="12" :offset="6">
+    <h3>{{ group.value }}</h3>
     <loba-component v-for="(elem, i) in lobaObj" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
     <el-button plain @click="onSubmit">Submit!</el-button>
     <ul>
@@ -23,6 +24,10 @@ export default {
 		next: {
 			required: true,
 			type: String
+		},
+		group: {
+			required: true,
+			type: Object
 		}
 	},
 	data() {
@@ -40,12 +45,12 @@ export default {
 			output['group'] = item.group
 			output['value'] = item.value
 			output['voteCount'] = item.voteCount
-			output['id'] = index + 1
+			output['id'] = `Q${index + 1}`
 			output['rated'] = false
 
 			return output
 		})
-		console.log(this.lobaObj)
+		// console.log(this.lobaObj)
 	},
 	methods: {
 		...mapActions(['setLobas', 'setLobaQuestions']),
@@ -75,6 +80,15 @@ export default {
 }
 </script>
 <style scoped>
+h3 {
+	color: black;
+	background-color: white;
+	font-size: 2rem;
+	text-align: right;
+	border-bottom: 1px solid white;
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
 .el-col {
 	border: 1px solid white;
 }
