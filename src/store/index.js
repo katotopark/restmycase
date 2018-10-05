@@ -42,27 +42,27 @@ const createStore = () => {
 					)
 				}
 			},
-			setLobaQuestions(state) {
+			setQuestions(state) {
 				state.questionsArray = questions_0.map(item => {
 					let output = {
-						value: item.value,
+						value: `${item.value}?`,
 						group: item.group,
 						voteCount: item.voteCount
 					}
 					return output
 				})
 			},
+			addQuestion(state, payload) {
+				state.questionsArray.push(payload)
+			},
+			voteQuestion(state, payload) {
+				state.questionsArray[payload].voteCount++
+			},
 			formatLobaQuestions(state) {
 				const qHeader = 'On a scale from 1 to 5, '
 				state.questionsArray.forEach(item => {
-					item.value = `${qHeader} ${item.value}?`
+					item.value = `${qHeader} ${item.value}`
 				})
-			},
-			addLobaQuestion(state, payload) {
-				state.questionsArray.push(payload)
-			},
-			voteLobaQuestion(state, payload) {
-				state.questionsArray[payload].voteCount++
 			},
 			addForm(state) {
 				ipfs.files.add(
@@ -110,20 +110,21 @@ const createStore = () => {
 			getTransactions(context) {
 				return context.state.txArray
 			},
-			setLobaQuestions(context) {
-				context.commit('setLobaQuestions')
+			setQuestions(context) {
+				context.commit('setQuestions')
+			},
+			addQuestion(context, payload) {
+				context.commit('addQuestion', payload)
+			},
+			voteQuestion(context, payload) {
+				context.commit('voteQuestion', payload)
 			},
 			formatLobaQuestions(context) {
 				context.commit('formatLobaQuestions')
 			},
-			addLobaQuestion(context, payload) {
-				context.commit('addLobaQuestion', payload)
-			},
-			voteLobaQuestion(context, payload) {
-				context.commit('voteLobaQuestion', payload)
-			},
-			getQuestionsByVote(context) {
-				return context.getters.getQuestionsByVote
+			async composeLobaQuestions(context) {
+				await context.dispatch('setQuestions')
+				context.dispatch('formatLobaQuestions')
 			},
 			randomNum(context) {
 				context.commit('randomNum')

@@ -25,12 +25,16 @@ export default {
 		...mapGetters(['getQuestionsByGroup'])
 	},
 	created() {
-		this.setLobaQuestions()
+		this.setQuestions()
 		this.formatLobaQuestions()
 		this.qArray = this.getQuestionsByGroup(this.group.value)
 	},
 	methods: {
-		...mapActions(['setLobaQuestions', 'formatLobaQuestions'])
+		...mapActions([
+			'setQuestions',
+			'formatLobaQuestions',
+			'composeLobaQuestions'
+		])
 	}
 }
 </script>

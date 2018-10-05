@@ -71,19 +71,14 @@ export default {
 	},
 	computed: {
 		...mapState(['questionsArray']),
-		...mapGetters(['getQuestionsByGroup'])
+		...mapGetters(['getQuestionsByGroup', 'getQuestionsByVote'])
 	},
 	created() {
-		this.setLobaQuestions()
+		this.setQuestions()
 		this.qArr = this.questionsArray
 	},
 	methods: {
-		...mapActions([
-			'setLobaQuestions',
-			'addLobaQuestion',
-			'voteLobaQuestion',
-			'getQuestionsByVote'
-		]),
+		...mapActions(['setQuestions', 'addQuestion', 'voteQuestion']),
 		setCurrent(row) {
 			this.$refs.singleTable.setCurrentRow(row)
 		},
@@ -107,7 +102,7 @@ export default {
 					group: this.newGroup.value,
 					voteCount: 0
 				}
-				this.addLobaQuestion(this.newQ)
+				this.addQuestion(this.newQ)
 				this.newQ = {}
 				this.qSubmitted = true
 			} else {
@@ -132,7 +127,7 @@ export default {
 		handleClick(index) {
 			if (!this.voted) {
 				this.voted = true
-				this.voteLobaQuestion(index)
+				this.voteQuestion(index)
 			} else {
 				this.errors.push('you already voted')
 			}

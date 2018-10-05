@@ -1,8 +1,12 @@
 <template>
-  <el-col :span="12" :offset="6">
+  <el-col id="container" :span="12" :offset="6">
     <h3>{{ group.value }}</h3>
     <loba-component v-for="(elem, i) in lobaObj" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
-    <el-button plain @click="onSubmit">Submit!</el-button>
+    <el-row>
+      <el-col :span="24">
+        <el-button @click="onSubmit">Next</el-button>
+      </el-col>
+    </el-row>
     <ul>
       <li v-for="err in errors" :key="err.key" style="color: white;">{{ err }}</li>
     </ul>
@@ -50,10 +54,9 @@ export default {
 
 			return output
 		})
-		// console.log(this.lobaObj)
 	},
 	methods: {
-		...mapActions(['setLobas', 'setLobaQuestions']),
+		...mapActions(['setLobas', 'setQuestions']),
 		onCatchInput(e, i) {
 			this.lobaObj[i].rated = true
 			console.log(`${this.lobaObj[i].value}: ${this.lobaObj[i].score}`)
@@ -88,11 +91,15 @@ h3 {
 	border-bottom: 1px solid white;
 	margin-top: 0px;
 	margin-bottom: 5px;
+	padding-right: 5px;
 }
-.el-col {
+.el-col#container {
 	border: 1px solid white;
 }
 .el-button {
 	border-radius: 0px;
+	width: 100%;
+	font-family: inherit;
+	font-size: 1rem;
 }
 </style>
