@@ -2,6 +2,7 @@ import Vuex from 'vuex'
 import web3 from '~/plugins/web3'
 import web3Abi from 'web3-eth-abi'
 import NonFungibleCase from '../../build/contracts/NonFungibleCase'
+import * as questions_0 from './questionsDefault'
 
 const IPFS = require('ipfs-api')
 // const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
@@ -28,6 +29,7 @@ const createStore = () => {
 			totalLoba: 0,
 			ipfsHash: '',
 			txHash: '',
+			questionsArray: [],
 			caseArray: [],
 			txArray: [],
 			userArray: [] // ERC721 => js filter for ownerOf
@@ -71,6 +73,22 @@ const createStore = () => {
 			},
 			getTransactions(context) {
 				return context.state.txArray
+			},
+			setQuestions(context) {
+				context.commit('setQuestions')
+			},
+			addQuestion(context, payload) {
+				context.commit('addQuestion', payload)
+			},
+			voteQuestion(context, payload) {
+				context.commit('voteQuestion', payload)
+			},
+			formatLobaQuestions(context) {
+				context.commit('formatLobaQuestions')
+			},
+			async composeLobaQuestions(context) {
+				await context.dispatch('setQuestions')
+				context.dispatch('formatLobaQuestions')
 			},
 			randomNum(context) {
 				context.commit('randomNum')
@@ -163,9 +181,25 @@ const createStore = () => {
 				return output
 			}
 		},
-		getters: {}
+		getters: {
+			getQuestionsByGroup: state => group => {
+				let output = state.questionsArray.filter(q => q.group === group)
+				return output
+			},
+			getQuestionsByVote: state => {
+				let output = []
+				state.questionsArray.forEach(q => {
+					if (output.length < 5) {
+						output.push(q)
+						output.sort(function(a, b) {
+							return b.voteCount - a.voteCount
+						})
+					}
+				})
+				return output
+			}
+		}
 	})
-
 	store.subscribe((mutation, state) => {
 		if (process.browser) {
 			localStorage.setItem('createStore', JSON.stringify(state))

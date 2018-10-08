@@ -1,6 +1,11 @@
 <template>
   <el-row >
     <el-col :span="24">
+      <el-row v-if="revealComponents">
+        <el-col id="case-id" :span="12" :offset="6">
+          <span>#{{ fakerId }}</span>
+        </el-col>
+      </el-row>
       <el-row class="case-card">
         <el-col>
           <el-col id="case-img" :span="20" :offset="2">
@@ -19,8 +24,8 @@
         </el-col>
       </el-row>
       <el-row id="case-buttons">
-        <el-col :span="12" :offset="6">
-          <case-card-buttons :show-buttons="revealButtons" @show-details="showDetails"/>
+        <el-col :offset="6">
+          <case-card-buttons :show-buttons="revealComponents" @show-details="showDetails"/>
         </el-col>
       </el-row>
     </el-col>
@@ -50,10 +55,7 @@ export default {
 		}
 	},
 	computed: {
-		revealButtons() {
-			return this.$router.currentRoute.path !== '/cases/' ? false : true
-		},
-		revealMetadata() {
+		revealComponents() {
 			return this.$router.currentRoute.path !== '/cases/' ? false : true
 		}
 	},
@@ -88,6 +90,12 @@ div.image {
 	border: 0.1rem solid black;
 	/* background-color: black; */
 }
+#case-id {
+	color: white;
+	font-size: 1.2rem;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
 #case-name {
 	font-size: 18px;
 	font-weight: bold;
@@ -102,6 +110,12 @@ div.image {
 	font-size: 14px;
 	max-height: 100%;
 }
+#case-class {
+	/* border: 2px solid red;
+	color: white;
+	background-color: ; */
+}
+
 #case-buttons {
 	margin: 10px auto 20px auto;
 }
