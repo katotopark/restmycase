@@ -10,7 +10,7 @@ contract NonFungibleCase is ERC721Token('NonFungibleCase', 'NFC'), Ownable {
   mapping(uint => uint) tokenToPrice;
 
 
-  function mintCase(string ipfsHash, uint price) public payable onlyOwner {
+  function mintCase(string ipfsHash, uint price) public payable {
     require(ipfsHashToToken[ipfsHash] == 0); // gen 0 validation
 
     uint newTokenId = totalSupply().add(1);
@@ -19,7 +19,7 @@ contract NonFungibleCase is ERC721Token('NonFungibleCase', 'NFC'), Ownable {
     tokenToIpfsHash[newTokenId] = ipfsHash;
     tokenToPrice[newTokenId] = price;
 
-    _mint(address(this), newTokenId);
+    _mint(msg.sender, newTokenId);
   }
 
   function buyCase(uint _tokenId) public payable {

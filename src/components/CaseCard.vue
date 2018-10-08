@@ -6,14 +6,15 @@
           <el-col id="case-img" :span="20" :offset="2">
             <el-row>
               <el-col :span="24">
-                <div class="image" @mouseenter="fade=true" @mouseleave="fade=false">
-                  <img v-if="!fade" src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-tiffany-blue-solid-color-background.jpg">
-                  <case-card-metadata :show-metadata="revealMetadata" :fade="fade" />
+                <!--@mouseenter="fade=true" @mouseleave="fade=false"-->
+                <div class="image" >
+                  <img src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-tiffany-blue-solid-color-background.jpg">
+                  <!-- <case-card-metadata :show-metadata="revealMetadata" :fade="fade" /> -->
                 </div>
               </el-col>
             </el-row>
-            <span id="case-name">_{{ fakerName }}</span>
-            <p id="case-description">{{ fakerDescription }}</p>
+            <span id="case-name">_{{ theCase.caseName }}</span>
+            <p id="case-description">{{ theCase.caseDescription }}</p>
           </el-col>
         </el-col>
       </el-row>
@@ -23,7 +24,6 @@
         </el-col>
       </el-row>
     </el-col>
-
   </el-row>
 </template>
 <script>
@@ -37,13 +37,16 @@ export default {
 		CaseCardMetadata,
 		CaseCardButtons
 	},
+	props: {
+		theCase: {
+			required: true,
+			type: Object
+		}
+	},
 	data() {
 		return {
 			fakerImg: null,
-			fakerName: '',
-			fakerDescription: '',
-			fakerId: 0,
-			fade: false
+			fade: true
 		}
 	},
 	computed: {
@@ -56,14 +59,12 @@ export default {
 	},
 	created() {
 		this.fakerImg = Faker.image.abstract()
-		this.fakerName = Faker.random.words()
-		this.fakerDescription = Faker.lorem.sentence()
-		this.fakerId = Faker.random.number(100)
 		console.log(this.$router.currentRoute.path)
+		console.log('Our passed case is', this.theCase)
 	},
 	methods: {
 		showDetails() {
-			this.$router.push(`/cases/${this.fakerId}`)
+			this.$router.push(`/cases/${this.theCase.id}`)
 		}
 	}
 }
