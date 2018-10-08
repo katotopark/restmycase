@@ -3,20 +3,21 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _0aeb6be7 = () => import('../src/pages/questionPool.vue' /* webpackChunkName: "pages/questionPool" */).then(m => m.default || m)
-const _94c5268c = () => import('../src/pages/participantPool.vue' /* webpackChunkName: "pages/participantPool" */).then(m => m.default || m)
-const _7251d7ce = () => import('../src/pages/cases.vue' /* webpackChunkName: "pages/cases" */).then(m => m.default || m)
-const _9b36685e = () => import('../src/pages/cases/index.vue' /* webpackChunkName: "pages/cases/index" */).then(m => m.default || m)
-const _dbf36900 = () => import('../src/pages/cases/mintSuccess.vue' /* webpackChunkName: "pages/cases/mintSuccess" */).then(m => m.default || m)
-const _62a716f0 = () => import('../src/pages/cases/loba3.vue' /* webpackChunkName: "pages/cases/loba3" */).then(m => m.default || m)
-const _628ae7ee = () => import('../src/pages/cases/loba1.vue' /* webpackChunkName: "pages/cases/loba1" */).then(m => m.default || m)
-const _6d138969 = () => import('../src/pages/cases/caseNaming.vue' /* webpackChunkName: "pages/cases/caseNaming" */).then(m => m.default || m)
-const _6298ff6f = () => import('../src/pages/cases/loba2.vue' /* webpackChunkName: "pages/cases/loba2" */).then(m => m.default || m)
-const _662cf730 = () => import('../src/pages/cases/lobas.vue' /* webpackChunkName: "pages/cases/lobas" */).then(m => m.default || m)
-const _55a58e79 = () => import('../src/pages/cases/_id.vue' /* webpackChunkName: "pages/cases/_id" */).then(m => m.default || m)
-const _e13cd388 = () => import('../src/pages/cases/_id/index.vue' /* webpackChunkName: "pages/cases/_id/index" */).then(m => m.default || m)
-const _0c70242d = () => import('../src/pages/pfive.vue' /* webpackChunkName: "pages/pfive" */).then(m => m.default || m)
-const _1924b5dd = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+const _7acfadbe = () => import('../src/pages/questionPool.vue' /* webpackChunkName: "pages/questionPool" */).then(m => m.default || m)
+const _adb170fa = () => import('../src/pages/participantPool.vue' /* webpackChunkName: "pages/participantPool" */).then(m => m.default || m)
+const _46bfe9d7 = () => import('../src/pages/cases.vue' /* webpackChunkName: "pages/cases" */).then(m => m.default || m)
+const _0895731a = () => import('../src/pages/cases/index.vue' /* webpackChunkName: "pages/cases/index" */).then(m => m.default || m)
+const _6af6cfee = () => import('../src/pages/cases/mintSuccess.vue' /* webpackChunkName: "pages/cases/mintSuccess" */).then(m => m.default || m)
+const _8e50838e = () => import('../src/pages/cases/loba3.vue' /* webpackChunkName: "pages/cases/loba3" */).then(m => m.default || m)
+const _8e88e192 = () => import('../src/pages/cases/loba1.vue' /* webpackChunkName: "pages/cases/loba1" */).then(m => m.default || m)
+const _2a75f080 = () => import('../src/pages/cases/caseNaming.vue' /* webpackChunkName: "pages/cases/caseNaming" */).then(m => m.default || m)
+const _8e6cb290 = () => import('../src/pages/cases/loba2.vue' /* webpackChunkName: "pages/cases/loba2" */).then(m => m.default || m)
+const _8744c30e = () => import('../src/pages/cases/lobas.vue' /* webpackChunkName: "pages/cases/lobas" */).then(m => m.default || m)
+const _41397402 = () => import('../src/pages/cases/_id.vue' /* webpackChunkName: "pages/cases/_id" */).then(m => m.default || m)
+const _fa291df6 = () => import('../src/pages/cases/_id/index.vue' /* webpackChunkName: "pages/cases/_id/index" */).then(m => m.default || m)
+const _678f8e7e = () => import('../src/pages/caseFetch.vue' /* webpackChunkName: "pages/caseFetch" */).then(m => m.default || m)
+const _3e439394 = () => import('../src/pages/pfive.vue' /* webpackChunkName: "pages/pfive" */).then(m => m.default || m)
+const _24da7034 = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
 
@@ -78,60 +79,60 @@ export function createRouter () {
     routes: [
 		{
 			path: "/questionPool",
-			component: _0aeb6be7,
+			component: _7acfadbe,
 			name: "questionPool"
 		},
 		{
 			path: "/participantPool",
-			component: _94c5268c,
+			component: _adb170fa,
 			name: "participantPool"
 		},
 		{
 			path: "/cases",
-			component: _7251d7ce,
+			component: _46bfe9d7,
 			children: [
 				{
 					path: "",
-					component: _9b36685e,
+					component: _0895731a,
 					name: "cases"
 				},
 				{
 					path: "mintSuccess",
-					component: _dbf36900,
+					component: _6af6cfee,
 					name: "cases-mintSuccess"
 				},
 				{
 					path: "loba3",
-					component: _62a716f0,
+					component: _8e50838e,
 					name: "cases-loba3"
 				},
 				{
 					path: "loba1",
-					component: _628ae7ee,
+					component: _8e88e192,
 					name: "cases-loba1"
 				},
 				{
 					path: "caseNaming",
-					component: _6d138969,
+					component: _2a75f080,
 					name: "cases-caseNaming"
 				},
 				{
 					path: "loba2",
-					component: _6298ff6f,
+					component: _8e6cb290,
 					name: "cases-loba2"
 				},
 				{
 					path: "lobas",
-					component: _662cf730,
+					component: _8744c30e,
 					name: "cases-lobas"
 				},
 				{
 					path: ":id",
-					component: _55a58e79,
+					component: _41397402,
 					children: [
 						{
 							path: "",
-							component: _e13cd388,
+							component: _fa291df6,
 							name: "cases-id"
 						}
 					]
@@ -139,13 +140,18 @@ export function createRouter () {
 			]
 		},
 		{
+			path: "/caseFetch",
+			component: _678f8e7e,
+			name: "caseFetch"
+		},
+		{
 			path: "/pfive",
-			component: _0c70242d,
+			component: _3e439394,
 			name: "pfive"
 		},
 		{
 			path: "/",
-			component: _1924b5dd,
+			component: _24da7034,
 			name: "index"
 		}
     ],

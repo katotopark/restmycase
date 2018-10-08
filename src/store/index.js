@@ -7,13 +7,13 @@ const IPFS = require('ipfs-api')
 // const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
 const ipfs = IPFS()
 
-const tokenAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10'
+const tokenAddress = '0xfb88de099e13c3ed21f80a7a1e49f8caecf10df6'
 const aNFC = new web3.eth.Contract(NonFungibleCase.abi, tokenAddress)
 
-let account
-web3.eth.getAccounts().then(res => {
-	account = res[0]
-})
+async function getAccount() {
+	let accounts = await web3.eth.getAccounts()
+	return accounts[0]
+}
 
 const createStore = () => {
 	const store = new Vuex.Store({
@@ -40,22 +40,8 @@ const createStore = () => {
 					)
 				}
 			},
-			addForm(state) {
-				ipfs.files.add(
-					Buffer.from(JSON.stringify(state.formObj)),
-					(err, res) => {
-						if (err || !res) {
-							return console.error('ipfs add fail', err, res)
-						}
-						res.forEach(function(file) {
-							if (file && file.hash) {
-								state.ipfsHash = file.hash
-								state.caseArray.push(state.ipfsHash)
-								return state.ipfsHash
-							}
-						})
-					}
-				)
+			resetHash(state, payload) {
+				state.ipfsHash = payload
 			},
 			confirmTx(state, hash) {
 				state.txHash = hash
@@ -95,14 +81,31 @@ const createStore = () => {
 			async describeCase(context, payload) {
 				await context.commit('describeCase', payload)
 			},
-			async addForm(context) {
-				await context.commit('addForm')
-			},
 			async getTokenName() {
-				return await aNFC.methods.name().call({ from: account })
+				return await aNFC.methods.name().call({ from: getAccount() })
+			},
+			async addForm(context) {
+				const contextBuffer = Buffer.from(JSON.stringify(context.state.formObj))
+
+				return ipfs.files
+					.add(contextBuffer)
+					.then(res => {
+						return res.map(file => {
+							context.commit('resetHash', file.hash)
+							console.log('Writing to IPFS returned the hash', file.hash)
+							return file.hash
+						})
+					})
+					.catch(err => {
+						return console.error('ipfs add fail', err)
+					})
+			},
+			async mintComposed(context) {
+				await context.dispatch('addForm')
+				context.dispatch('mintCase')
 			},
 			async mintCase(context) {
-				await context.dispatch('addForm')
+				let account = await getAccount()
 
 				const mintMethod = NonFungibleCase.abi.find(method => {
 					return method.name === 'mintCase'
@@ -111,12 +114,14 @@ const createStore = () => {
 					context.state.ipfsHash,
 					web3.utils.toBN(1)
 				])
+				console.log('Trying transaction for IPFS hash', context.state.ipfsHash)
 				const estimateGas = await web3.eth.estimateGas({
 					from: account,
 					to: tokenAddress,
 					data: mintMethodTxData
 				})
 				const nonce = await web3.eth.getTransactionCount(account)
+				console.log('Transaction count for account', account, 'is', nonce)
 
 				const receipt = await web3.eth.sendTransaction({
 					from: account,
@@ -127,38 +132,35 @@ const createStore = () => {
 					gas: estimateGas
 				})
 
+				if (receipt.status !== true) {
+					throw new Error('The transaction failed.')
+				}
+
 				await context.commit('confirmTx', receipt.transactionHash)
 
-				console.log(
-					'Transaction successful!',
-					context.state.txHash,
-					context.state.ipfsHash
-				)
+				console.log('Transaction successful!')
+				console.log('Receipt:', receipt)
+
 				return receipt
 			},
-			async getUsersCases() {
+			async getUsersCases(context, payload) {
+				let account = await getAccount()
 				const casesArr = await aNFC.methods
-					.tokensOf(tokenAddress)
+					.tokensOf(payload)
 					.call({ from: account })
-				console.log(`casesArr: ${casesArr}`)
 				return casesArr
 			},
-			async getCaseHash(payload) {
-				payload = 2
+			async getCaseHash(context, payload) {
+				let account = await getAccount()
 				const caseHash = await aNFC.methods
 					.getIpfsHash(payload)
 					.call({ from: account })
-				console.log(caseHash)
 				return caseHash
 			},
-			async caseHashToData(payload) {
-				payload = 'QmNsyBaxTHoJtdKcHh85tM2QUE9SBCVxyW8DWVGvDQUdQy'
-				await ipfs.files.cat(payload, function(err, file) {
-					if (err) {
-						throw err
-					}
-					console.log(file.toString('utf8'))
-				})
+			async caseHashToData(context, payload) {
+				//+console.log(`Payload (type ${typeof payload}) is`, payload)
+				let output = await ipfs.files.cat(payload)
+				return output
 			}
 		},
 		getters: {}
