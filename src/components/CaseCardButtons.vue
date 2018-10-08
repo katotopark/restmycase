@@ -30,5 +30,6 @@ export default {
 .el-button:hover {
 	background: white;
 	color: black;
+	padding: 5px;
 }
 </style>

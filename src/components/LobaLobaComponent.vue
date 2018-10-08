@@ -1,9 +1,14 @@
 <template>
-  <el-col :span="12" :offset="6">
+  <el-col id="container" :span="12" :offset="6">
+    <h3>{{ group.value }}</h3>
     <loba-component v-for="(elem, i) in lobaObj" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
-    <el-button plain @click="onSubmit">Submit!</el-button>
+    <el-row>
+      <el-col :span="24">
+        <el-button @click="onSubmit">Next</el-button>
+      </el-col>
+    </el-row>
     <ul>
-      <li v-for="err in errors" :key="err.key">{{ err }}</li>
+      <li v-for="err in errors" :key="err.key" style="color: white;">{{ err }}</li>
     </ul>
   </el-col>
 </template>
@@ -23,6 +28,10 @@ export default {
 		next: {
 			required: true,
 			type: String
+		},
+		group: {
+			required: true,
+			type: Object
 		}
 	},
 	data() {
@@ -37,18 +46,20 @@ export default {
 	created() {
 		this.lobaObj = this.questions.map((item, index) => {
 			let output = {}
-			output['group'] = `D${index + 1}`
-			output['title'] = `${item.value}?`
-			output['id'] = item.id
+			output['group'] = item.group
+			output['value'] = item.value
+			output['voteCount'] = item.voteCount
+			output['id'] = `Q${index + 1}`
 			output['rated'] = false
+
 			return output
 		})
 	},
 	methods: {
-		...mapActions(['setLobas']),
+		...mapActions(['setLobas', 'setQuestions']),
 		onCatchInput(e, i) {
 			this.lobaObj[i].rated = true
-			console.log(`${this.lobaObj[i].title}: ${this.lobaObj[i].score}`)
+			console.log(`${this.lobaObj[i].value}: ${this.lobaObj[i].score}`)
 		},
 		onSubmit() {
 			this.checkForm()
@@ -72,10 +83,23 @@ export default {
 }
 </script>
 <style scoped>
-.el-col {
-	border: 2px solid black;
+h3 {
+	color: black;
+	background-color: white;
+	font-size: 2rem;
+	text-align: right;
+	border-bottom: 1px solid white;
+	margin-top: 0px;
+	margin-bottom: 5px;
+	padding-right: 5px;
+}
+.el-col#container {
+	border: 1px solid white;
 }
 .el-button {
 	border-radius: 0px;
+	width: 100%;
+	font-family: inherit;
+	font-size: 1rem;
 }
 </style>

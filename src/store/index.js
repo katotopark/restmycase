@@ -42,6 +42,28 @@ const createStore = () => {
 					)
 				}
 			},
+			setQuestions(state) {
+				state.questionsArray = questions_0.map(item => {
+					let output = {
+						value: `${item.value}?`,
+						group: item.group,
+						voteCount: item.voteCount
+					}
+					return output
+				})
+			},
+			addQuestion(state, payload) {
+				state.questionsArray.push(payload)
+			},
+			voteQuestion(state, payload) {
+				state.questionsArray[payload].voteCount++
+			},
+			formatLobaQuestions(state) {
+				const qHeader = 'On a scale from 1 to 5, '
+				state.questionsArray.forEach(item => {
+					item.value = `${qHeader} ${item.value}`
+				})
+			},
 			resetHash(state, payload) {
 				state.ipfsHash = payload
 			},
