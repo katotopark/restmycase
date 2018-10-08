@@ -8,7 +8,7 @@
               <el-col :span="24">
                 <!--@mouseenter="fade=true" @mouseleave="fade=false"-->
                 <div class="image" >
-                  <img src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-tiffany-blue-solid-color-background.jpg">
+                  <img v-if="!fade" src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-tiffany-blue-solid-color-background.jpg">
                   <!-- <case-card-metadata :show-metadata="revealMetadata" :fade="fade" /> -->
                 </div>
               </el-col>
