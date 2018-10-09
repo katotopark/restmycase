@@ -43,32 +43,14 @@
     "absolutePath": "/Users/katotopark/Documents/woerk/kod/tez/node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721Receiver.sol",
     "exportedSymbols": {
       "ERC721Receiver": [
-<<<<<<< HEAD
-        1172
-||||||| merged common ancestors
-        1175
-=======
-        1411
->>>>>>> q_pool_migration
+        1275
       ]
     },
-<<<<<<< HEAD
-    "id": 1173,
-||||||| merged common ancestors
-    "id": 1176,
-=======
-    "id": 1412,
->>>>>>> q_pool_migration
+    "id": 1276,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-<<<<<<< HEAD
-        "id": 1155,
-||||||| merged common ancestors
-        "id": 1158,
-=======
-        "id": 1394,
->>>>>>> q_pool_migration
+        "id": 1258,
         "literals": [
           "solidity",
           "^",
@@ -76,7 +58,7 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:12"
+        "src": "0:24:10"
       },
       {
         "baseContracts": [],
@@ -84,46 +66,20 @@
         "contractKind": "contract",
         "documentation": "@title ERC721 token receiver interface\n@dev Interface for any contract that wants to support safeTransfers\nfrom ERC721 asset contracts.",
         "fullyImplemented": false,
-<<<<<<< HEAD
-        "id": 1172,
-||||||| merged common ancestors
-        "id": 1175,
-=======
-        "id": 1411,
->>>>>>> q_pool_migration
+        "id": 1275,
         "linearizedBaseContracts": [
-<<<<<<< HEAD
-          1172
-||||||| merged common ancestors
-          1175
-=======
-          1411
->>>>>>> q_pool_migration
+          1275
         ],
         "name": "ERC721Receiver",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-<<<<<<< HEAD
-            "id": 1158,
-||||||| merged common ancestors
-            "id": 1161,
-=======
-            "id": 1397,
->>>>>>> q_pool_migration
+            "id": 1261,
             "name": "ERC721_RECEIVED",
             "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-            "scope": 1172,
-            "src": "463:53:9",
-||||||| merged common ancestors
-            "scope": 1175,
-            "src": "463:53:9",
-=======
-            "scope": 1411,
-            "src": "463:53:12",
->>>>>>> q_pool_migration
+            "scope": 1275,
+            "src": "463:53:10",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -131,16 +87,10 @@
               "typeString": "bytes4"
             },
             "typeName": {
-<<<<<<< HEAD
-              "id": 1156,
-||||||| merged common ancestors
-              "id": 1159,
-=======
-              "id": 1395,
->>>>>>> q_pool_migration
+              "id": 1259,
               "name": "bytes4",
               "nodeType": "ElementaryTypeName",
-              "src": "463:6:12",
+              "src": "463:6:10",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes4",
                 "typeString": "bytes4"
@@ -149,20 +99,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "30783135306237613032",
-<<<<<<< HEAD
-              "id": 1157,
-||||||| merged common ancestors
-              "id": 1160,
-=======
-              "id": 1396,
->>>>>>> q_pool_migration
+              "id": 1260,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "506:10:12",
+              "src": "506:10:10",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_353073666_by_1",
@@ -175,13 +119,7 @@
           {
             "body": null,
             "documentation": "@notice Handle the receipt of an NFT\n@dev The ERC721 smart contract calls this function on the recipient\nafter a `safetransfer`. This function MAY throw to revert and reject the\ntransfer. Return of other than the magic value MUST result in the\ntransaction being reverted.\nNote: the contract address is always the message sender.\n@param _operator The address which called `safeTransferFrom` function\n@param _from The address which previously owned the token\n@param _tokenId The NFT identifier which is being transferred\n@param _data Additional data with no specified format\n@return `bytes4(keccak256(\"onERC721Received(address,address,uint256,bytes)\"))`",
-<<<<<<< HEAD
-            "id": 1171,
-||||||| merged common ancestors
-            "id": 1174,
-=======
-            "id": 1410,
->>>>>>> q_pool_migration
+            "id": 1274,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -189,36 +127,16 @@
             "name": "onERC721Received",
             "nodeType": "FunctionDefinition",
             "parameters": {
-<<<<<<< HEAD
-              "id": 1167,
-||||||| merged common ancestors
-              "id": 1170,
-=======
-              "id": 1406,
->>>>>>> q_pool_migration
+              "id": 1270,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< HEAD
-                  "id": 1160,
-||||||| merged common ancestors
-                  "id": 1163,
-=======
-                  "id": 1399,
->>>>>>> q_pool_migration
+                  "id": 1263,
                   "name": "_operator",
                   "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-                  "scope": 1171,
-                  "src": "1271:17:9",
-||||||| merged common ancestors
-                  "scope": 1174,
-                  "src": "1271:17:9",
-=======
-                  "scope": 1410,
-                  "src": "1271:17:12",
->>>>>>> q_pool_migration
+                  "scope": 1274,
+                  "src": "1271:17:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -226,16 +144,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-<<<<<<< HEAD
-                    "id": 1159,
-||||||| merged common ancestors
-                    "id": 1162,
-=======
-                    "id": 1398,
->>>>>>> q_pool_migration
+                    "id": 1262,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1271:7:12",
+                    "src": "1271:7:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -246,25 +158,11 @@
                 },
                 {
                   "constant": false,
-<<<<<<< HEAD
-                  "id": 1162,
-||||||| merged common ancestors
-                  "id": 1165,
-=======
-                  "id": 1401,
->>>>>>> q_pool_migration
+                  "id": 1265,
                   "name": "_from",
                   "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-                  "scope": 1171,
-                  "src": "1294:13:9",
-||||||| merged common ancestors
-                  "scope": 1174,
-                  "src": "1294:13:9",
-=======
-                  "scope": 1410,
-                  "src": "1294:13:12",
->>>>>>> q_pool_migration
+                  "scope": 1274,
+                  "src": "1294:13:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -272,16 +170,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-<<<<<<< HEAD
-                    "id": 1161,
-||||||| merged common ancestors
-                    "id": 1164,
-=======
-                    "id": 1400,
->>>>>>> q_pool_migration
+                    "id": 1264,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1294:7:12",
+                    "src": "1294:7:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -292,25 +184,11 @@
                 },
                 {
                   "constant": false,
-<<<<<<< HEAD
-                  "id": 1164,
-||||||| merged common ancestors
-                  "id": 1167,
-=======
-                  "id": 1403,
->>>>>>> q_pool_migration
+                  "id": 1267,
                   "name": "_tokenId",
                   "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-                  "scope": 1171,
-                  "src": "1313:16:9",
-||||||| merged common ancestors
-                  "scope": 1174,
-                  "src": "1313:16:9",
-=======
-                  "scope": 1410,
-                  "src": "1313:16:12",
->>>>>>> q_pool_migration
+                  "scope": 1274,
+                  "src": "1313:16:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -318,16 +196,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-<<<<<<< HEAD
-                    "id": 1163,
-||||||| merged common ancestors
-                    "id": 1166,
-=======
-                    "id": 1402,
->>>>>>> q_pool_migration
+                    "id": 1266,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1313:7:12",
+                    "src": "1313:7:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -338,25 +210,11 @@
                 },
                 {
                   "constant": false,
-<<<<<<< HEAD
-                  "id": 1166,
-||||||| merged common ancestors
-                  "id": 1169,
-=======
-                  "id": 1405,
->>>>>>> q_pool_migration
+                  "id": 1269,
                   "name": "_data",
                   "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-                  "scope": 1171,
-                  "src": "1335:11:9",
-||||||| merged common ancestors
-                  "scope": 1174,
-                  "src": "1335:11:9",
-=======
-                  "scope": 1410,
-                  "src": "1335:11:12",
->>>>>>> q_pool_migration
+                  "scope": 1274,
+                  "src": "1335:11:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -364,16 +222,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-<<<<<<< HEAD
-                    "id": 1165,
-||||||| merged common ancestors
-                    "id": 1168,
-=======
-                    "id": 1404,
->>>>>>> q_pool_migration
+                    "id": 1268,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1335:5:12",
+                    "src": "1335:5:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -383,40 +235,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1265:85:12"
+              "src": "1265:85:10"
             },
             "payable": false,
             "returnParameters": {
-<<<<<<< HEAD
-              "id": 1170,
-||||||| merged common ancestors
-              "id": 1173,
-=======
-              "id": 1409,
->>>>>>> q_pool_migration
+              "id": 1273,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< HEAD
-                  "id": 1169,
-||||||| merged common ancestors
-                  "id": 1172,
-=======
-                  "id": 1408,
->>>>>>> q_pool_migration
+                  "id": 1272,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-                  "scope": 1171,
-                  "src": "1374:6:9",
-||||||| merged common ancestors
-                  "scope": 1174,
-                  "src": "1374:6:9",
-=======
-                  "scope": 1410,
-                  "src": "1374:6:12",
->>>>>>> q_pool_migration
+                  "scope": 1274,
+                  "src": "1374:6:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -424,16 +256,10 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-<<<<<<< HEAD
-                    "id": 1168,
-||||||| merged common ancestors
-                    "id": 1171,
-=======
-                    "id": 1407,
->>>>>>> q_pool_migration
+                    "id": 1271,
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1374:6:12",
+                    "src": "1374:6:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes4",
                       "typeString": "bytes4"
@@ -443,67 +269,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1373:8:12"
+              "src": "1373:8:10"
             },
-<<<<<<< HEAD
-            "scope": 1172,
-            "src": "1240:142:9",
-||||||| merged common ancestors
-            "scope": 1175,
-            "src": "1240:142:9",
-=======
-            "scope": 1411,
-            "src": "1240:142:12",
->>>>>>> q_pool_migration
+            "scope": 1275,
+            "src": "1240:142:10",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-<<<<<<< HEAD
-        "scope": 1173,
-        "src": "180:1204:9"
-||||||| merged common ancestors
-        "scope": 1176,
-        "src": "180:1204:9"
-=======
-        "scope": 1412,
-        "src": "180:1204:12"
->>>>>>> q_pool_migration
+        "scope": 1276,
+        "src": "180:1204:10"
       }
     ],
-    "src": "0:1385:12"
+    "src": "0:1385:10"
   },
   "legacyAST": {
     "absolutePath": "/Users/katotopark/Documents/woerk/kod/tez/node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721Receiver.sol",
     "exportedSymbols": {
       "ERC721Receiver": [
-<<<<<<< HEAD
-        1172
-||||||| merged common ancestors
-        1175
-=======
-        1411
->>>>>>> q_pool_migration
+        1275
       ]
     },
-<<<<<<< HEAD
-    "id": 1173,
-||||||| merged common ancestors
-    "id": 1176,
-=======
-    "id": 1412,
->>>>>>> q_pool_migration
+    "id": 1276,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-<<<<<<< HEAD
-        "id": 1155,
-||||||| merged common ancestors
-        "id": 1158,
-=======
-        "id": 1394,
->>>>>>> q_pool_migration
+        "id": 1258,
         "literals": [
           "solidity",
           "^",
@@ -511,7 +303,7 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:12"
+        "src": "0:24:10"
       },
       {
         "baseContracts": [],
@@ -519,46 +311,20 @@
         "contractKind": "contract",
         "documentation": "@title ERC721 token receiver interface\n@dev Interface for any contract that wants to support safeTransfers\nfrom ERC721 asset contracts.",
         "fullyImplemented": false,
-<<<<<<< HEAD
-        "id": 1172,
-||||||| merged common ancestors
-        "id": 1175,
-=======
-        "id": 1411,
->>>>>>> q_pool_migration
+        "id": 1275,
         "linearizedBaseContracts": [
-<<<<<<< HEAD
-          1172
-||||||| merged common ancestors
-          1175
-=======
-          1411
->>>>>>> q_pool_migration
+          1275
         ],
         "name": "ERC721Receiver",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-<<<<<<< HEAD
-            "id": 1158,
-||||||| merged common ancestors
-            "id": 1161,
-=======
-            "id": 1397,
->>>>>>> q_pool_migration
+            "id": 1261,
             "name": "ERC721_RECEIVED",
             "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-            "scope": 1172,
-            "src": "463:53:9",
-||||||| merged common ancestors
-            "scope": 1175,
-            "src": "463:53:9",
-=======
-            "scope": 1411,
-            "src": "463:53:12",
->>>>>>> q_pool_migration
+            "scope": 1275,
+            "src": "463:53:10",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -566,16 +332,10 @@
               "typeString": "bytes4"
             },
             "typeName": {
-<<<<<<< HEAD
-              "id": 1156,
-||||||| merged common ancestors
-              "id": 1159,
-=======
-              "id": 1395,
->>>>>>> q_pool_migration
+              "id": 1259,
               "name": "bytes4",
               "nodeType": "ElementaryTypeName",
-              "src": "463:6:12",
+              "src": "463:6:10",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes4",
                 "typeString": "bytes4"
@@ -584,20 +344,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "30783135306237613032",
-<<<<<<< HEAD
-              "id": 1157,
-||||||| merged common ancestors
-              "id": 1160,
-=======
-              "id": 1396,
->>>>>>> q_pool_migration
+              "id": 1260,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "506:10:12",
+              "src": "506:10:10",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_353073666_by_1",
@@ -610,13 +364,7 @@
           {
             "body": null,
             "documentation": "@notice Handle the receipt of an NFT\n@dev The ERC721 smart contract calls this function on the recipient\nafter a `safetransfer`. This function MAY throw to revert and reject the\ntransfer. Return of other than the magic value MUST result in the\ntransaction being reverted.\nNote: the contract address is always the message sender.\n@param _operator The address which called `safeTransferFrom` function\n@param _from The address which previously owned the token\n@param _tokenId The NFT identifier which is being transferred\n@param _data Additional data with no specified format\n@return `bytes4(keccak256(\"onERC721Received(address,address,uint256,bytes)\"))`",
-<<<<<<< HEAD
-            "id": 1171,
-||||||| merged common ancestors
-            "id": 1174,
-=======
-            "id": 1410,
->>>>>>> q_pool_migration
+            "id": 1274,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -624,36 +372,16 @@
             "name": "onERC721Received",
             "nodeType": "FunctionDefinition",
             "parameters": {
-<<<<<<< HEAD
-              "id": 1167,
-||||||| merged common ancestors
-              "id": 1170,
-=======
-              "id": 1406,
->>>>>>> q_pool_migration
+              "id": 1270,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< HEAD
-                  "id": 1160,
-||||||| merged common ancestors
-                  "id": 1163,
-=======
-                  "id": 1399,
->>>>>>> q_pool_migration
+                  "id": 1263,
                   "name": "_operator",
                   "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-                  "scope": 1171,
-                  "src": "1271:17:9",
-||||||| merged common ancestors
-                  "scope": 1174,
-                  "src": "1271:17:9",
-=======
-                  "scope": 1410,
-                  "src": "1271:17:12",
->>>>>>> q_pool_migration
+                  "scope": 1274,
+                  "src": "1271:17:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -661,16 +389,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-<<<<<<< HEAD
-                    "id": 1159,
-||||||| merged common ancestors
-                    "id": 1162,
-=======
-                    "id": 1398,
->>>>>>> q_pool_migration
+                    "id": 1262,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1271:7:12",
+                    "src": "1271:7:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -681,25 +403,11 @@
                 },
                 {
                   "constant": false,
-<<<<<<< HEAD
-                  "id": 1162,
-||||||| merged common ancestors
-                  "id": 1165,
-=======
-                  "id": 1401,
->>>>>>> q_pool_migration
+                  "id": 1265,
                   "name": "_from",
                   "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-                  "scope": 1171,
-                  "src": "1294:13:9",
-||||||| merged common ancestors
-                  "scope": 1174,
-                  "src": "1294:13:9",
-=======
-                  "scope": 1410,
-                  "src": "1294:13:12",
->>>>>>> q_pool_migration
+                  "scope": 1274,
+                  "src": "1294:13:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -707,16 +415,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-<<<<<<< HEAD
-                    "id": 1161,
-||||||| merged common ancestors
-                    "id": 1164,
-=======
-                    "id": 1400,
->>>>>>> q_pool_migration
+                    "id": 1264,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1294:7:12",
+                    "src": "1294:7:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -727,25 +429,11 @@
                 },
                 {
                   "constant": false,
-<<<<<<< HEAD
-                  "id": 1164,
-||||||| merged common ancestors
-                  "id": 1167,
-=======
-                  "id": 1403,
->>>>>>> q_pool_migration
+                  "id": 1267,
                   "name": "_tokenId",
                   "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-                  "scope": 1171,
-                  "src": "1313:16:9",
-||||||| merged common ancestors
-                  "scope": 1174,
-                  "src": "1313:16:9",
-=======
-                  "scope": 1410,
-                  "src": "1313:16:12",
->>>>>>> q_pool_migration
+                  "scope": 1274,
+                  "src": "1313:16:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -753,16 +441,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-<<<<<<< HEAD
-                    "id": 1163,
-||||||| merged common ancestors
-                    "id": 1166,
-=======
-                    "id": 1402,
->>>>>>> q_pool_migration
+                    "id": 1266,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1313:7:12",
+                    "src": "1313:7:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -773,25 +455,11 @@
                 },
                 {
                   "constant": false,
-<<<<<<< HEAD
-                  "id": 1166,
-||||||| merged common ancestors
-                  "id": 1169,
-=======
-                  "id": 1405,
->>>>>>> q_pool_migration
+                  "id": 1269,
                   "name": "_data",
                   "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-                  "scope": 1171,
-                  "src": "1335:11:9",
-||||||| merged common ancestors
-                  "scope": 1174,
-                  "src": "1335:11:9",
-=======
-                  "scope": 1410,
-                  "src": "1335:11:12",
->>>>>>> q_pool_migration
+                  "scope": 1274,
+                  "src": "1335:11:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -799,16 +467,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-<<<<<<< HEAD
-                    "id": 1165,
-||||||| merged common ancestors
-                    "id": 1168,
-=======
-                    "id": 1404,
->>>>>>> q_pool_migration
+                    "id": 1268,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1335:5:12",
+                    "src": "1335:5:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -818,40 +480,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1265:85:12"
+              "src": "1265:85:10"
             },
             "payable": false,
             "returnParameters": {
-<<<<<<< HEAD
-              "id": 1170,
-||||||| merged common ancestors
-              "id": 1173,
-=======
-              "id": 1409,
->>>>>>> q_pool_migration
+              "id": 1273,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< HEAD
-                  "id": 1169,
-||||||| merged common ancestors
-                  "id": 1172,
-=======
-                  "id": 1408,
->>>>>>> q_pool_migration
+                  "id": 1272,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-<<<<<<< HEAD
-                  "scope": 1171,
-                  "src": "1374:6:9",
-||||||| merged common ancestors
-                  "scope": 1174,
-                  "src": "1374:6:9",
-=======
-                  "scope": 1410,
-                  "src": "1374:6:12",
->>>>>>> q_pool_migration
+                  "scope": 1274,
+                  "src": "1374:6:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -859,16 +501,10 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-<<<<<<< HEAD
-                    "id": 1168,
-||||||| merged common ancestors
-                    "id": 1171,
-=======
-                    "id": 1407,
->>>>>>> q_pool_migration
+                    "id": 1271,
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1374:6:12",
+                    "src": "1374:6:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes4",
                       "typeString": "bytes4"
@@ -878,36 +514,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1373:8:12"
+              "src": "1373:8:10"
             },
-<<<<<<< HEAD
-            "scope": 1172,
-            "src": "1240:142:9",
-||||||| merged common ancestors
-            "scope": 1175,
-            "src": "1240:142:9",
-=======
-            "scope": 1411,
-            "src": "1240:142:12",
->>>>>>> q_pool_migration
+            "scope": 1275,
+            "src": "1240:142:10",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-<<<<<<< HEAD
-        "scope": 1173,
-        "src": "180:1204:9"
-||||||| merged common ancestors
-        "scope": 1176,
-        "src": "180:1204:9"
-=======
-        "scope": 1412,
-        "src": "180:1204:12"
->>>>>>> q_pool_migration
+        "scope": 1276,
+        "src": "180:1204:10"
       }
     ],
-    "src": "0:1385:12"
+    "src": "0:1385:10"
   },
   "compiler": {
     "name": "solc",
@@ -915,11 +535,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-<<<<<<< HEAD
-  "updatedAt": "2018-10-07T12:20:21.122Z"
-||||||| merged common ancestors
-  "updatedAt": "2018-09-24T09:21:50.957Z"
-=======
-  "updatedAt": "2018-10-02T09:30:54.178Z"
->>>>>>> q_pool_migration
+  "updatedAt": "2018-10-09T09:55:55.046Z"
 }
