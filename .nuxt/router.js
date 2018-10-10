@@ -7,7 +7,7 @@ const _7acfadbe = () => import('../src/pages/questionPool.vue' /* webpackChunkNa
 const _adb170fa = () => import('../src/pages/participantPool.vue' /* webpackChunkName: "pages/participantPool" */).then(m => m.default || m)
 const _46bfe9d7 = () => import('../src/pages/cases.vue' /* webpackChunkName: "pages/cases" */).then(m => m.default || m)
 const _0895731a = () => import('../src/pages/cases/index.vue' /* webpackChunkName: "pages/cases/index" */).then(m => m.default || m)
-const _6af6cfee = () => import('../src/pages/cases/mintSuccess.vue' /* webpackChunkName: "pages/cases/mintSuccess" */).then(m => m.default || m)
+const _2aa49846 = () => import('../src/pages/cases/mintConfirm.vue' /* webpackChunkName: "pages/cases/mintConfirm" */).then(m => m.default || m)
 const _8e50838e = () => import('../src/pages/cases/loba3.vue' /* webpackChunkName: "pages/cases/loba3" */).then(m => m.default || m)
 const _8e88e192 = () => import('../src/pages/cases/loba1.vue' /* webpackChunkName: "pages/cases/loba1" */).then(m => m.default || m)
 const _2a75f080 = () => import('../src/pages/cases/caseNaming.vue' /* webpackChunkName: "pages/cases/caseNaming" */).then(m => m.default || m)
@@ -15,7 +15,7 @@ const _8e6cb290 = () => import('../src/pages/cases/loba2.vue' /* webpackChunkNam
 const _8744c30e = () => import('../src/pages/cases/lobas.vue' /* webpackChunkName: "pages/cases/lobas" */).then(m => m.default || m)
 const _41397402 = () => import('../src/pages/cases/_id.vue' /* webpackChunkName: "pages/cases/_id" */).then(m => m.default || m)
 const _fa291df6 = () => import('../src/pages/cases/_id/index.vue' /* webpackChunkName: "pages/cases/_id/index" */).then(m => m.default || m)
-const _678f8e7e = () => import('../src/pages/caseFetch.vue' /* webpackChunkName: "pages/caseFetch" */).then(m => m.default || m)
+const _fcabfda2 = () => import('../src/pages/caseRandom.vue' /* webpackChunkName: "pages/caseRandom" */).then(m => m.default || m)
 const _3e439394 = () => import('../src/pages/pfive.vue' /* webpackChunkName: "pages/pfive" */).then(m => m.default || m)
 const _24da7034 = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
@@ -97,9 +97,9 @@ export function createRouter () {
 					name: "cases"
 				},
 				{
-					path: "mintSuccess",
-					component: _6af6cfee,
-					name: "cases-mintSuccess"
+					path: "mintConfirm",
+					component: _2aa49846,
+					name: "cases-mintConfirm"
 				},
 				{
 					path: "loba3",
@@ -140,9 +140,9 @@ export function createRouter () {
 			]
 		},
 		{
-			path: "/caseFetch",
-			component: _678f8e7e,
-			name: "caseFetch"
+			path: "/caseRandom",
+			component: _fcabfda2,
+			name: "caseRandom"
 		},
 		{
 			path: "/pfive",

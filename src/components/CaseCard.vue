@@ -3,7 +3,7 @@
     <el-col :span="24">
       <el-row v-if="revealComponents">
         <el-col id="case-id" :span="12" :offset="6">
-          <span>#{{ fakerId }}</span>
+          <span>#{{ theCase.id }}</span>
         </el-col>
       </el-row>
       <el-row class="case-card">
@@ -62,7 +62,6 @@ export default {
 	created() {
 		this.fakerImg = Faker.image.abstract()
 		console.log(this.$router.currentRoute.path)
-		console.log('Our passed case is', this.theCase)
 	},
 	methods: {
 		showDetails() {

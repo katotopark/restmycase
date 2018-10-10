@@ -30,11 +30,7 @@ export default {
 		this.qArray = this.getQuestionsByGroup(this.group.value)
 	},
 	methods: {
-		...mapActions([
-			'setQuestions',
-			'formatLobaQuestions',
-			'composeLobaQuestions'
-		])
+		...mapActions(['setQuestions', 'formatLobaQuestions'])
 	}
 }
 </script>

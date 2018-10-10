@@ -34,7 +34,7 @@ export default {
 		...mapState(['formObj'])
 	},
 	methods: {
-		...mapActions(['describeCase', 'randomNum', 'mintCase']),
+		...mapActions(['describeCase', 'randomNum', 'mintComposed']),
 		async onSubmit() {
 			this.checkInput()
 			if (this.errors.length === 0) {
@@ -42,10 +42,10 @@ export default {
 					caseName: this.caseName,
 					caseDescription: this.caseDescription
 				})
-				await this.randomNum()
-				this.mintCase()
 
-				this.$router.push('mintSuccess')
+				await this.randomNum()
+				await this.mintComposed()
+				this.$router.push('mintConfirm')
 			}
 		},
 		checkInput() {

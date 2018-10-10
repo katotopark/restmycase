@@ -50,6 +50,7 @@ export default {
 			output['value'] = item.value
 			output['voteCount'] = item.voteCount
 			output['id'] = `Q${index + 1}`
+			output['score'] = 0
 			output['rated'] = false
 
 			return output
@@ -59,17 +60,25 @@ export default {
 		...mapActions(['setLobas', 'setQuestions']),
 		onCatchInput(e, i) {
 			this.lobaObj[i].rated = true
-			console.log(`${this.lobaObj[i].value}: ${this.lobaObj[i].score}`)
+			console.log(
+				`G${this.lobaObj[i].group}_${this.lobaObj[i].id}: ${
+					this.lobaObj[i].score
+				}`
+			)
 		},
 		onSubmit() {
 			this.checkForm()
 			if (this.errors.length === 0) {
 				this.lobaObj.forEach(item => {
-					this.setLobas({ id: item.id, score: item.score })
+					this.setLobas({
+						group: item.group,
+						id: item.id,
+						score: item.score
+					})
 				})
+				console.log(this.formObj.lobas)
 				this.$router.push(this.next)
 			}
-			console.log('loba submitted!')
 		},
 		checkForm() {
 			this.errors = []

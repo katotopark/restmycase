@@ -8,7 +8,7 @@ const IPFS = require('ipfs-api')
 // const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
 const ipfs = IPFS()
 
-const tokenAddress = '0xfb88de099e13c3ed21f80a7a1e49f8caecf10df6'
+const tokenAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10'
 const aNFC = new web3.eth.Contract(NonFungibleCase.abi, tokenAddress)
 
 async function getAccount() {
@@ -76,7 +76,12 @@ const createStore = () => {
 				state.formObj.tDuration = (Math.random() * 5).toFixed(2)
 			},
 			setLobas(state, payload) {
-				state.formObj.lobas[payload.id] = payload.score
+				let group = state.formObj.lobas[payload.group]
+					? state.formObj.lobas[payload.group]
+					: {}
+
+				group[payload.id] = payload.score
+				state.formObj.lobas[payload.group] = group
 			},
 			describeCase(state, payload) {
 				state.formObj.caseName = payload.caseName
@@ -84,18 +89,6 @@ const createStore = () => {
 			}
 		},
 		actions: {
-			getIpfsHash(context) {
-				return context.getters.getIpfsHash
-			},
-			getAllCases(context) {
-				return context.getters.getAllCases
-			},
-			getCaseById(context) {
-				return context.getters.getCaseById
-			},
-			getTransactions(context) {
-				return context.state.txArray
-			},
 			setQuestions(context) {
 				context.commit('setQuestions')
 			},
@@ -108,10 +101,6 @@ const createStore = () => {
 			formatLobaQuestions(context) {
 				context.commit('formatLobaQuestions')
 			},
-			async composeLobaQuestions(context) {
-				await context.dispatch('setQuestions')
-				context.dispatch('formatLobaQuestions')
-			},
 			randomNum(context) {
 				context.commit('randomNum')
 			},
@@ -123,6 +112,10 @@ const createStore = () => {
 			},
 			async getTokenName() {
 				return await aNFC.methods.name().call({ from: getAccount() })
+			},
+			async mintComposed(context) {
+				await context.dispatch('addForm')
+				context.dispatch('mintCase')
 			},
 			async addForm(context) {
 				const contextBuffer = Buffer.from(JSON.stringify(context.state.formObj))
@@ -140,10 +133,6 @@ const createStore = () => {
 						return console.error('ipfs add fail', err)
 					})
 			},
-			async mintComposed(context) {
-				await context.dispatch('addForm')
-				context.dispatch('mintCase')
-			},
 			async mintCase(context) {
 				let account = await getAccount()
 
@@ -154,14 +143,13 @@ const createStore = () => {
 					context.state.ipfsHash,
 					web3.utils.toBN(1)
 				])
-				console.log('Trying transaction for IPFS hash', context.state.ipfsHash)
 				const estimateGas = await web3.eth.estimateGas({
 					from: account,
 					to: tokenAddress,
 					data: mintMethodTxData
 				})
 				const nonce = await web3.eth.getTransactionCount(account)
-				console.log('Transaction count for account', account, 'is', nonce)
+				console.log(`nonce for [${account}] is ${nonce}`)
 
 				const receipt = await web3.eth.sendTransaction({
 					from: account,
@@ -179,7 +167,7 @@ const createStore = () => {
 				await context.commit('confirmTx', receipt.transactionHash)
 
 				console.log('Transaction successful!')
-				console.log('Receipt:', receipt)
+				console.log(`txHash: ${receipt.transactionHash}`)
 
 				return receipt
 			},
