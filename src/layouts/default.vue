@@ -14,6 +14,7 @@ html {
 	font-family: 'Inconsolata', monospace;
 	font-size: 16px;
 	background-color: rgb(0, 0, 0);
+	color: white;
 	word-spacing: 1px;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;

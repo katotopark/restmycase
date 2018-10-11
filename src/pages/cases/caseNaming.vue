@@ -1,23 +1,32 @@
 <template>
-  <el-col :span="12" :offset="6">
-    <span>Case name: {{ caseName }}</span>
-    <el-input
-      v-model="caseName"
-      :rows="2"
-      type="textarea"
-      placeholder="e.g., Bureaupanique"/>
-    <div style="margin: 20px 0;"/>
-    <span>Case description: </span>
-    <el-input
-      v-model="caseDescription"
-      :autosize="{ minRows: 4, maxRows: 8}"
-      type="textarea"
-      placeholder="e.g., pre-breakfast absolute total shitstorm"/>
-    <el-button plain @click="onSubmit">Mint!</el-button>
-    <ul>
-      <li v-for="err in errors" :key="err.key">{{ err }}</li>
-    </ul>
-  </el-col>
+  <el-row type="flex" justify="center">
+    <el-col :span="12">
+      <el-row class="row">
+        <h3 class="label">Case name: <h3 id="title">_{{ caseName }}</h3></h3>
+        <el-input
+          v-model="caseName"
+          :rows="2"
+          type="textarea"
+          placeholder="e.g., Bureaupanique"/>
+      </el-row>
+      <el-row class="row">
+        <h3 class="label">Case description: </h3>
+        <el-input
+          v-model="caseDescription"
+          :autosize="{ minRows: 4, maxRows: 8}"
+          type="textarea"
+          placeholder="e.g., pre-breakfast absolute total shitstorm"/>
+      </el-row>
+      <el-row class="row">
+        <el-button plain @click="onSubmit">Mint!</el-button>
+      </el-row>
+      <el-row class="row">
+        <ul>
+          <li v-for="err in errors" :key="err.key">{{ err }}</li>
+        </ul>
+      </el-row>
+    </el-col>
+  </el-row>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
@@ -63,13 +72,32 @@ export default {
 }
 </script>
 <style scoped>
-span {
-	margin: 50px auto;
+.el-row.row {
+	margin-bottom: 1rem;
+}
+.label {
+	margin-bottom: 0.5rem;
+}
+#title {
+	/* font-size: 30px; */
+	/* color: red; */
+	width: 100%;
+	word-wrap: break-word;
+	display: inline;
 }
 .el-input {
 	border-radius: 0px;
+	border-top: 20px;
 }
 .el-button {
 	border-radius: 0px;
+	width: 100%;
+	font-family: inherit;
+	font-size: 1rem;
+}
+.el-button:hover,
+.el-button:focus {
+	background: white;
+	color: black;
 }
 </style>

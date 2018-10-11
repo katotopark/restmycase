@@ -28,7 +28,6 @@ export default {
 
 		let mappingFunction = async caseId => {
 			let hash = await this.getCaseHash(caseId)
-			console.log('IPFS hash for case', caseId, 'is', hash)
 			let data = await this.caseHashToData(hash)
 			return Object.assign(JSON.parse(data.toString('utf8')), { id: caseId })
 		}

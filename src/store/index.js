@@ -29,6 +29,7 @@ const createStore = () => {
 			totalLoba: 0,
 			ipfsHash: '',
 			txHash: '',
+			blockHash: '',
 			questionsArray: [],
 			caseArray: [],
 			txArray: [],
@@ -67,9 +68,10 @@ const createStore = () => {
 			resetHash(state, payload) {
 				state.ipfsHash = payload
 			},
-			confirmTx(state, hash) {
-				state.txHash = hash
-				state.txArray.push(hash)
+			confirmTx(state, payload) {
+				state.txHash = payload.txHash
+				state.blockHash = payload.blockHash
+				state.txArray.push(payload.txHash)
 			},
 			randomNum(state) {
 				state.formObj.tDistance = (Math.random() * 10).toFixed(2)
@@ -164,10 +166,14 @@ const createStore = () => {
 					throw new Error('The transaction failed.')
 				}
 
-				await context.commit('confirmTx', receipt.transactionHash)
+				await context.commit('confirmTx', {
+					txHash: receipt.transactionHash,
+					blockHash: receipt.blockHash
+				})
 
 				console.log('Transaction successful!')
-				console.log(`txHash: ${receipt.transactionHash}`)
+				// console.log(`txHash: ${receipt.transactionHash}`)
+				console.log(receipt)
 
 				return receipt
 			},
@@ -185,8 +191,14 @@ const createStore = () => {
 					.call({ from: account })
 				return caseHash
 			},
+			async getCaseId(context, payload) {
+				let account = await getAccount()
+				const caseId = await aNFC.methods
+					.getToken(payload)
+					.call({ from: account })
+				return caseId
+			},
 			async caseHashToData(context, payload) {
-				//+console.log(`Payload (type ${typeof payload}) is`, payload)
 				let output = await ipfs.files.cat(payload)
 				return output
 			}

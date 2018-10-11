@@ -1,6 +1,6 @@
 <template>
   <el-button-group v-if="showButtons">
-    <el-button @click="$emit('show-details')">Details</el-button>
+    <el-button @click="$emit('show-details')">Fetch case</el-button>
   </el-button-group>
 </template>
 <script>
@@ -18,7 +18,7 @@ export default {
 </script>
 <style scoped>
 .el-button {
-	border-radius: 0px !important;
+	border-radius: 0px;
 	font-family: inherit;
 	font-size: 1rem;
 	padding: 0px;

@@ -23,9 +23,9 @@
           </el-col>
         </el-col>
       </el-row>
-      <el-row id="case-buttons">
+      <el-row>
         <el-col :offset="6">
-          <case-card-buttons :show-buttons="revealComponents" @show-details="showDetails"/>
+          <case-card-buttons id="case-buttons" :show-buttons="revealComponents" @show-details="showDetails"/>
         </el-col>
       </el-row>
     </el-col>
@@ -101,6 +101,7 @@ div.image {
 	word-wrap: break-word;
 	hyphens: auto;
 	max-height: 100%;
+	color: black;
 }
 #case-description {
 	margin-top: 10px;
@@ -108,13 +109,8 @@ div.image {
 	hyphens: auto;
 	font-size: 14px;
 	max-height: 100%;
+	color: black;
 }
-#case-class {
-	/* border: 2px solid red;
-	color: white;
-	background-color: ; */
-}
-
 #case-buttons {
 	margin: 10px auto 20px auto;
 }

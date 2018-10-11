@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <loba-loba-component :questions="qArray" :group="group" next="caseNaming"/>
-  </div>
+  <el-row type="flex" justify="center">
+    <el-col :span="24">
+      <loba-loba-component :questions="qArray" :group="group" next="caseNaming"/>
+    </el-col>
+  </el-row>
 </template>
 <script>
 import LobaLobaComponent from '../../components/LobaLobaComponent.vue'

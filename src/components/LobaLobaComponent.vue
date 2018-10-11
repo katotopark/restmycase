@@ -7,8 +7,8 @@
         <el-button @click="onSubmit">Next</el-button>
       </el-col>
     </el-row>
-    <ul>
-      <li v-for="err in errors" :key="err.key" style="color: white;">{{ err }}</li>
+    <ul v-if="errors.length > 0">
+      <li v-for="err in errors" :key="err.key">{{ err }}</li>
     </ul>
   </el-col>
 </template>
@@ -110,5 +110,10 @@ h3 {
 	width: 100%;
 	font-family: inherit;
 	font-size: 1rem;
+}
+.el-button:hover,
+.el-button:focus {
+	background: white;
+	color: black;
 }
 </style>
