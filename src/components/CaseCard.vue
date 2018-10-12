@@ -12,9 +12,9 @@
             <el-row>
               <el-col :span="24">
                 <!--@mouseenter="fade=true" @mouseleave="fade=false"-->
-                <div class="image" >
-                  <img v-if="!fade" src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-tiffany-blue-solid-color-background.jpg">
-                  <!-- <case-card-metadata :show-metadata="revealMetadata" :fade="fade" /> -->
+                <div ref="test" class="image">
+                  <!-- <case-card-metadata :the-case="theCase"/> -->
+                  <case-card-data-viz :dimensions="dims"/>
                 </div>
               </el-col>
             </el-row>
@@ -32,15 +32,15 @@
   </el-row>
 </template>
 <script>
-import Faker from 'faker'
 import CaseCardMetadata from './CaseCardMetadata.vue'
-// import CaseCardVisual from './CaseCardDataVisual.vue'
+import CaseCardDataViz from './CaseCardDataViz.vue'
 import CaseCardButtons from './CaseCardButtons.vue'
 
 export default {
 	components: {
 		CaseCardMetadata,
-		CaseCardButtons
+		CaseCardButtons,
+		CaseCardDataViz
 	},
 	props: {
 		theCase: {
@@ -50,8 +50,8 @@ export default {
 	},
 	data() {
 		return {
-			fakerImg: null,
-			fade: true
+			fade: true,
+			dims: {}
 		}
 	},
 	computed: {
@@ -60,8 +60,11 @@ export default {
 		}
 	},
 	created() {
-		this.fakerImg = Faker.image.abstract()
 		console.log(this.$router.currentRoute.path)
+	},
+	mounted() {
+		this.dims.x = this.$refs.test.offsetWidth
+		this.dims.y = this.$refs.test.offsetHeight
 	},
 	methods: {
 		showDetails() {
@@ -76,6 +79,7 @@ export default {
 	max-height: 500px;
 	max-width: 500px;
 	min-width: 200px;
+	margin-bottom: 50px;
 }
 img {
 	width: 100%;
@@ -83,10 +87,10 @@ img {
 }
 div.image {
 	margin: 20px 0 20px 0;
-	width: 100%;
+	/* width: 100%; */
 	height: 15rem;
 	object-fit: fill;
-	border: 0.1rem solid black;
+	/* border: 0.1rem solid black; */
 	/* background-color: black; */
 }
 #case-id {

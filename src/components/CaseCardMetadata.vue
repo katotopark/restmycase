@@ -1,64 +1,73 @@
 <template>
-  <transition v-if="showMetadata" name="fade" type="transition">
-    <div v-if="fade" id="transition">
-      <el-row :gutter="0">
-        <el-col :span="20" :offset="2">
-          <div class="content">
-            <p>LOBALOBAS: <span>{{ lobalobas }}</span></p>
-            <p>FFS: <span>{{ ffs }}</span></p>
-            <p>TX: <span>{{ tx }}</span></p>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-  </transition>
+  <!-- <transition v-if="true" name="fade" type="transition"> -->
+  <div v-if="true" id="transition">
+    <el-row>
+      <el-col :span="24">
+        <div class="content">
+          <!-- <h5>ipfsHash: {{ ipfsHash }}</h5>
+          <h5>txHash: {{ txHash }}</h5>
+          <h5>blockHash: {{ blockHash }}</h5>
+          <h5>data: {{ bytes }}</h5> -->
+          <!-- <h5>{{ theCase.id }}</h5> -->
+          <h5>ipfsHash: {{ hash }}</h5>
+          <h5>data: {{ bytes }}</h5>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
+  <!-- </transition> -->
 </template>
 <script>
-import Faker from 'faker'
+import { mapState, mapActions } from 'vuex'
 
 export default {
 	props: {
-		fade: {
+		// fade: {
+		// 	required: true,
+		// 	type: Boolean
+		// },
+		// showMetadata: {
+		// 	required: true,
+		// 	type: Boolean
+		// }
+		theCase: {
 			required: true,
-			type: Boolean
-		},
-		showMetadata: {
-			required: true,
-			type: Boolean
+			type: Object
 		}
 	},
 	data() {
 		return {
-			lobalobas: '',
-			ffs: '',
-			tx: ''
+			bytes: [],
+			hash: ''
 		}
 	},
-	created() {
-		this.lobalobas = Faker.random.number(30)
-		this.ffs = Faker.finance.bitcoinAddress()
-		this.tx = Faker.finance.bitcoinAddress()
+	computed: {
+		...mapState(['ipfsHash', 'txHash', 'blockHash'])
+	},
+	async created() {
+		console.log('CASEID: ', this.theCase.id)
+		this.hash = await this.getCaseHash(this.theCase.id)
+		let data = await this.caseHashToData(this.hash)
+		this.bytes = Object.values(data)
+		console.log('DATA: ', this.bytes)
+	},
+	methods: {
+		...mapActions(['getCaseHash', 'caseHashToData'])
 	}
 }
 </script>
 <style scoped>
 div.content {
-	margin-top: 20%;
+	margin-top: 5%;
 	border: 0px solid white;
 	height: 50%;
 	color: white;
 	font-size: 1.1rem;
 }
-p {
-	/* margin: 20px auto 0px 0%; */
-	hyphens: auto;
-}
-p > span {
-	font-size: 1rem;
-}
-div {
-	background-color: black;
-	height: 100%;
+h5 {
+	margin: 0px;
+	padding: 4px 4px;
+	/* border-bottom: 1px solid white; */
 }
 .fade-enter-active {
 	transition: all 0.8s ease;

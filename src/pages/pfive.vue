@@ -1,16 +1,13 @@
 <template>
-  <div>
-    <!-- <vue-p5 v-on="{setup}"/> -->
+  <div ref="kaka">
+    <el-col>
+      <vue-p5 v-on="{setup,draw}"/>
     <!-- <a :href="fakerImg"/> -->
-    <img :src="fakerImg">
+    <!-- <img :src="fakerImg"> -->
+    </el-col>
   </div>
 </template>
 <script>
-import Faker from 'faker'
-import Chance from 'chance'
-
-const chance = new Chance()
-
 var components = {}
 if (process.browser) {
 	const VueP5 = require('vue-p5')
@@ -21,23 +18,41 @@ export default {
 	components: components,
 	data() {
 		return {
-			fakerImg: null
+			fakerImg: null,
+			test: 0,
+			testWidth: 0
 		}
 	},
-	created() {
-		this.fakerImg = Faker.image.abstract()
+	watch: {
+		testWidth() {
+			console.log('size updated')
+			console.log('new ref', this.$refs.kaka.offsetHeight)
+		}
+	},
+	mounted() {
+		console.log('refs', this.$refs)
+		this.testWidth = this.$refs.kaka.offsetWidth
+
+		console.log(this.$refs.kaka.offsetWidth)
+	},
+	updated() {
+		this.testWidth = this.$refs.kaka.offsetWidth
 	},
 	methods: {
 		setup(sketch) {
-			sketch.createCanvas(400, 600)
-
-			const chanceHash = chance.hash({ length: 20 })
-			const chanceArr = chanceHash.split('')
-			console.log(chanceArr)
+			sketch.createCanvas(this.testWidth / 2, 600)
+			sketch.background(255)
+			// const chanceHash = chance.hash({ length: 20 })
+			// const chanceArr = chanceHash.split('')
+			// console.log(chanceArr)
 			// const newArr = chanceArr.map((c, i) => {
 			// 	return chanceArr.splice(i, c)
 			// })
 			// console.log(newArr)
+		},
+		draw(sketch) {
+			sketch.fill(255, 0, 0)
+			sketch.rect(sketch.pmouseX, sketch.pmouseY, 30, 30)
 		}
 	}
 }

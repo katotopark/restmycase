@@ -15,10 +15,7 @@
             <el-row class="text">
               <el-col :span="24">
                 <el-button plain>Go Meta!</el-button>
-                <h5>ipfsHash: {{ ipfsHash }}</h5>
-                <h5>txHash: {{ txHash }}</h5>
-                <h5>blockHash: {{ blockHash }}</h5>
-                <h5>data: {{ bytes }}</h5>
+                <case-card-metadata :the-case="theCase"/>
               </el-col>
             </el-row>
           </el-col>
@@ -30,16 +27,17 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import CaseCard from '../../components/CaseCard.vue'
+import CaseCardMetadata from '../../components/CaseCardMetadata.vue'
 
 export default {
 	components: {
-		CaseCard
+		CaseCard,
+		CaseCardMetadata
 	},
 	data() {
 		return {
 			theCase: {},
-			confirmed: false,
-			bytes: []
+			confirmed: false
 		}
 	},
 	computed: {
@@ -62,7 +60,6 @@ export default {
 			})
 			this.theCase = dataParsed
 
-			this.bytes = Object.values(data)
 			console.log(this.theCase)
 		}
 	}
@@ -78,11 +75,6 @@ export default {
 #card {
 	margin-top: 20px;
 	margin-bottom: 20px;
-}
-.el-col > h5 {
-	margin: 0px;
-	padding: 4px 4px;
-	/* border-bottom: 1px solid white; */
 }
 .el-button {
 	border-radius: 0px;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <case-card v-for="elem in cases" :key="elem.id" :the-case="elem"/>
+    <case-card v-for="elem in cases" ref="test" :key="elem.id" :the-case="elem"/>
   </div>
 </template>
 
