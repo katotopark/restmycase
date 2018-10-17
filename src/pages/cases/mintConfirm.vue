@@ -60,7 +60,7 @@ export default {
 			})
 			this.theCase = dataParsed
 
-			console.log(this.theCase)
+			// console.log(this.theCase)
 		}
 	}
 }

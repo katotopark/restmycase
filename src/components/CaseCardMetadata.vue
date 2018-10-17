@@ -8,7 +8,6 @@
           <h5>txHash: {{ txHash }}</h5>
           <h5>blockHash: {{ blockHash }}</h5>
           <h5>data: {{ bytes }}</h5> -->
-          <!-- <h5>{{ theCase.id }}</h5> -->
           <h5>ipfsHash: {{ hash }}</h5>
           <h5>data: {{ bytes }}</h5>
         </div>
@@ -18,7 +17,7 @@
   <!-- </transition> -->
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
 	props: {
@@ -41,18 +40,19 @@ export default {
 			hash: ''
 		}
 	},
-	computed: {
-		...mapState(['ipfsHash', 'txHash', 'blockHash'])
-	},
-	async created() {
-		console.log('CASEID: ', this.theCase.id)
-		this.hash = await this.getCaseHash(this.theCase.id)
-		let data = await this.caseHashToData(this.hash)
-		this.bytes = Object.values(data)
-		console.log('DATA: ', this.bytes)
+	watch: {
+		async theCase() {
+			await this.composeMetadata()
+		}
 	},
 	methods: {
-		...mapActions(['getCaseHash', 'caseHashToData'])
+		...mapActions(['getCaseHash', 'caseHashToData']),
+		async composeMetadata() {
+			this.hash = await this.getCaseHash(this.theCase.id)
+			let data = await this.caseHashToData(this.hash)
+			this.bytes = Object.values(data)
+			console.log('data: ', this.bytes)
+		}
 	}
 }
 </script>

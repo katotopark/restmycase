@@ -8,7 +8,7 @@ const IPFS = require('ipfs-api')
 // const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
 const ipfs = IPFS()
 
-const tokenAddress = '0xfb88de099e13c3ed21f80a7a1e49f8caecf10df6'
+const tokenAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10'
 const aNFC = new web3.eth.Contract(NonFungibleCase.abi, tokenAddress)
 
 async function getAccount() {
@@ -26,7 +26,7 @@ const createStore = () => {
 				tDuration: '',
 				lobas: {}
 			},
-			totalLoba: 0,
+			totalScore: 0,
 			ipfsHash: '',
 			txHash: '',
 			blockHash: '',
@@ -65,6 +65,9 @@ const createStore = () => {
 					item.value = `${qHeader} ${item.value}`
 				})
 			},
+			updateScore(state, payload) {
+				state.totalScore += payload
+			},
 			resetHash(state, payload) {
 				state.ipfsHash = payload
 			},
@@ -102,6 +105,10 @@ const createStore = () => {
 			},
 			formatLobaQuestions(context) {
 				context.commit('formatLobaQuestions')
+			},
+			updateScore(context, payload) {
+				console.log('new score is: ', context.state.totalScore)
+				context.commit('updateScore', payload)
 			},
 			randomNum(context) {
 				context.commit('randomNum')
