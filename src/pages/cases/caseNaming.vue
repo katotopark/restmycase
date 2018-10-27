@@ -2,7 +2,7 @@
   <el-row type="flex" justify="center">
     <el-col :span="12">
       <el-row class="row">
-        <h3 class="label">Case name: <h3 id="title">_{{ caseName }}</h3></h3>
+        <h3 class="label">Case name: <span id="title">_{{ caseName }}</span></h3>
         <el-input
           v-model="caseName"
           :rows="2"
@@ -26,12 +26,19 @@
         </ul>
       </el-row>
     </el-col>
+    <case-card-data-viz ref="caseCardDataViz" :x="417" :y="240"/>
+
   </el-row>
+
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
+import CaseCardDataViz from '../../components/CaseCardDataViz.vue'
 
 export default {
+	components: {
+		CaseCardDataViz
+	},
 	data() {
 		return {
 			caseName: '',
@@ -47,9 +54,18 @@ export default {
 		async onSubmit() {
 			this.checkInput()
 			if (this.errors.length === 0) {
+				const boundDrawingMethod = this.$refs.caseCardDataViz.draw.bind(
+					this.$refs.caseCardDataViz
+				)
+
+				//TODO
+				let caseData = {}
+				const imageData = boundDrawingMethod(caseData)
+
 				await this.describeCase({
 					caseName: this.caseName,
-					caseDescription: this.caseDescription
+					caseDescription: this.caseDescription,
+					imageData: imageData
 				})
 
 				await this.randomNum()

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <header-component/>
     <case-card v-for="elem in cases" ref="test" :key="elem.id" :the-case="elem"/>
   </div>
 </template>
@@ -7,10 +8,12 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import CaseCard from '../../components/CaseCard.vue'
+import HeaderComponent from '../../components/HeaderComponent.vue'
 
 export default {
 	components: {
-		CaseCard
+		CaseCard,
+		HeaderComponent
 	},
 	data() {
 		return {
@@ -23,7 +26,7 @@ export default {
 	},
 	async created() {
 		let usersCases = await this.getUsersCases(
-			'0x821aea9a577a9b44299b9c15c88cf3087f3b5544'
+			'0x627306090abaB3A6e1400e9345bC60c78a8BEf57'
 		)
 
 		let mappingFunction = async caseId => {
@@ -46,3 +49,5 @@ export default {
 	}
 }
 </script>
+<style scoped>
+</style>

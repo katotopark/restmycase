@@ -48,7 +48,7 @@ export default {
 
 			this.describeCase({
 				caseName: Faker.lorem.word(),
-				caseDescription: Faker.lorem.sentences(1)
+				caseDescription: Faker.lorem.sentences(2)
 			})
 
 			this.lobas.forEach(item => {

@@ -9,9 +9,17 @@
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
 @import url('https://fonts.googleapis.com/css?family=Inconsolata');
+@font-face {
+	font-family: InputCondensed;
+	src: url('../assets/InputMonoCondensed-Light.ttf');
+}
+@font-face {
+	font-family: InputRegular;
+	src: url('../assets/InputMono-Regular.ttf');
+}
 
 html {
-	font-family: 'Inconsolata', monospace;
+	font-family: 'InputCondensed', monospace;
 	font-size: 16px;
 	background-color: rgb(0, 0, 0);
 	color: white;

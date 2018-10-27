@@ -51,7 +51,7 @@ export default {
 			this.hash = await this.getCaseHash(this.theCase.id)
 			let data = await this.caseHashToData(this.hash)
 			this.bytes = Object.values(data)
-			console.log('data: ', this.bytes)
+			// console.log('data: ', this.bytes)
 		}
 	}
 }

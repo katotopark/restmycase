@@ -55,10 +55,14 @@ export default {
 
 			const caseId = await this.getCaseId(this.ipfsHash)
 			let data = await this.caseHashToData(this.ipfsHash)
-			let dataParsed = Object.assign(JSON.parse(data.toString('utf8')), {
+			let parsedData = JSON.parse(data.toString('utf8'))
+
+			console.log('parsed data is', parsedData)
+
+			let theCase = Object.assign(parsedData, {
 				id: caseId
 			})
-			this.theCase = dataParsed
+			this.theCase = theCase
 
 			// console.log(this.theCase)
 		}

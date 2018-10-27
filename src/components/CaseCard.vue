@@ -14,7 +14,7 @@
                 <!--@mouseenter="fade=true" @mouseleave="fade=false"-->
                 <div ref="test" class="image">
                   <!-- <case-card-metadata :the-case="theCase"/> -->
-                  <case-card-data-viz :dimensions="dims"/>
+                  <img :src="theCase.caseImage" >
                 </div>
               </el-col>
             </el-row>
@@ -25,7 +25,7 @@
       </el-row>
       <el-row>
         <el-col :offset="6">
-          <case-card-buttons id="case-buttons" :show-buttons="revealComponents" @show-details="showDetails"/>
+          <case-card-buttons id="case-buttons" :show-buttons="revealComponents" @buy-case="buyACase" @show-details="showDetails"/>
         </el-col>
       </el-row>
     </el-col>
@@ -35,6 +35,7 @@
 import CaseCardMetadata from './CaseCardMetadata.vue'
 import CaseCardDataViz from './CaseCardDataViz.vue'
 import CaseCardButtons from './CaseCardButtons.vue'
+import { mapActions } from 'vuex'
 
 export default {
 	components: {
@@ -67,8 +68,13 @@ export default {
 		this.dims.y = this.$refs.test.offsetHeight
 	},
 	methods: {
+		...mapActions(['buyCase']),
 		showDetails() {
 			this.$router.push(`/cases/${this.theCase.id}`)
+		},
+		buyACase() {
+			console.log('yo')
+			this.buyCase(this.theCase.id)
 		}
 	}
 }
@@ -79,7 +85,7 @@ export default {
 	max-height: 500px;
 	max-width: 500px;
 	min-width: 200px;
-	margin-bottom: 50px;
+	margin-bottom: 10px;
 }
 img {
 	width: 100%;
@@ -100,6 +106,7 @@ div.image {
 	margin-bottom: 5px;
 }
 #case-name {
+	font-family: InputRegular;
 	font-size: 18px;
 	font-weight: bold;
 	word-wrap: break-word;

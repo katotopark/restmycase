@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <!-- <img src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-tiffany-blue-solid-color-background.jpg"> -->
-    <vue-p5 v-on="{ draw }"/>
+  <div style="display:none; background-color:white">
+    <vue-p5 v-on="{ setup }"/>
   </div>
 </template>
 <script>
 var components = {}
-if (process.browser) {
+if (process.client) {
 	const VueP5 = require('vue-p5')
 	components.VueP5 = VueP5
 }
@@ -14,34 +13,50 @@ if (process.browser) {
 export default {
 	components: components,
 	props: {
-		// showImage: {
-		// 	required: false,
-		// 	type: Boolean
-		// },
-		dimensions: {
+		x: {
 			required: true,
-			type: Object
+			type: Number
+		},
+		y: {
+			required: true,
+			type: Number
 		}
 	},
 	data() {
-		return {}
-	},
-	mounted() {
-		console.log('data viz mounted')
-		if (this.dimensions) {
-			console.log('dimensions: ', this.dimensions)
+		return {
+			sk: null
 		}
 	},
+	mounted() {
+		console.log('data viz mounted. x:', this.x, 'y:', this.y)
+	},
 	methods: {
-		draw(sk) {
-			sk.createCanvas(this.dimensions.x, this.dimensions.y)
-			sk.background(255, 0, 0, 40)
-			sk.fill(0, 255, 0)
-			sk.rectMode(sk.CENTER)
-			sk.rect(sk.width / 2, sk.height / 2, 10, 10)
-			sk.rect(5, 5, 10, 10)
-			sk.rect(sk.width - 6, sk.height - 6, 10, 10)
-			sk.line(sk.width, sk.height, sk.width / 2, sk.height / 2)
+		setup(sk) {
+			this.sk = sk
+		},
+		draw(caseData) {
+			// TODO remove this
+			if (window.sadflkhadsfladf) {
+				caseData()
+			}
+
+			const skCanvas = this.sk.createCanvas(this.x, this.y)
+
+			this.sk.background(255, 0, 0)
+			this.sk.fill(0, 255, 0)
+			this.sk.rectMode(this.sk.CENTER)
+			this.sk.rect(this.sk.width / 2, this.sk.height / 2, 10, 10)
+			this.sk.rect(5, 5, 10, 10)
+			this.sk.rect(this.sk.width - 6, this.sk.height - 6, 10, 10)
+			this.sk.line(
+				this.sk.width,
+				this.sk.height,
+				this.sk.width / 2,
+				this.sk.height / 2
+			)
+			this.sk.noLoop()
+
+			return skCanvas.canvas.toDataURL('image/jpeg')
 		}
 	}
 }

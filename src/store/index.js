@@ -24,7 +24,8 @@ const createStore = () => {
 				caseDescription: '',
 				tDistance: '',
 				tDuration: '',
-				lobas: {}
+				lobas: {},
+				caseImage: null
 			},
 			totalScore: 0,
 			ipfsHash: '',
@@ -91,6 +92,7 @@ const createStore = () => {
 			describeCase(state, payload) {
 				state.formObj.caseName = payload.caseName
 				state.formObj.caseDescription = payload.caseDescription
+				state.formObj.caseImage = payload.imageData
 			}
 		},
 		actions: {
@@ -183,6 +185,42 @@ const createStore = () => {
 				console.log(receipt)
 
 				return receipt
+			},
+			async buyCase(unused_context, payload) {
+				let account = '0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef'
+
+				const buyMethod = NonFungibleCase.abi.find(method => {
+					return method.name === 'buyCase'
+				})
+				const buyMethodTxData = web3Abi.encodeFunctionCall(buyMethod, [payload])
+				try {
+					const estimateParameters = {
+						from: account,
+						to: tokenAddress,
+						data: buyMethodTxData
+					}
+					console.log('Estimating gas, parameters:', estimateParameters)
+					const estimateGas = await web3.eth.estimateGas(estimateParameters)
+				} catch (e) {
+					console.error('Estimating the gas amount threw an exception:\n', e)
+					return
+				}
+				console.log('gettingn transaction count')
+				const nonce = await web3.eth.getTransactionCount(account)
+
+				console.log('sending transaction now')
+				const receipt = await web3.eth.sendTransaction({
+					from: account,
+					to: tokenAddress,
+					data: buyMethodTxData,
+					value: 0,
+					nonce: nonce,
+					gas: estimateGas
+				})
+				console.log(receipt)
+				return receipt
+
+				console.log('Payload is', payload)
 			},
 			async getUsersCases(context, payload) {
 				let account = await getAccount()

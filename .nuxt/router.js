@@ -5,6 +5,9 @@ Vue.use(Router)
 
 const _7acfadbe = () => import('../src/pages/questionPool.vue' /* webpackChunkName: "pages/questionPool" */).then(m => m.default || m)
 const _adb170fa = () => import('../src/pages/participantPool.vue' /* webpackChunkName: "pages/participantPool" */).then(m => m.default || m)
+const _477b2fbe = () => import('../src/pages/imageTest.vue' /* webpackChunkName: "pages/imageTest" */).then(m => m.default || m)
+const _fcabfda2 = () => import('../src/pages/caseRandom.vue' /* webpackChunkName: "pages/caseRandom" */).then(m => m.default || m)
+const _644a25be = () => import('../src/pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
 const _46bfe9d7 = () => import('../src/pages/cases.vue' /* webpackChunkName: "pages/cases" */).then(m => m.default || m)
 const _0895731a = () => import('../src/pages/cases/index.vue' /* webpackChunkName: "pages/cases/index" */).then(m => m.default || m)
 const _2aa49846 = () => import('../src/pages/cases/mintConfirm.vue' /* webpackChunkName: "pages/cases/mintConfirm" */).then(m => m.default || m)
@@ -15,7 +18,6 @@ const _8e6cb290 = () => import('../src/pages/cases/loba2.vue' /* webpackChunkNam
 const _8744c30e = () => import('../src/pages/cases/lobas.vue' /* webpackChunkName: "pages/cases/lobas" */).then(m => m.default || m)
 const _41397402 = () => import('../src/pages/cases/_id.vue' /* webpackChunkName: "pages/cases/_id" */).then(m => m.default || m)
 const _fa291df6 = () => import('../src/pages/cases/_id/index.vue' /* webpackChunkName: "pages/cases/_id/index" */).then(m => m.default || m)
-const _fcabfda2 = () => import('../src/pages/caseRandom.vue' /* webpackChunkName: "pages/caseRandom" */).then(m => m.default || m)
 const _3e439394 = () => import('../src/pages/pfive.vue' /* webpackChunkName: "pages/pfive" */).then(m => m.default || m)
 const _24da7034 = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
@@ -88,6 +90,21 @@ export function createRouter () {
 			name: "participantPool"
 		},
 		{
+			path: "/imageTest",
+			component: _477b2fbe,
+			name: "imageTest"
+		},
+		{
+			path: "/caseRandom",
+			component: _fcabfda2,
+			name: "caseRandom"
+		},
+		{
+			path: "/about",
+			component: _644a25be,
+			name: "about"
+		},
+		{
 			path: "/cases",
 			component: _46bfe9d7,
 			children: [
@@ -138,11 +155,6 @@ export function createRouter () {
 					]
 				}
 			]
-		},
-		{
-			path: "/caseRandom",
-			component: _fcabfda2,
-			name: "caseRandom"
 		},
 		{
 			path: "/pfive",
