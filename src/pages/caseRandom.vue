@@ -1,9 +1,12 @@
 <template>
-  <div id="all">
-    <el-button plain @click="addCase">Add a random case</el-button>
-    <el-button plain @click="test">Test</el-button>
-    <h3 style="color:white;">ipfsHash: {{ ipfsHash }}</h3>
-  </div>
+  <el-row>
+    <el-col :span="8" :offset="8">
+      <el-button plain @click="test">Mint</el-button>
+      <h3>ipfsHash: {{ ipfsHash }}</h3>
+      <h3>txHash: {{ txHash }}</h3>
+      <h3>blockHash: {{ blockHash }}</h3>
+    </el-col>
+  </el-row>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
@@ -29,7 +32,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(['formObj', 'ipfsHash'])
+		...mapState(['formObj', 'ipfsHash', 'txHash', 'blockHash'])
 	},
 	created() {},
 	methods: {
@@ -48,7 +51,7 @@ export default {
 
 			this.describeCase({
 				caseName: Faker.lorem.word(),
-				caseDescription: Faker.lorem.sentences(2)
+				caseDescription: Faker.lorem.sentences(3)
 			})
 
 			this.lobas.forEach(item => {
@@ -76,7 +79,24 @@ export default {
 }
 </script>
 <style scoped>
-#all {
+.el-col {
+	border: 1px solid white;
+}
+.el-button {
+	width: 100%;
+	border-radius: 0px !important;
+	font-family: InputRegular;
+	font-size: 1rem;
+	border: 0px;
+}
+.el-button:active,
+.el-button:hover {
+	background-color: black;
 	color: white;
+}
+h3 {
+	word-wrap: break-word;
+	margin: 5px 5px 5px 5px;
+	font-size: 1.2rem;
 }
 </style>

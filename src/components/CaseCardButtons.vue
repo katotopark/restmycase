@@ -1,7 +1,7 @@
 <template>
   <el-button-group v-if="showButtons">
-    <el-button @click="$emit('show-details')">Fetch case</el-button>
-    <el-button @click="$emit('buy-case')">Buy case</el-button>
+    <el-button @click="$emit('show-details')">Fetch Case</el-button>
+    <el-button @click="$emit('buy-case')">Buy Case</el-button>
   </el-button-group>
 </template>
 <script>
@@ -23,14 +23,14 @@ export default {
 	font-family: inherit;
 	font-size: 1rem;
 	padding: 8px;
-	color: white;
-	background: none;
+	background: white;
+	color: black;
 	border: 0px;
 	/* border-bottom: 0.5px solid white; */
 }
 .el-button:hover {
-	background: white;
-	color: black;
+	color: white;
+	background: black;
 	border-radius: 0px !important;
 }
 </style>

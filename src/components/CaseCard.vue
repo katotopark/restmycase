@@ -1,39 +1,35 @@
 <template>
-  <el-row >
-    <el-col :span="24">
-      <el-row v-if="revealComponents">
-        <el-col id="case-id" :span="12" :offset="6">
-          <span>#{{ theCase.id }}</span>
-        </el-col>
-      </el-row>
-      <el-row class="case-card">
-        <el-col>
-          <el-col id="case-img" :span="20" :offset="2">
-            <el-row>
-              <el-col :span="24">
-                <!--@mouseenter="fade=true" @mouseleave="fade=false"-->
-                <div ref="test" class="image">
-                  <!-- <case-card-metadata :the-case="theCase"/> -->
-                  <img :src="theCase.caseImage" >
-                </div>
-              </el-col>
-            </el-row>
-            <span id="case-name">_{{ theCase.caseName }}</span>
-            <p id="case-description">{{ theCase.caseDescription }}</p>
-          </el-col>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :offset="6">
-          <case-card-buttons id="case-buttons" :show-buttons="revealComponents" @buy-case="buyACase" @show-details="showDetails"/>
-        </el-col>
-      </el-row>
-    </el-col>
+  <el-row style="border: 2px solid red;">
+    <el-row v-if="revealComponents" id="case-id">
+      <h3>#{{ theCase.id }}</h3>
+    </el-row>
+    <el-row class="case-card">
+      <el-col id="case-img" :span="20" :offset="2">
+        <el-row>
+          <!--@mouseenter="fade=true" @mouseleave="fade=false"-->
+          <div ref="test" class="image">
+            <!-- <case-card-metadata :the-case="theCase"/> -->
+            <img :src="theCase.caseImage">
+          </div>
+        </el-row>
+        <el-row>
+          <span id="case-name">_{{ theCase.caseName }}</span>
+          <p id="case-description">{{ theCase.caseDescription }}</p>
+        </el-row>
+        <el-row id="case-graph">
+          <case-card-graph style="color: black;"/>
+        </el-row>
+      </el-col>
+    </el-row>
+    <el-row>
+      <case-card-buttons id="case-buttons" :show-buttons="revealComponents" @buy-case="buyACase" @show-details="showDetails"/>
+    </el-row>
   </el-row>
 </template>
 <script>
 import CaseCardMetadata from './CaseCardMetadata.vue'
 import CaseCardDataViz from './CaseCardDataViz.vue'
+import CaseCardGraph from './CaseCardGraph.vue'
 import CaseCardButtons from './CaseCardButtons.vue'
 import { mapActions } from 'vuex'
 
@@ -41,7 +37,8 @@ export default {
 	components: {
 		CaseCardMetadata,
 		CaseCardButtons,
-		CaseCardDataViz
+		CaseCardDataViz,
+		CaseCardGraph
 	},
 	props: {
 		theCase: {
@@ -82,8 +79,8 @@ export default {
 <style scoped>
 .el-row.case-card {
 	background-color: rgb(244, 243, 234);
-	max-height: 500px;
-	max-width: 500px;
+	height: 500px;
+	width: 400px;
 	min-width: 200px;
 	margin-bottom: 10px;
 }
@@ -121,6 +118,11 @@ div.image {
 	font-size: 14px;
 	max-height: 100%;
 	color: black;
+}
+#case-graph {
+	background-color: rgb(75, 111, 158);
+	height: 100px;
+	margin-top: 15px;
 }
 #case-buttons {
 	margin: 10px auto 20px auto;

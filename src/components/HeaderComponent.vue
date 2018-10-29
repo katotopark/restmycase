@@ -1,52 +1,53 @@
 <template>
-  <el-header>
-    <button type="button" name="button">
-      <a href="#">Home</a>
-    </button>
-    <button type="button" name="button">
-      <a href="#">AQP</a>
-    </button>
-    <button type="button" name="button">
-      <a href="#">Wiki</a>
-    </button>
-    <button type="button" name="button">
-      <a href="/about">About</a>
-    </button>
-  </el-header>
+  <el-menu :default-active="activeIndex" mode="horizontal"
+           @select="handleSelect">
+    <el-menu-item index="1">Home</el-menu-item>
+    <el-menu-item index="2">AQP</el-menu-item>
+    <el-menu-item index="3">Wiki</el-menu-item>
+    <el-menu-item index="4">About</el-menu-item>
+  </el-menu>
 </template>
 <script>
 export default {
-	name: '',
-	data: () => ({})
+	data() {
+		return {
+			activeIndex: ''
+		}
+	},
+	methods: {
+		handleSelect(key, keyPath) {
+			console.log(key, keyPath)
+			switch (key) {
+				case '1':
+					this.$router.push('/cases/')
+					break
+				case '2':
+					this.$router.push('/aqp')
+					break
+				case '3':
+					this.$router.push('/wiki')
+					break
+				case '4':
+					this.$router.push('/about')
+					break
+			}
+		}
+	}
 }
 </script>
 <style scoped>
-.el-header {
-	background-color: white;
-	height: 40px !important;
-}
-.el-header a {
-	/* border: 2px solid red; */
+.el-menu-item {
 	height: inherit;
 	color: black;
 	font-family: InputRegular;
 	text-decoration: none;
-	font-size: 1rem;
+	font-size: 1.1rem;
 }
-.el-header button {
+el-menu-item:active {
+	border: 2px solid red !important;
+}
+.el-menu-item a {
+	text-decoration: none;
 	height: 100%;
-	background-color: white;
-	padding-right: 10px;
-	border: 0px;
-	/* border-left: 1px solid black; */
-}
-.el-header button:last-child {
-	/* border-right: 1px solid black; */
-}
-.el-header button:active {
-	background-color: black;
-}
-.el-header button a:active {
-	color: white;
 }
 </style>

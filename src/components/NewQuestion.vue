@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="">
-            <el-input v-model="dataObj.title" type="textarea" placeholder="title" @change="$emit('catch-input', dataObj.title)" />
+            <el-input v-model="dataObj.title" type="textarea" placeholder="title" @change="$emit('catch-input', dataObj.title)"/>
           </el-form-item>
         </el-col>
       </el-row>
@@ -18,10 +18,14 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item>
-            <el-button type="submit" size="mini" @click="$emit('submit')" >Submit</el-button>
-            <el-button type="submit" size="mini" @click="$emit('clear')" >Clear</el-button>
+            <el-col :span="12">
+              <el-button type="submit" size="mini" @click="$emit('submit')" >Submit</el-button>
+            </el-col>
+            <el-col :span="12">
+              <el-button type="submit" size="mini" @click="$emit('clear')" >Clear</el-button>
+            </el-col>
           </el-form-item>
         </el-col>
       </el-row>
@@ -48,8 +52,14 @@ export default {
 <style scoped>
 .el-button {
 	font-family: inherit;
-	font-size: 0.85rem;
+	font-size: 1rem;
 	margin-top: 0.1rem;
 	border-radius: 0px;
+	width: 100%;
+	border: 0px;
+}
+.el-button:hover {
+	background-color: black;
+	color: white;
 }
 </style>

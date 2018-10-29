@@ -8,6 +8,7 @@
         <el-row>
           <el-col id="image" :span="24">
             <case-card :the-case="theCase" />
+            <!-- <img :src="theCase.caseImage"> -->
           </el-col>
         </el-row>
       </el-col>
@@ -23,6 +24,11 @@
           </el-col>
         </el-row>
       </el-col>
+      <el-row>
+        <el-col :span="24">
+          <p>{{ metadata }}</p>
+        </el-col>
+      </el-row>
     </el-col>
   </el-row>
 </template>
@@ -37,7 +43,8 @@ export default {
 	},
 	data() {
 		return {
-			theCase: null
+			theCase: null,
+			metadata: ''
 		}
 	},
 	async created() {
@@ -49,8 +56,9 @@ export default {
 		let encodedData = await this.caseHashToData(hash)
 		let caseData = JSON.parse(encodedData.toString('utf8'))
 
+		console.log(encodedData)
 		console.table(caseData)
-
+		this.metadata = Object.values(encodedData)
 		this.theCase = caseData
 	},
 	methods: {

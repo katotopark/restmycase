@@ -1,19 +1,29 @@
 <template>
-  <div>
+  <el-container>
     <header-component/>
-    <case-card v-for="elem in cases" ref="test" :key="elem.id" :the-case="elem"/>
-  </div>
+    <el-container>
+      <el-aside>
+        <aside-component/>
+      </el-aside>
+      <el-main>
+        <case-card v-for="elem in cases" ref="test" :key="elem.id" :the-case="elem"/>
+      </el-main>
+    </el-container>
+    <el-footer/>
+  </el-container>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
 import CaseCard from '../../components/CaseCard.vue'
 import HeaderComponent from '../../components/HeaderComponent.vue'
+import AsideComponent from '../../components/AsideComponent.vue'
 
 export default {
 	components: {
 		CaseCard,
-		HeaderComponent
+		HeaderComponent,
+		AsideComponent
 	},
 	data() {
 		return {

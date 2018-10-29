@@ -186,7 +186,7 @@ const createStore = () => {
 
 				return receipt
 			},
-			async buyCase(unused_context, payload) {
+			/*async buyCase(unused_context, payload) {
 				let account = '0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef'
 
 				const buyMethod = NonFungibleCase.abi.find(method => {
@@ -221,7 +221,7 @@ const createStore = () => {
 				return receipt
 
 				console.log('Payload is', payload)
-			},
+			},*/
 			async getUsersCases(context, payload) {
 				let account = await getAccount()
 				const casesArr = await aNFC.methods

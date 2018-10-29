@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     {{ msg }}
   </div>
 </template>
@@ -7,7 +7,7 @@
 export default {
 	data() {
 		return {
-			msg: 'hello'
+			msg: 'hello from graph'
 		}
 	}
 }
