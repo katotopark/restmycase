@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col :span="8" :offset="8">
+    <el-col :span="12" :offset="6">
       <el-button plain @click="test">Mint</el-button>
       <h3>ipfsHash: {{ ipfsHash }}</h3>
       <h3>txHash: {{ txHash }}</h3>
@@ -51,7 +51,8 @@ export default {
 
 			this.describeCase({
 				caseName: Faker.lorem.word(),
-				caseDescription: Faker.lorem.sentences(3)
+				caseDescription: Faker.lorem.sentences(3),
+				imageData: Faker.image.image()
 			})
 
 			this.lobas.forEach(item => {
@@ -67,6 +68,7 @@ export default {
 			this.describeCase({
 				caseName: Faker.lorem.word(),
 				caseDescription: Faker.lorem.sentences(1)
+				// caseImage: Faker.image.abstract()
 			})
 
 			this.lobas.forEach(item => {

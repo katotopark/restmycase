@@ -92,7 +92,7 @@ const createStore = () => {
 			describeCase(state, payload) {
 				state.formObj.caseName = payload.caseName
 				state.formObj.caseDescription = payload.caseDescription
-				state.formObj.caseImage = payload.imageData
+				state.formObj.caseImage = payload.caseImage
 			}
 		},
 		actions: {

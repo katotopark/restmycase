@@ -65,7 +65,7 @@ export default {
 				await this.describeCase({
 					caseName: this.caseName,
 					caseDescription: this.caseDescription,
-					imageData: imageData
+					caseImage: imageData
 				})
 
 				await this.randomNum()

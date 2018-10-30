@@ -1,17 +1,15 @@
 <template>
-  <el-button-group v-if="showButtons">
-    <el-button @click="$emit('show-details')">Fetch Case</el-button>
-    <el-button @click="$emit('buy-case')">Buy Case</el-button>
-  </el-button-group>
+  <el-row>
+    <el-col :span="12">
+      <el-button @click="$emit('show-details')">Fetch Case</el-button>
+    </el-col>
+    <el-col :span="12">
+      <el-button @click="$emit('buy-case')">Buy Case</el-button>
+    </el-col>
+  </el-row>
 </template>
 <script>
 export default {
-	props: {
-		showButtons: {
-			required: true,
-			type: Boolean
-		}
-	},
 	data() {
 		return {}
 	}
@@ -26,6 +24,7 @@ export default {
 	background: white;
 	color: black;
 	border: 0px;
+	width: 100%;
 	/* border-bottom: 0.5px solid white; */
 }
 .el-button:hover {

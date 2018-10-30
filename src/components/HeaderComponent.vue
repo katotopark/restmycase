@@ -3,8 +3,9 @@
            @select="handleSelect">
     <el-menu-item index="1">Home</el-menu-item>
     <el-menu-item index="2">AQP</el-menu-item>
-    <el-menu-item index="3">Wiki</el-menu-item>
-    <el-menu-item index="4">About</el-menu-item>
+    <el-menu-item index="3">BLP</el-menu-item>
+    <el-menu-item index="4">Wiki</el-menu-item>
+    <el-menu-item index="5">About</el-menu-item>
   </el-menu>
 </template>
 <script>
@@ -25,9 +26,12 @@ export default {
 					this.$router.push('/aqp')
 					break
 				case '3':
-					this.$router.push('/wiki')
+					this.$router.push('/blp')
 					break
 				case '4':
+					this.$router.push('/wiki')
+					break
+				case '5':
 					this.$router.push('/about')
 					break
 			}

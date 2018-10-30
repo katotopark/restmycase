@@ -14,7 +14,7 @@
           <el-table-column width="40" type="index" label="#"/>
           <el-table-column prop="value" label="QUESTIONS"/>
           <el-table-column prop="group" width="60" label="GROUP"/>
-          <el-table-column width="60" prop="voteCount" label="VOTES"/>
+          <el-table-column prop="voteCount" width="60" label="VOTES"/>
           <el-table-column
             fixed="right"
             label="Up!Up!"

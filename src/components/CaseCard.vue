@@ -1,29 +1,37 @@
 <template>
-  <el-row style="border: 2px solid red;">
-    <el-row v-if="revealComponents" id="case-id">
-      <h3>#{{ theCase.id }}</h3>
-    </el-row>
-    <el-row class="case-card">
-      <el-col id="case-img" :span="20" :offset="2">
-        <el-row>
-          <!--@mouseenter="fade=true" @mouseleave="fade=false"-->
-          <div ref="test" class="image">
-            <!-- <case-card-metadata :the-case="theCase"/> -->
-            <img :src="theCase.caseImage">
-          </div>
-        </el-row>
-        <el-row>
-          <span id="case-name">_{{ theCase.caseName }}</span>
-          <p id="case-description">{{ theCase.caseDescription }}</p>
-        </el-row>
-        <el-row id="case-graph">
-          <case-card-graph style="color: black;"/>
-        </el-row>
-      </el-col>
-    </el-row>
-    <el-row>
-      <case-card-buttons id="case-buttons" :show-buttons="revealComponents" @buy-case="buyACase" @show-details="showDetails"/>
-    </el-row>
+  <el-row type="flex" justify="center">
+    <el-col id="container">
+      <div v-if="revealComponents">
+        <el-col :span="12" :offset="6">
+          <el-row id="case-id" type="flex" justify="center">
+            <h3>#{{ theCase.id }}</h3>
+          </el-row>
+        </el-col>
+      </div>
+      <el-row>
+        <el-col class="case-card">
+          <el-col>
+            <el-row>
+              <el-col id="case-img" :span="20" :offset="2">
+                <div ref="test" class="image">
+                  <img :src="theCase.caseImage">
+                </div>
+                <el-row>
+                  <span id="case-name">_{{ theCase.caseName }}</span>
+                  <p id="case-description">{{ theCase.caseDescription }}</p>
+                </el-row>
+                <el-row id="case-graph">
+                  <case-card-graph style="color: black;"/>
+                </el-row>
+              </el-col>
+            </el-row>
+          </el-col>
+        </el-col>
+      </el-row>
+      <div v-if="revealComponents">
+        <case-card-buttons id="case-buttons" @buy-case="buyACase" @show-details="showDetails"/>
+      </div>
+    </el-col>
   </el-row>
 </template>
 <script>
@@ -77,11 +85,13 @@ export default {
 }
 </script>
 <style scoped>
-.el-row.case-card {
+#container {
+	width: 400px;
+}
+.case-card {
 	background-color: rgb(244, 243, 234);
 	height: 500px;
-	width: 400px;
-	min-width: 200px;
+	width: 100%;
 	margin-bottom: 10px;
 }
 img {
@@ -99,8 +109,10 @@ div.image {
 #case-id {
 	color: white;
 	font-size: 1.2rem;
-	margin-top: 10px;
+	/* margin-top: 10px; */
 	margin-bottom: 5px;
+	padding-right: 0px;
+	height: 60px;
 }
 #case-name {
 	font-family: InputRegular;
@@ -122,9 +134,9 @@ div.image {
 #case-graph {
 	background-color: rgb(75, 111, 158);
 	height: 100px;
-	margin-top: 15px;
+	margin-top: 10px;
 }
 #case-buttons {
-	margin: 10px auto 20px auto;
+	margin: 10px auto 30px auto;
 }
 </style>

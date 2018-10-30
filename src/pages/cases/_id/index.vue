@@ -3,7 +3,7 @@
     <el-col v-if="theCase === null" :span="16" :offset="4" class="container">
       <span class="large-text loading">Loading case...</span>
     </el-col>
-    <el-col v-if="theCase !== null" :span="16" :offset="4" class="container">
+    <el-col v-else :span="16" :offset="4" class="container">
       <el-col id="top-left" :sm="12" :md="12">
         <el-row>
           <el-col id="image" :span="24">
@@ -56,7 +56,7 @@ export default {
 		let encodedData = await this.caseHashToData(hash)
 		let caseData = JSON.parse(encodedData.toString('utf8'))
 
-		console.log(encodedData)
+		console.log(hash)
 		console.table(caseData)
 		this.metadata = Object.values(encodedData)
 		this.theCase = caseData
@@ -90,7 +90,7 @@ export default {
 	margin-bottom: 20px;
 }
 
-.el-row p {
+.el-row#data p {
 	color: white;
 	hyphens: auto;
 	border-bottom: 0.5px solid white;
