@@ -15,9 +15,9 @@ const _8e6cb290 = () => import('../src/pages/cases/loba2.vue' /* webpackChunkNam
 const _8744c30e = () => import('../src/pages/cases/lobas.vue' /* webpackChunkName: "pages/cases/lobas" */).then(m => m.default || m)
 const _41397402 = () => import('../src/pages/cases/_id.vue' /* webpackChunkName: "pages/cases/_id" */).then(m => m.default || m)
 const _fa291df6 = () => import('../src/pages/cases/_id/index.vue' /* webpackChunkName: "pages/cases/_id/index" */).then(m => m.default || m)
-const _b9503d0c = () => import('../src/pages/blp.vue' /* webpackChunkName: "pages/blp" */).then(m => m.default || m)
-const _644a25be = () => import('../src/pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
 const _76f9e154 = () => import('../src/pages/aqp.vue' /* webpackChunkName: "pages/aqp" */).then(m => m.default || m)
+const _644a25be = () => import('../src/pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
+const _6e71a639 = () => import('../src/pages/alp.vue' /* webpackChunkName: "pages/alp" */).then(m => m.default || m)
 const _fcabfda2 = () => import('../src/pages/caseRandom.vue' /* webpackChunkName: "pages/caseRandom" */).then(m => m.default || m)
 const _3e439394 = () => import('../src/pages/pfive.vue' /* webpackChunkName: "pages/pfive" */).then(m => m.default || m)
 const _24da7034 = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
@@ -143,9 +143,9 @@ export function createRouter () {
 			]
 		},
 		{
-			path: "/blp",
-			component: _b9503d0c,
-			name: "blp"
+			path: "/aqp",
+			component: _76f9e154,
+			name: "aqp"
 		},
 		{
 			path: "/about",
@@ -153,9 +153,9 @@ export function createRouter () {
 			name: "about"
 		},
 		{
-			path: "/aqp",
-			component: _76f9e154,
-			name: "aqp"
+			path: "/alp",
+			component: _6e71a639,
+			name: "alp"
 		},
 		{
 			path: "/caseRandom",

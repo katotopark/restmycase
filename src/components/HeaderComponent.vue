@@ -3,7 +3,7 @@
            @select="handleSelect">
     <el-menu-item index="1">Home</el-menu-item>
     <el-menu-item index="2">AQP</el-menu-item>
-    <el-menu-item index="3">BLP</el-menu-item>
+    <el-menu-item index="3">ALP</el-menu-item>
     <el-menu-item index="4">Wiki</el-menu-item>
     <el-menu-item index="5">About</el-menu-item>
   </el-menu>
@@ -26,7 +26,7 @@ export default {
 					this.$router.push('/aqp')
 					break
 				case '3':
-					this.$router.push('/blp')
+					this.$router.push('/alp')
 					break
 				case '4':
 					this.$router.push('/wiki')

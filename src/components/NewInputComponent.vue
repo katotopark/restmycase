@@ -4,15 +4,20 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="">
-            <el-input v-model="dataObj.title" type="textarea" placeholder="title" @change="$emit('catch-input', dataObj.title)"/>
+            <el-input v-model="dataObj[inputProps.inputA]" :placeholder="inputProps.inputA" type="textarea" @change="$emit('catch-input-a', dataObj[inputProps.inputA])"/>
           </el-form-item>
+          <span v-if="routePath">
+            <el-form-item label="">
+              <el-input v-model="dataObj[inputProps.inputB]" :placeholder="inputProps.inputB" type="textarea" @change="$emit('catch-input-b', dataObj[inputProps.inputB])"/>
+            </el-form-item>
+          </span>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
           <el-form-item size="large" label="">
-            <el-select v-model="dataObj.group" style="width: 100%" placeholder="group" @change="$emit('catch-group', dataObj.group)">
-              <el-option v-for="item in groupOptions" :key="item.value" :value="item.value" :label="`${item.value}: ${item.label}`"/>
+            <el-select v-model="dataObj[inputProps.select]" :placeholder="inputProps.select" style="width: 100%" clearable @change="$emit('catch-select', dataObj[inputProps.select])">
+              <el-option v-for="item in selectOptions" :key="item.value" :value="item.value" :label="`${item.value}: ${item.label}`"/>
             </el-select>
           </el-form-item>
         </el-col>
@@ -39,13 +44,22 @@ export default {
 			required: true,
 			type: Object
 		},
-		groupOptions: {
+		selectOptions: {
 			required: true,
 			type: Array
+		},
+		inputProps: {
+			required: true,
+			type: Object
 		}
 	},
 	data() {
 		return {}
+	},
+	computed: {
+		routePath() {
+			return this.$router.currentRoute.path == '/alp' ? true : false
+		}
 	}
 }
 </script>

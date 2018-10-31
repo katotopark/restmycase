@@ -3,41 +3,30 @@
     <header-component/>
     <el-row>
       <el-col :span="12" :offset="6">
-        <ul id="errors">
-          <li v-for="err in errors" :key="err.key" style="list-style-type: none">{{ err }}</li>
-        </ul>
-        <new-question :data-obj.sync="newQ" :group-options="groups" @catch-input="onCatchInput" @submit="onSubmit" @clear="onClear" @catch-group="onCatchGroup"/>
+        <span v-if="errors">
+          <ul id="errors">
+            <li v-for="err in errors" :key="err.key" style="list-style-type: none">{{ err }}</li>
+          </ul>
+        </span>
+        <new-input-component id="new-input" :data-obj.sync="newQ" :select-options="groups" :input-props="inputProps" @catch-input-a="onCatchTitle" @submit="onSubmit" @clear="onClear" @catch-select="onCatchGroup"/>
         <el-select v-model="filterGroup" clearable placeholder="Filter by group" @change="filterByGroup">
           <el-option v-for="item in groups" :key="item.value" :value="item.value" :label="`${item.value}: ${item.label}`"/>
         </el-select>
-        <el-table id="questions-table" ref="singleTable" :data="qArr" highlight-current-row @current-change="handleCurrentChange">
-          <el-table-column width="40" type="index" label="#"/>
-          <el-table-column prop="value" label="QUESTIONS"/>
-          <el-table-column prop="group" width="60" label="GROUP"/>
-          <el-table-column prop="voteCount" width="60" label="VOTES"/>
-          <el-table-column
-            fixed="right"
-            label="Up!Up!"
-            width="90">
-            <template slot-scope="scope">
-              <el-button size="small" type="text" @click="handleClick(scope.$index, qArr)">
-                <i class="el-icon-plus"/>
-              </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
+        <table-component id="questions-table" :data-obj="qArr" :props-arr="tableProps" :voteable="true" @handle-click="handleClick"/>
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
-import NewQuestion from '../components/NewQuestion.vue'
+import NewInputComponent from '../components/NewInputComponent.vue'
 import HeaderComponent from '../components/HeaderComponent.vue'
+import TableComponent from '../components/TableComponent.vue'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
-		NewQuestion,
+		NewInputComponent,
+		TableComponent,
 		HeaderComponent
 	},
 	data() {
@@ -71,6 +60,15 @@ export default {
 			qSubmitted: false,
 			errors: [],
 			qArr: [],
+			tableProps: [
+				{ value: 'value', width: '300' },
+				{ value: 'group', width: '60' },
+				{ value: 'voteCount' }
+			],
+			inputProps: {
+				inputA: 'title',
+				select: 'group'
+			},
 			filterGroup: ''
 		}
 	},
@@ -93,7 +91,7 @@ export default {
 		onCatchGroup(e) {
 			this.newGroup.value = e
 		},
-		onCatchInput(e) {
+		onCatchTitle(e) {
 			this.newTitle = e
 		},
 		onClear() {
@@ -130,6 +128,7 @@ export default {
 			}
 		},
 		handleClick(index) {
+			console.log('clicked')
 			if (!this.voted) {
 				this.voted = true
 				this.voteQuestion(index)
@@ -150,28 +149,19 @@ export default {
 </script>
 <style scoped>
 .el-select {
-	border-radius: 0px !important;
-	/* border: 2px solid red; */
-}
-.el-table {
-	margin-top: 30px;
-	color: black;
-}
-.el-button {
-	font-family: inherit;
-	color: inherit;
-}
-
-.el-select {
 	width: 100%;
 	margin-top: 40px;
+	margin-bottom: 20px;
+	border-radius: 0px !important;
 }
 ul#errors {
 	padding-left: 0px;
 	font-size: 1rem;
 	font-family: InputRegular;
-	/* color: black; */
-	/* background-color: white; */
-	padding: 8px 2px 8px 6px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+#new-input {
+	margin-top: 30px;
 }
 </style>
