@@ -4,10 +4,12 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="">
+            <span class="input-label">_{{ inputProps.inputA.toUpperCase() }}:</span>
             <el-input v-model="dataObj[inputProps.inputA]" :placeholder="inputProps.inputA" type="textarea" @change="$emit('catch-input-a', dataObj[inputProps.inputA])"/>
           </el-form-item>
           <span v-if="routePath">
             <el-form-item label="">
+              <span class="input-label">_{{ inputProps.inputB.toUpperCase() }}:</span>
               <el-input v-model="dataObj[inputProps.inputB]" :placeholder="inputProps.inputB" type="textarea" @change="$emit('catch-input-b', dataObj[inputProps.inputB])"/>
             </el-form-item>
           </span>
@@ -16,6 +18,7 @@
       <el-row>
         <el-col :span="24">
           <el-form-item size="large" label="">
+            <span class="input-label">_{{ inputProps.select.toUpperCase() }}:</span>
             <el-select v-model="dataObj[inputProps.select]" :placeholder="inputProps.select" style="width: 100%" clearable @change="$emit('catch-select', dataObj[inputProps.select])">
               <el-option v-for="item in selectOptions" :key="item.value" :value="item.value" :label="`${item.value}: ${item.label}`"/>
             </el-select>
@@ -75,5 +78,12 @@ export default {
 .el-button:hover {
 	background-color: black;
 	color: white;
+}
+.input-label {
+	font-size: 1.1rem;
+	font-family: InputRegular;
+	background-color: white;
+	color: black;
+	padding: 5px;
 }
 </style>

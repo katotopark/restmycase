@@ -3,6 +3,7 @@ import web3 from '~/plugins/web3'
 import web3Abi from 'web3-eth-abi'
 import NonFungibleCase from '../../build/contracts/NonFungibleCase'
 import * as questions_0 from './questionsDefault'
+import * as locations_0 from './locationsDefault'
 
 const IPFS = require('ipfs-api')
 // const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
@@ -32,6 +33,7 @@ const createStore = () => {
 			txHash: '',
 			blockHash: '',
 			questionsArray: [],
+			locationsArray: [],
 			caseArray: [],
 			txArray: [],
 			userArray: [] // ERC721 => js filter for ownerOf
@@ -68,6 +70,23 @@ const createStore = () => {
 			},
 			updateScore(state, payload) {
 				state.totalScore += payload
+			},
+			setLocations(state) {
+				state.locationsArray = locations_0.map(item => {
+					let output = {
+						name: item.name,
+						address: item.address,
+						class: item.class,
+						voteCount: item.voteCount
+					}
+					return output
+				})
+			},
+			addLocation(state, payload) {
+				state.locationsArray.push(payload)
+			},
+			voteLocation(state, payload) {
+				state.locationsArray[payload].voteCount++
 			},
 			resetHash(state, payload) {
 				state.ipfsHash = payload
@@ -111,6 +130,15 @@ const createStore = () => {
 			updateScore(context, payload) {
 				console.log('new score is: ', context.state.totalScore)
 				context.commit('updateScore', payload)
+			},
+			setLocations(context) {
+				context.commit('setLocations')
+			},
+			addLocation(context, payload) {
+				context.commit('addLocation', payload)
+			},
+			voteLocation(context, payload) {
+				context.commit('voteLocation', payload)
 			},
 			randomNum(context) {
 				context.commit('randomNum')

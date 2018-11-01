@@ -2,15 +2,15 @@
   <div>
     <header-component/>
     <el-row>
-      <el-col :span="12" :offset="6">
+      <el-col :span="16" :offset="4">
         <span v-if="errors">
           <ul id="errors">
             <li v-for="err in errors" :key="err.key" style="list-style-type: none">{{ err }}</li>
           </ul>
         </span>
-        <new-input-component id="new-input" :data-obj.sync="newQ" :select-options="groups" :input-props="inputProps" @catch-input-a="onCatchTitle" @submit="onSubmit" @clear="onClear" @catch-select="onCatchGroup"/>
+        <new-input-component id="new-input" :data-obj.sync="newQ" :select-options="qGroupsArr" :input-props="inputProps" @catch-input-a="onCatchTitle" @submit="onSubmit" @clear="onClear" @catch-select="onCatchGroup"/>
         <el-select v-model="filterGroup" clearable placeholder="Filter by group" @change="filterByGroup">
-          <el-option v-for="item in groups" :key="item.value" :value="item.value" :label="`${item.value}: ${item.label}`"/>
+          <el-option v-for="item in qGroupsArr" :key="item.value" :value="item.value" :label="`${item.value}: ${item.label}`"/>
         </el-select>
         <table-component id="questions-table" :data-obj="qArr" :props-arr="tableProps" :voteable="true" @handle-click="handleClick"/>
       </el-col>
@@ -31,7 +31,16 @@ export default {
 	},
 	data() {
 		return {
-			groups: [
+			tableProps: [
+				{ value: 'value', width: '' },
+				{ value: 'group', width: '' },
+				{ value: 'voteCount' }
+			],
+			inputProps: {
+				inputA: 'title',
+				select: 'group'
+			},
+			qGroupsArr: [
 				{
 					value: 'A',
 					label: 'space'
@@ -60,15 +69,7 @@ export default {
 			qSubmitted: false,
 			errors: [],
 			qArr: [],
-			tableProps: [
-				{ value: 'value', width: '300' },
-				{ value: 'group', width: '60' },
-				{ value: 'voteCount' }
-			],
-			inputProps: {
-				inputA: 'title',
-				select: 'group'
-			},
+
 			filterGroup: ''
 		}
 	},
@@ -82,12 +83,6 @@ export default {
 	},
 	methods: {
 		...mapActions(['setQuestions', 'addQuestion', 'voteQuestion']),
-		setCurrent(row) {
-			this.$refs.singleTable.setCurrentRow(row)
-		},
-		handleCurrentChange(val) {
-			this.currentRow = val
-		},
 		onCatchGroup(e) {
 			this.newGroup.value = e
 		},
@@ -121,10 +116,10 @@ export default {
 			this.errors = []
 			if (this.newTitle === '' || this.newGroup.value === '') {
 				this.qSubmitted = false
-				this.errors.push("You'll need to fill in both fields.")
+				this.errors.push("You'll need to fill in all the fields.")
 			}
 			if (this.qSubmitted) {
-				this.errors.push("You've already submitted")
+				this.errors.push('You have already submitted')
 			}
 		},
 		handleClick(index) {
@@ -133,7 +128,7 @@ export default {
 				this.voted = true
 				this.voteQuestion(index)
 			} else {
-				this.errors.push('you already voted')
+				this.errors.push('You have already voted')
 			}
 		},
 		filterByGroup(e) {

@@ -2,14 +2,14 @@
   <div>
     <header-component/>
     <el-row>
-      <el-col :span="12" :offset="6">
+      <el-col :span="16" :offset="4">
         <span v-if="errors">
           <ul id="errors">
             <li v-for="err in errors" :key="err.key" style="list-style-type: none">{{ err }}</li>
           </ul>
         </span>
         <new-input-component id="new-input" :data-obj="newLoc" :select-options="locClassArr" :input-props="inputProps" @catch-input-a="onCatchName" @catch-input-b="onCatchAddress" @catch-select="onCatchClass" @submit="onSubmit" @clear="onClear"/>
-        <table-component :props-arr="tableProps" :data-obj="tableData" :voteable="true"/>
+        <table-component :props-arr="tableProps" :data-obj="locArr" :voteable="true" @handle-click="handleClick"/>
       </el-col>
     </el-row>
   </div>
@@ -19,6 +19,7 @@ import HeaderComponent from '../components/HeaderComponent.vue'
 import NewInputComponent from '../components/NewInputComponent.vue'
 import TableComponent from '../components/TableComponent.vue'
 import Faker from 'faker'
+import { mapState, mapActions } from 'vuex'
 
 export default {
 	components: {
@@ -29,32 +30,15 @@ export default {
 	data() {
 		return {
 			tableProps: [
-				{ value: 'name', width: '80' },
-				{ value: 'address', width: '200' },
-				{ value: 'class' }
-			],
-			tableData: [
-				{ name: 'yoyo', address: 'yoyotown', class: '2' },
-				{ name: 'yoyo', address: 'yoyotown', class: '2' },
-				{ name: 'yoyo', address: 'yoyotown', class: '2' },
-				{ name: 'yoyo', address: 'yoyotown', class: '2' },
-				{ name: 'yoyo', address: 'yoyotown', class: '2' }
+				{ value: 'name', width: '100' },
+				{ value: 'address', width: '' },
+				{ value: 'class' },
+				{ value: 'voteCount' }
 			],
 			inputProps: {
 				inputA: 'name',
 				inputB: 'address',
 				select: 'class'
-			},
-			newLoc: {
-				name: '',
-				address: '',
-				class: ''
-			},
-			newLocName: '',
-			newLocAddress: '',
-			newLocClass: {
-				value: '',
-				label: ''
 			},
 			locClassArr: [
 				{
@@ -78,9 +62,26 @@ export default {
 					label: 'Professional'
 				}
 			],
+			locArr: [],
+			newLoc: {
+				name: '',
+				address: '',
+				class: '',
+				voteCount: 0
+			},
+			newLocName: '',
+			newLocAddress: '',
+			newLocClass: {
+				value: '',
+				label: ''
+			},
+			voted: false,
 			locSubmitted: false,
 			errors: []
 		}
+	},
+	computed: {
+		...mapState(['locationsArray'])
 	},
 	created() {
 		let someLong = Faker.address.longitude()
@@ -89,8 +90,15 @@ export default {
 		console.log('longitude: ', someLong)
 		console.log('latitude: ', someLat)
 		console.log('address: ', someStr)
+
+		this.setLocations()
+		this.locArr = this.locationsArray
+
+		// console.log(Object.values(this.inputProps))
+		// console.log(Object.values(this.tableData))
 	},
 	methods: {
+		...mapActions(['setLocations', 'addLocation', 'voteLocation']),
 		onCatchName(e) {
 			this.newLocName = e
 			console.log('got name: ', this.newLocName)
@@ -112,9 +120,10 @@ export default {
 				this.newLoc = {
 					name: this.newLocName,
 					address: this.newLocAddress,
-					class: this.newLocClass.value
+					class: this.newLocClass.value,
+					voteCount: 0
 				}
-				this.tableData.push(this.newLoc)
+				this.addLocation(this.newLoc)
 				this.newLoc = {}
 				this.locSubmitted = true
 				console.log('location submitted')
@@ -122,7 +131,8 @@ export default {
 				this.newLoc = {
 					name: this.newLocName,
 					address: this.newLocAddress,
-					class: this.newLocClass.value
+					class: this.newLocClass.value,
+					voteCount: 0
 				}
 				this.locSubmitted = false
 			}
@@ -139,6 +149,15 @@ export default {
 			}
 			if (this.locSubmitted) {
 				this.errors.push('You have already submitted')
+			}
+		},
+		handleClick(index) {
+			console.log('clicked ', index)
+			if (!this.voted) {
+				this.voted = true
+				this.voteLocation(index)
+			} else {
+				this.errors.push('You have already voted')
 			}
 		}
 	}
