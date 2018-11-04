@@ -3,11 +3,7 @@
     <header-component/>
     <el-row>
       <el-col :span="16" :offset="4">
-        <span v-if="errors">
-          <ul id="errors">
-            <li v-for="err in errors" :key="err.key" style="list-style-type: none">{{ err }}</li>
-          </ul>
-        </span>
+        <error-component :err-arr="errors"/>
         <new-input-component id="new-input" :data-obj="newLoc" :select-options="locClassArr" :input-props="inputProps" @catch-input-a="onCatchName" @catch-input-b="onCatchAddress" @catch-select="onCatchClass" @submit="onSubmit" @clear="onClear"/>
         <table-component :props-arr="tableProps" :data-obj="locArr" :voteable="true" @handle-click="handleClick"/>
       </el-col>
@@ -18,6 +14,7 @@
 import HeaderComponent from '../components/HeaderComponent.vue'
 import NewInputComponent from '../components/NewInputComponent.vue'
 import TableComponent from '../components/TableComponent.vue'
+import ErrorComponent from '../components/ErrorComponent.vue'
 import Faker from 'faker'
 import { mapState, mapActions } from 'vuex'
 
@@ -25,6 +22,7 @@ export default {
 	components: {
 		HeaderComponent,
 		NewInputComponent,
+		ErrorComponent,
 		TableComponent
 	},
 	data() {

@@ -40,7 +40,7 @@ const createStore = () => {
 		},
 		mutations: {
 			initializeStore(state) {
-				if (process.browser && localStorage.getItem('store')) {
+				if (process.isClient && localStorage.getItem('store')) {
 					this.replaceState(
 						Object.assign(state, JSON.parse(localStorage.getItem('store')))
 					)

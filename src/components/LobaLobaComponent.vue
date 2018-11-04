@@ -1,24 +1,24 @@
 <template>
   <el-col id="container" :span="12" :offset="6">
     <h3>{{ group.value }}</h3>
+    <error-component :err-arr="errors"/>
     <loba-component v-for="(elem, i) in lobaObj" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
     <el-row>
       <el-col :span="24">
         <el-button @click="onSubmit">Next</el-button>
       </el-col>
     </el-row>
-    <ul v-if="errors.length > 0">
-      <li v-for="err in errors" :key="err.key">{{ err }}</li>
-    </ul>
   </el-col>
 </template>
 <script>
 import LobaComponent from './LobaComponent.vue'
+import ErrorComponent from './ErrorComponent.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {
 	components: {
-		LobaComponent
+		LobaComponent,
+		ErrorComponent
 	},
 	props: {
 		questions: {
@@ -113,7 +113,7 @@ h3 {
 }
 .el-button:hover,
 .el-button:focus {
-	background: white;
-	color: black;
+	background: black;
+	color: white;
 }
 </style>

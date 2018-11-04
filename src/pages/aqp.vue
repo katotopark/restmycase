@@ -3,11 +3,7 @@
     <header-component/>
     <el-row>
       <el-col :span="16" :offset="4">
-        <span v-if="errors">
-          <ul id="errors">
-            <li v-for="err in errors" :key="err.key" style="list-style-type: none">{{ err }}</li>
-          </ul>
-        </span>
+        <error-component :err-arr="errors"/>
         <new-input-component id="new-input" :data-obj.sync="newQ" :select-options="qGroupsArr" :input-props="inputProps" @catch-input-a="onCatchTitle" @submit="onSubmit" @clear="onClear" @catch-select="onCatchGroup"/>
         <el-select v-model="filterGroup" clearable placeholder="Filter by group" @change="filterByGroup">
           <el-option v-for="item in qGroupsArr" :key="item.value" :value="item.value" :label="`${item.value}: ${item.label}`"/>
@@ -21,12 +17,14 @@
 import NewInputComponent from '../components/NewInputComponent.vue'
 import HeaderComponent from '../components/HeaderComponent.vue'
 import TableComponent from '../components/TableComponent.vue'
+import ErrorComponent from '../components/ErrorComponent.vue'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
 		NewInputComponent,
 		TableComponent,
+		ErrorComponent,
 		HeaderComponent
 	},
 	data() {
@@ -148,13 +146,6 @@ export default {
 	margin-top: 40px;
 	margin-bottom: 20px;
 	border-radius: 0px !important;
-}
-ul#errors {
-	padding-left: 0px;
-	font-size: 1rem;
-	font-family: InputRegular;
-	margin-top: 0px;
-	margin-bottom: 0px;
 }
 #new-input {
 	margin-top: 30px;
