@@ -87,18 +87,33 @@ export default {
 .el-button {
 	width: 100%;
 	border-radius: 0px !important;
-	font-family: InputRegular;
-	font-size: 1rem;
+	font-family: InputMonoCondensed;
+	font-size: 1.1rem;
 	border: 0px;
+	background-color: rgb(247, 244, 204);
+	color: black;
 }
-.el-button:active,
+
 .el-button:hover {
 	background-color: black;
 	color: white;
+	font-family: InputMonoCondensedItalic;
+	border: 0px;
 }
+.el-button:focus {
+	color: black;
+	background-color: rgb(247, 244, 204);
+	font-family: InputMonoCondensed;
+}
+/* .el-button:active {
+	color: black;
+	background-color: rgb(247, 244, 204);
+} */
+
 h3 {
 	word-wrap: break-word;
 	margin: 5px 5px 5px 5px;
 	font-size: 1.2rem;
+	font-family: InputMonoCondensedLight;
 }
 </style>

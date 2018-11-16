@@ -10,18 +10,30 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
 @import url('https://fonts.googleapis.com/css?family=Inconsolata');
 @font-face {
-	font-family: InputCondensed;
-	src: url('../assets/InputMonoCondensed-Light.ttf');
+	font-family: InputMonoCondensedLight;
+	src: url('../assets/Input_Fonts/InputMono/InputMonoCondensed/InputMonoCondensed-Light.ttf');
+}
+@font-face {
+	font-family: InputMonoCondensed;
+	src: url('../assets/Input_Fonts/InputMono/InputMonoCondensed/InputMonoCondensed-Regular.ttf');
 }
 @font-face {
 	font-family: InputRegular;
 	src: url('../assets/InputMono-Regular.ttf');
 }
+@font-face {
+	font-family: InputMonoCondensedItalic;
+	src: url('../assets/Input_Fonts/InputMono/InputMonoCondensed/InputMonoCondensed-Italic.ttf');
+}
+@font-face {
+	font-family: InputMonoCondensedLightItalic;
+	src: url('../assets/Input_Fonts/InputMono/InputMonoCondensed/InputMonoCondensed-LightItalic.ttf');
+}
 
 html {
-	font-family: 'InputCondensed', monospace;
+	font-family: 'InputMonoCondensed', monospace;
 	font-size: 16px;
-	background-color: white;
+	background-color: rgb(247, 244, 209);
 	color: black;
 	word-spacing: 1px;
 	-ms-text-size-adjust: 100%;

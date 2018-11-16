@@ -1,8 +1,10 @@
 <template>
-  <div :style="styleObj" class="content">
+  <div v-if="byteSort.length > 0" :style="styleObj" class="content">
     <el-row v-if="theCase" id="transition" >
       <el-row>
-        <span>{{ byteSort }}</span>
+        <div ref="dataRef">
+          <span>{{ byteSort }}</span>
+        </div>
       </el-row>
       <el-row>
         <el-button @click="handleClick">Next</el-button>
@@ -28,7 +30,8 @@ export default {
 			type: Object
 		},
 		long: {
-			required: true,
+			required: false,
+			default: 400,
 			type: Number
 		}
 	},
@@ -37,7 +40,7 @@ export default {
 			newBytes: [],
 			hash: '',
 			counter: 1,
-			dataSize: 110,
+			dataSize: 80,
 			ySize: 0,
 			styleObj: ''
 		}
@@ -58,16 +61,19 @@ export default {
 			await this.composeMetadata()
 		},
 		ySize() {
-			// console.log('ySize changed ', this.ySize)
-			this.styleObj = `height: ${this.ySize}px; border: 2px solid black;`
-			// console.log(this.styleObj)
+			this.styleObj = `height: ${this.ySize}px;`
 		}
+	},
+	mounted() {
+		//do something after mounting vue instance
 	},
 	updated() {
 		this.$nextTick(() => {
 			this.ySize = this.long
 			// console.log('height is ', this.height)
+			// console.log(this.$refs.dataRef.clientHeight)
 		})
+		console.log(this.long)
 	},
 
 	methods: {
@@ -92,30 +98,29 @@ span {
 	color: black;
 	margin-bottom: 20px;
 	width: 100%;
-	line-height: 2rem;
+	line-height: 40px;
 }
-.el-col#next-array {
-	/* border: 30px solid red; */
-	/* height: 400px; */
-}
+
 .el-button {
 	width: 100%;
 	border: 0px;
 	border-radius: 0px;
-	font-family: inherit;
+	font-family: InputMonoCondensed;
+	font-size: 1.1rem;
 	height: 4rem;
 	margin-top: 10px;
+	color: black;
+	background-color: rgb(247, 244, 204);
+	position: relative;
 }
 .el-button:hover {
 	color: white;
 	background-color: black;
+	font-family: InputMonoCondensedItalic;
 }
 
-.fade-enter-active {
-	transition: all 0.8s ease;
-}
-.fade-enter,
-.fade-leave-active {
-	opacity: 0;
+.el-button:visited {
+	color: black;
+	background-color: rgb(247, 244, 204);
 }
 </style>

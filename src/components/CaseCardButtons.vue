@@ -1,5 +1,5 @@
 <template>
-  <el-row>
+  <el-row :gutter="10">
     <el-col :span="12">
       <el-button @click="$emit('show-details')">Fetch Case</el-button>
     </el-col>
@@ -18,19 +18,21 @@ export default {
 <style scoped>
 .el-button {
 	border-radius: 0px;
-	font-family: inherit;
+	font-family: InputMonoCondensed;
 	font-size: 1rem;
 	padding: 8px;
-	background: white;
+	background-color: rgb(247, 244, 204);
 	color: black;
-	border: 0px;
+	border: 2px solid black;
 	width: 100%;
 	height: 4rem;
 	/* border-bottom: 0.5px solid white; */
 }
+
 .el-button:hover {
 	color: white;
 	background: black;
 	border-radius: 0px !important;
+	font-family: InputMonoCondensedItalic;
 }
 </style>

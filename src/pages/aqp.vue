@@ -1,8 +1,8 @@
 <template>
   <div>
     <header-component/>
-    <el-row>
-      <el-col :span="16" :offset="4">
+    <el-row type="flex" justify="center">
+      <el-col :sm="10" :md="12">
         <error-component :err-arr="errors"/>
         <new-input-component id="new-input" :data-obj.sync="newQ" :select-options="qGroupsArr" :input-props="inputProps" @catch-input-a="onCatchTitle" @submit="onSubmit" @clear="onClear" @catch-select="onCatchGroup"/>
         <el-select v-model="filterGroup" clearable placeholder="Filter by group" @change="filterByGroup">
@@ -143,11 +143,11 @@ export default {
 <style scoped>
 .el-select {
 	width: 100%;
-	margin-top: 40px;
 	margin-bottom: 20px;
 	border-radius: 0px !important;
 }
 #new-input {
 	margin-top: 30px;
+	margin-bottom: 30px;
 }
 </style>

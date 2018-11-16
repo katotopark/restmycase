@@ -4,11 +4,13 @@
     <el-col v-if="theCase === null" :span="12" :offset="6" class="container">
       <span class="large-text loading">Loading case...</span>
     </el-col>
-    <el-col v-else :span="12" :offset="6" class="container">
+    <el-col v-else :span="14" :offset="5" class="container">
       <el-row :gutter="10">
         <el-col id="image" :span="12">
-          <case-card :the-case="theCase" />
-          <!-- <img :src="theCase.caseImage"> -->
+          <!-- <case-card :the-case="theCase" /> -->
+          <div/>
+          <img :src="theCase.caseImage">
+          <case-card-graph style="background-color: black; height:200px;"/>
         </el-col>
         <el-col id="top-right" :sm="12" :md="12">
           <el-row id="title" class="large-text">
@@ -56,6 +58,7 @@ import { mapActions } from 'vuex'
 import CaseCard from '../../../components/CaseCard.vue'
 import HeaderComponent from '../../../components/HeaderComponent.vue'
 import CaseCardMetadata from '../../../components/CaseCardMetadata.vue'
+import CaseCardGraph from '../../../components/CaseCardGraph.vue'
 import LobaGraph from '../../../components/LobaGraph.vue'
 
 export default {
@@ -63,6 +66,7 @@ export default {
 		CaseCard,
 		HeaderComponent,
 		CaseCardMetadata,
+		CaseCardGraph,
 		LobaGraph
 	},
 	data() {
@@ -121,6 +125,15 @@ export default {
 	hyphens: auto;
 	border-bottom: 2px solid black;
 	margin-left: 15px;
+}
+#image {
+	/* border: 2px solid purple; */
+	height: 400px;
+	margin-top: 30px;
+}
+img {
+	max-width: 100%;
+	max-height: 100%;
 }
 
 .loading {

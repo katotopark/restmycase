@@ -1,8 +1,8 @@
 <template>
   <div>
     <header-component/>
-    <el-row>
-      <el-col :span="16" :offset="4">
+    <el-row type="flex" justify="center">
+      <el-col ::sm="10" :md="12">
         <error-component :err-arr="errors"/>
         <new-input-component id="new-input" :data-obj="newLoc" :select-options="locClassArr" :input-props="inputProps" @catch-input-a="onCatchName" @catch-input-b="onCatchAddress" @catch-select="onCatchClass" @submit="onSubmit" @clear="onClear"/>
         <table-component :props-arr="tableProps" :data-obj="locArr" :voteable="true" @handle-click="handleClick"/>
@@ -16,6 +16,7 @@ import NewInputComponent from '../components/NewInputComponent.vue'
 import TableComponent from '../components/TableComponent.vue'
 import ErrorComponent from '../components/ErrorComponent.vue'
 import Faker from 'faker'
+// import VueMomentLib from 'VueMomentLib'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -80,6 +81,10 @@ export default {
 	},
 	computed: {
 		...mapState(['locationsArray'])
+		// date() {
+		// 	// return this.$moment(Date.now()).format()
+		// 	return this.$time(Date.now()).format('DD/MM') // moment (alias)
+		// }
 	},
 	created() {
 		let someLong = Faker.address.longitude()
@@ -164,6 +169,7 @@ export default {
 <style scoped>
 #new-input {
 	margin-top: 30px;
+	margin-bottom: 30px;
 }
 ul#errors {
 	padding-left: 0px;

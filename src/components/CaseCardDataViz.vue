@@ -34,11 +34,11 @@ export default {
 		setup(sk) {
 			this.sk = sk
 		},
-		draw(caseData) {
+		draw() {
 			// TODO remove this
-			if (window.sadflkhadsfladf) {
-				caseData()
-			}
+			// if (window.sadflkhadsfladf) {
+			// 	caseData()
+			// }
 
 			const skCanvas = this.sk.createCanvas(this.x, this.y)
 

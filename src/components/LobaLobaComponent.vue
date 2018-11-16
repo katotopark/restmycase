@@ -2,7 +2,7 @@
   <el-col id="container" :span="12" :offset="6">
     <h3>{{ group.value }}</h3>
     <error-component :err-arr="errors"/>
-    <loba-component v-for="(elem, i) in lobaObj" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
+    <loba-component v-for="(elem, i) in lobaObj" id="loba-component" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
     <el-row>
       <el-col :span="24">
         <el-button @click="onSubmit">Next</el-button>
@@ -101,6 +101,8 @@ h3 {
 	margin-top: 0px;
 	margin-bottom: 5px;
 	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-top: 5px;
 }
 .el-col#container {
 	border: 2px solid black;
@@ -109,14 +111,16 @@ h3 {
 	border-radius: 0px;
 	border: 0px;
 	width: 100%;
-	font-family: inherit;
-	font-size: 1rem;
+	font-family: InputMonoCondensed;
+	font-size: 1.1rem;
 	height: 4rem;
+	background-color: rgb(247, 244, 204);
+	color: black;
 }
-.el-button:hover,
-.el-button:focus {
+.el-button:hover {
 	background-color: black;
 	color: white;
 	border: 0px;
+	font-family: InputMonoCondensedItalic;
 }
 </style>

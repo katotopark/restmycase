@@ -2,6 +2,9 @@
   <el-row type="flex" justify="center">
     <el-col :span="12">
       <el-row class="row">
+        <error-component :err-arr="errors"/>
+      </el-row>
+      <el-row class="row">
         <h3 class="label">Case name: <span id="title">_{{ caseName }}</span></h3>
         <el-input
           v-model="caseName"
@@ -20,11 +23,6 @@
       <el-row class="row">
         <el-button plain @click="onSubmit">Mint!</el-button>
       </el-row>
-      <el-row class="row">
-        <ul>
-          <li v-for="err in errors" :key="err.key">{{ err }}</li>
-        </ul>
-      </el-row>
     </el-col>
     <case-card-data-viz ref="caseCardDataViz" :x="417" :y="240"/>
 
@@ -34,10 +32,12 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import CaseCardDataViz from '../../components/CaseCardDataViz.vue'
+import ErrorComponent from '../../components/ErrorComponent.vue'
 
 export default {
 	components: {
-		CaseCardDataViz
+		CaseCardDataViz,
+		ErrorComponent
 	},
 	data() {
 		return {
@@ -95,8 +95,6 @@ export default {
 	margin-bottom: 0.5rem;
 }
 #title {
-	/* font-size: 30px; */
-	/* color: red; */
 	width: 100%;
 	word-wrap: break-word;
 	display: inline;
@@ -107,13 +105,18 @@ export default {
 }
 .el-button {
 	border-radius: 0px;
+	border: 2px solid black;
 	width: 100%;
-	font-family: inherit;
-	font-size: 1rem;
-}
-.el-button:hover,
-.el-button:focus {
-	background: white;
+	height: 4rem;
+	font-family: InputMonoCondensed;
+	font-size: 1.1rem;
+	background-color: rgb(247, 244, 209);
 	color: black;
+}
+.el-button:hover {
+	background: black;
+	color: white;
+	font-family: InputMonoCondensedItalic;
+	border: 2px solid black;
 }
 </style>

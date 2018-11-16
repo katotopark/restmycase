@@ -14,7 +14,7 @@
             </el-row>
             <el-row class="text">
               <el-col :span="24">
-                <el-button plain>Go Meta!</el-button>
+                <!-- <el-button plain>Go Meta!</el-button> -->
                 <case-card-metadata :the-case="theCase"/>
               </el-col>
             </el-row>

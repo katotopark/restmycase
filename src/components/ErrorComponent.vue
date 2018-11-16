@@ -1,5 +1,5 @@
 <template>
-  <div v-if="errArr.length !== 0">
+  <div v-if="errArr.length !== 0" class="container">
     <ul>
       <li v-for="err in errArr" :key="err.key">
         {{ err }}
@@ -22,14 +22,20 @@ export default {
 </script>
 <style scoped>
 ul {
-	font-size: 1.1rem;
-	font-family: InputRegular;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	background-color: white;
+	font-size: 1.2rem;
+	font-family: InputMonoCondensed;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	background-color: none;
 	width: 100%;
 	padding: 5px;
 	list-style-type: none;
-	color: black;
+	color: white;
+	background-color: black;
+}
+.container {
+	border: 2px solid black;
+	text-align: center;
+	margin-top: 20px;
 }
 </style>

@@ -2,11 +2,14 @@
   <el-row type="flex" justify="center">
     <el-col id="container">
       <div v-if="revealComponents">
-        <el-col :span="12" :offset="6">
-          <el-row id="case-id" type="flex" justify="center">
-            <h3>#{{ theCase.id }}</h3>
-          </el-row>
-        </el-col>
+        <el-row id="case-id" type="flex" justify="center">
+          <h3>#{{ theCase.id }}</h3>
+        </el-row>
+        <el-row type="flex" justify="end" >
+          <el-col id="case-class" :span="24">
+            <h4>C.{{ theCase.id }}</h4>
+          </el-col>
+        </el-row>
       </div>
       <el-row>
         <el-col class="case-card">
@@ -89,11 +92,11 @@ export default {
 	width: 400px;
 }
 .case-card {
-	background-color: white;
+	background-color: rgb(247, 244, 204);
 	border: 2px solid black;
 	height: 500px;
 	width: 100%;
-	margin-bottom: 10px;
+	margin-bottom: 8px;
 }
 img {
 	width: 100%;
@@ -108,15 +111,32 @@ div.image {
 	/* background-color: black; */
 }
 #case-id {
-	color: white;
-	font-size: 1.2rem;
+	color: black;
+	/* background-color: rgb(247, 244, 204); */
+	font-size: 1.4rem;
+	font-family: InputMonoCondensedLightItalic;
 	/* margin-top: 10px; */
-	margin-bottom: 5px;
+	margin-bottom: 8px;
 	padding-right: 0px;
-	height: 60px;
+	height: 45px;
+	align-items: center;
+	/* border: 2px solid black; */
+}
+#case-class {
+	background-color: black;
+	color: white;
+	height: 35px;
+	text-align: right;
+	align-items: center;
+}
+#case-class h4 {
+	margin-top: 0px;
+	font-size: 1.5rem;
+	font-family: InputMonoCondensedLight;
+	padding: 3px;
 }
 #case-name {
-	font-family: InputRegular;
+	font-family: InputMonoCondensed;
 	font-size: 18px;
 	font-weight: bold;
 	word-wrap: break-word;
@@ -125,6 +145,7 @@ div.image {
 	color: black;
 }
 #case-description {
+	font-family: InputMonoCondensedItalic;
 	margin-top: 10px;
 	word-wrap: break-word;
 	hyphens: auto;
@@ -138,6 +159,6 @@ div.image {
 	margin-top: 10px;
 }
 #case-buttons {
-	margin: 10px auto 30px auto;
+	margin: 0px auto 30px auto;
 }
 </style>

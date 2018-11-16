@@ -15,6 +15,7 @@ import { createStore } from './store.js'
 import nuxt_plugin_elementui_8e12f326 from 'nuxt_plugin_elementui_8e12f326' // Source: ../src/plugins/element-ui.js
 import nuxt_plugin_faker_7ae10e9f from 'nuxt_plugin_faker_7ae10e9f' // Source: ../src/plugins/faker.js
 import nuxt_plugin_chance_0d848544 from 'nuxt_plugin_chance_0d848544' // Source: ../src/plugins/chance.js
+import nuxt_plugin_VueMomentLib_35d24ad3 from 'nuxt_plugin_VueMomentLib_35d24ad3' // Source: ../src/plugins/VueMomentLib.js
 
 
 // Component: <no-ssr>
@@ -156,6 +157,7 @@ async function createApp (ssrContext) {
   if (typeof nuxt_plugin_elementui_8e12f326 === 'function') await nuxt_plugin_elementui_8e12f326(app.context, inject)
   if (typeof nuxt_plugin_faker_7ae10e9f === 'function') await nuxt_plugin_faker_7ae10e9f(app.context, inject)
   if (typeof nuxt_plugin_chance_0d848544 === 'function') await nuxt_plugin_chance_0d848544(app.context, inject)
+  if (typeof nuxt_plugin_VueMomentLib_35d24ad3 === 'function') await nuxt_plugin_VueMomentLib_35d24ad3(app.context, inject)
   
 
   // If server-side, wait for async component to be resolved first
