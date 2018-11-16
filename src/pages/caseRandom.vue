@@ -82,7 +82,7 @@ export default {
 </script>
 <style scoped>
 .el-col {
-	border: 1px solid white;
+	border: 2px solid black;
 }
 .el-button {
 	width: 100%;

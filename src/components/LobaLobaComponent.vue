@@ -93,27 +93,30 @@ export default {
 </script>
 <style scoped>
 h3 {
-	color: black;
-	background-color: white;
+	color: white;
+	background-color: black;
 	font-size: 2rem;
 	text-align: right;
-	border-bottom: 1px solid white;
+	border-bottom: 1px solid black;
 	margin-top: 0px;
 	margin-bottom: 5px;
 	padding-right: 5px;
 }
 .el-col#container {
-	border: 1px solid white;
+	border: 2px solid black;
 }
 .el-button {
 	border-radius: 0px;
+	border: 0px;
 	width: 100%;
 	font-family: inherit;
 	font-size: 1rem;
+	height: 4rem;
 }
 .el-button:hover,
 .el-button:focus {
-	background: black;
+	background-color: black;
 	color: white;
+	border: 0px;
 }
 </style>

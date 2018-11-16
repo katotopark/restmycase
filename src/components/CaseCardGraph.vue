@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ msg }}
+    <span style="color: white;">{{ msg }}</span>
   </div>
 </template>
 <script>

@@ -89,7 +89,8 @@ export default {
 	width: 400px;
 }
 .case-card {
-	background-color: rgb(244, 243, 234);
+	background-color: white;
+	border: 2px solid black;
 	height: 500px;
 	width: 100%;
 	margin-bottom: 10px;
@@ -103,7 +104,7 @@ div.image {
 	/* width: 100%; */
 	height: 15rem;
 	object-fit: fill;
-	/* border: 0.1rem solid black; */
+	border: 2px solid black;
 	/* background-color: black; */
 }
 #case-id {
@@ -132,7 +133,7 @@ div.image {
 	color: black;
 }
 #case-graph {
-	background-color: rgb(75, 111, 158);
+	background-color: black;
 	height: 100px;
 	margin-top: 10px;
 }

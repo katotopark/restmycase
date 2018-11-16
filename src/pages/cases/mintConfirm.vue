@@ -73,7 +73,8 @@ export default {
 .text {
 	max-width: 500px;
 	word-wrap: break-word;
-	border: 1px solid white;
+	border: 2px solid black;
+	color: black;
 	margin-bottom: 0px;
 }
 #card {
@@ -84,12 +85,13 @@ export default {
 	border-radius: 0px;
 	border: 0px;
 	width: 100%;
+	height: 4rem;
 	font-family: inherit;
 	font-size: 1rem;
 }
 .el-button:hover,
 .el-button:focus {
-	background: white;
-	color: black;
+	background: black;
+	color: white;
 }
 </style>

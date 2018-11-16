@@ -1,6 +1,6 @@
 <template>
-  <el-menu :default-active="activeIndex" mode="horizontal"
-           @select="handleSelect">
+  <el-menu :default-active="activeIndex" background-color="#000000"
+           mode="horizontal" @select="handleSelect">
     <el-menu-item index="1">Home</el-menu-item>
     <el-menu-item index="2">AQP</el-menu-item>
     <el-menu-item index="3">ALP</el-menu-item>
@@ -42,12 +42,14 @@ export default {
 <style scoped>
 .el-menu-item {
 	height: inherit;
-	color: black;
+	color: white !important;
 	font-family: InputRegular;
 	text-decoration: none;
 	font-size: 1.1rem;
+	padding-right: 70px;
+	border-right: 2px solid white;
 }
-el-menu-item:active {
+el-menu-item:hover {
 	border: 2px solid red !important;
 }
 .el-menu-item a {

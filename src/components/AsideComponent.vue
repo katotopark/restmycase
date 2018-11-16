@@ -20,4 +20,7 @@ export default {
 }
 </script>
 <style scoped>
+.el-aside {
+	margin-top: 0px;
+}
 </style>

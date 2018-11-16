@@ -25,6 +25,7 @@ export default {
 	color: black;
 	border: 0px;
 	width: 100%;
+	height: 4rem;
 	/* border-bottom: 0.5px solid white; */
 }
 .el-button:hover {

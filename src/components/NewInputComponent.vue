@@ -73,6 +73,7 @@ export default {
 	margin-top: 0.1rem;
 	border-radius: 0px;
 	width: 100%;
+	height: 4rem;
 	border: 0px;
 }
 .el-button:hover {
@@ -82,8 +83,8 @@ export default {
 .input-label {
 	font-size: 1.1rem;
 	font-family: InputRegular;
-	background-color: white;
-	color: black;
+	background-color: black;
+	color: white;
 	padding: 5px;
 }
 </style>

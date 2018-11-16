@@ -34,11 +34,12 @@ export default {
 ul li {
 	list-style-type: none;
 	font-family: InputRegular;
+	font-size: 1.2rem;
 	margin-bottom: 8px;
 	padding: 5px 5px 5px 5px;
 }
 ul li:hover {
-	background-color: white;
-	color: black;
+	background-color: black;
+	color: white;
 }
 </style>

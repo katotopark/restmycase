@@ -21,8 +21,8 @@
 html {
 	font-family: 'InputCondensed', monospace;
 	font-size: 16px;
-	background-color: rgb(0, 0, 0);
-	color: white;
+	background-color: white;
+	color: black;
 	word-spacing: 1px;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
