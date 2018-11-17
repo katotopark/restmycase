@@ -1,14 +1,21 @@
 <template>
-  <el-col id="container" :span="12" :offset="6">
-    <h3>{{ group.value }}</h3>
-    <error-component :err-arr="errors"/>
-    <loba-component v-for="(elem, i) in lobaObj" id="loba-component" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
+  <el-row>
+    <el-col :span="12" :offset="6">
+      <error-component :err-arr="errors"/>
+    </el-col>
     <el-row>
-      <el-col :span="24">
-        <el-button @click="onSubmit">Next</el-button>
+      <el-col id="container" :span="12" :offset="6">
+        <h3>{{ group.value }}</h3>
+        <loba-component v-for="(elem, i) in lobaObj" id="loba-component" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
+        <el-row>
+          <el-col :span="24">
+            <el-button @click="onSubmit">Next</el-button>
+          </el-col>
+        </el-row>
       </el-col>
     </el-row>
-  </el-col>
+  </el-row>
+
 </template>
 <script>
 import LobaComponent from './LobaComponent.vue'

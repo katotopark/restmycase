@@ -37,5 +37,6 @@ ul {
 	border: 2px solid black;
 	text-align: center;
 	margin-top: 20px;
+	margin-bottom: 20px;
 }
 </style>
