@@ -1,18 +1,18 @@
 <template>
   <el-row type="flex" justify="center">
     <el-col :span="12">
-      <el-row class="row">
+      <el-row>
         <error-component :err-arr="errors"/>
       </el-row>
       <el-row class="row">
-        <h3 class="label">Case name: <span id="title">_{{ caseName }}</span></h3>
+        <h3 class="label">Case name: _{{ caseName }}</h3>
         <el-input
           v-model="caseName"
           :rows="2"
           type="textarea"
           placeholder="e.g., Bureaupanique"/>
       </el-row>
-      <el-row class="row">
+      <el-row>
         <h3 class="label">Case description: </h3>
         <el-input
           v-model="caseDescription"
@@ -20,17 +20,26 @@
           type="textarea"
           placeholder="e.g., pre-breakfast absolute total shitstorm"/>
       </el-row>
-      <el-row class="row">
-        <el-button plain @click="onSubmit">Mint!</el-button>
+      <el-row>
+        <h3 class="label">Case class: C.{{ caseClass.value }} </h3>
+        <el-select v-model="caseClass" :placeholder="caseClass.label" clearable @change="handleChange">
+          <el-option v-for="loc in locClassArr" :key="loc.value" :value="loc.value" :label="`${loc.label}`"/>
+        </el-select>
+      </el-row>
+      <el-row :gutter="10">
+        <el-col :span="12">
+          <el-button plain @click="onSubmit">Mint</el-button>
+        </el-col>
+        <el-col :span="12">
+          <el-button plain @click="onClear">Clear</el-button>
+        </el-col>
       </el-row>
     </el-col>
     <case-card-data-viz ref="caseCardDataViz" :x="417" :y="240"/>
-
   </el-row>
-
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import CaseCardDataViz from '../../components/CaseCardDataViz.vue'
 import ErrorComponent from '../../components/ErrorComponent.vue'
 
@@ -43,12 +52,37 @@ export default {
 		return {
 			caseName: '',
 			caseDescription: '',
+			locClassArr: [
+				{
+					value: '1',
+					label: 'Governmental'
+				},
+				{
+					value: '2',
+					label: 'Legal'
+				},
+				{
+					value: '3',
+					label: 'Medical'
+				},
+				{
+					value: '4',
+					label: 'Academic'
+				},
+				{
+					value: '5',
+					label: 'Professional'
+				}
+			],
+			caseClass: {
+				value: '',
+				label: ''
+			},
+			caseClassOutput: '',
 			errors: []
 		}
 	},
-	computed: {
-		...mapState(['formObj'])
-	},
+	computed: {},
 	methods: {
 		...mapActions(['describeCase', 'randomNum', 'mintComposed']),
 		async onSubmit() {
@@ -65,6 +99,7 @@ export default {
 				await this.describeCase({
 					caseName: this.caseName,
 					caseDescription: this.caseDescription,
+					caseClass: this.caseClass,
 					caseImage: imageData
 				})
 
@@ -73,13 +108,30 @@ export default {
 				this.$router.push('mintConfirm')
 			}
 		},
+		handleChange(index) {
+			this.caseClass = {
+				value: this.locClassArr[index - 1]['value'],
+				label: this.locClassArr[index - 1]['label']
+			}
+		},
+		onClear() {
+			console.log('cleared')
+			this.caseName = ''
+			this.caseDescription = ''
+			this.caseClass = {
+				value: '',
+				label: ''
+			}
+		},
 		checkInput() {
 			this.errors = []
 			if (
 				!this.caseName ||
 				!this.caseDescription ||
 				this.caseName.length == 0 ||
-				this.caseDescription.length == 0
+				this.caseDescription.length == 0 ||
+				!this.caseClass.value ||
+				!this.caseClass.label
 			) {
 				this.errors.push('Fill those!')
 			}
@@ -88,22 +140,25 @@ export default {
 }
 </script>
 <style scoped>
-.el-row.row {
-	margin-bottom: 1rem;
+.el-row {
+	margin-bottom: 20px;
 }
-.label {
-	margin-bottom: 0.5rem;
-}
-#title {
-	width: 100%;
+h3 {
+	margin: 0px 0px 10px 0px;
 	word-wrap: break-word;
-	display: inline;
+	display: block;
+	font-weight: normal;
 }
 .el-input {
 	border-radius: 0px;
-	border-top: 20px;
 }
-.el-button {
+.el-select {
+	margin-bottom: 20px;
+	width: 100%;
+}
+.el-button,
+.el-button:active,
+.el-button:focus {
 	border-radius: 0px;
 	border: 2px solid black;
 	width: 100%;

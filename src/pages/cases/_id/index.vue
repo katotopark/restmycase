@@ -4,47 +4,50 @@
     <el-col v-if="theCase === null" :span="12" :offset="6" class="container">
       <span class="large-text loading">Loading case...</span>
     </el-col>
-    <el-col v-else :sm="18" :offset="3" class="container">
-      <el-row :gutter="10">
-        <el-col id="top-left" :sm="24" :md="12">
-          <!-- <case-card :the-case="theCase" /> -->
-          <img id="case-image" :src="theCase.caseImage">
-          <case-card-graph id="case-graph" style="background-color: black; height:200px;"/>
-        </el-col>
-        <el-col id="top-right" :sm="24" :md="12">
-          <el-row id="title">
-            <el-col>
-              <p>_{{ theCase.caseName }}</p>
-            </el-col>
-          </el-row>
-          <el-row id="data">
-            <el-col v-for="elem in 4" :key="elem.key">
-              <p><span>NAME:</span> {{ theCase.caseDescription }}</p>
-            </el-col>
-          </el-row>
-        </el-col>
-      </el-row>
-      <el-row id="bottom" :gutter="20">
-        <div ref="hiya">
-          <el-col id="mini-graph" :sm="24" :md="10">
-            <el-row>
-              <div style="height: 200px; border:1px solid black;"/>
-            </el-row>
-            <el-row>
-              <div style="height: 200px; border:1px solid purple;"/>
-            </el-row>
-            <el-row>
-              <!-- <loba-graph/> -->
-              <div style="height: 200px; border:1px solid black;"/>
-            </el-row>
-
+    <el-row v-else type="flex" justify="center">
+      <el-col :sm="18" class="container">
+        <el-row :gutter="10">
+          <el-col id="top-left" :sm="24" :md="12">
+            <!-- <case-card :the-case="theCase" /> -->
+            <img id="case-image" :src="theCase.caseImage">
+            <case-card-graph id="case-graph" style="background-color: black; height:200px;"/>
           </el-col>
-        </div>
-        <el-col :sm="24" :md="14">
-          <case-card-metadata id="meta-data" :the-case="theCase"/>
-        </el-col>
-      </el-row>
-    </el-col>
+          <el-col id="top-right" :sm="24" :md="12">
+            <el-row id="title">
+              <el-col>
+                <p>_{{ theCase.caseName }}</p>
+              </el-col>
+            </el-row>
+            <el-row id="data">
+              <el-col v-for="elem in 4" :key="elem.key">
+                <p><span>NAME:</span> {{ theCase.caseDescription }}</p>
+              </el-col>
+            </el-row>
+          </el-col>
+        </el-row>
+        <el-row id="bottom" :gutter="20">
+          <div ref="hiya">
+            <el-col id="mini-graph" :sm="24" :md="10">
+              <el-row>
+                <div style="height: 200px; border:1px solid black;"/>
+              </el-row>
+              <el-row>
+                <div style="height: 200px; border:1px solid purple;"/>
+              </el-row>
+              <el-row>
+                <!-- <loba-graph/> -->
+                <div style="height: 200px; border:1px solid black;"/>
+              </el-row>
+
+            </el-col>
+          </div>
+          <el-col :sm="24" :md="14">
+            <case-card-metadata id="meta-data" :the-case="theCase"/>
+          </el-col>
+        </el-row>
+      </el-col>
+    </el-row>
+
   </el-row>
 </template>
 

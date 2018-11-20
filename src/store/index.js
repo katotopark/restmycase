@@ -23,6 +23,7 @@ const createStore = () => {
 			formObj: {
 				caseName: '',
 				caseDescription: '',
+				caseClass: {},
 				tDistance: '',
 				tDuration: '',
 				lobas: {},
@@ -112,6 +113,7 @@ const createStore = () => {
 				state.formObj.caseName = payload.caseName
 				state.formObj.caseDescription = payload.caseDescription
 				state.formObj.caseImage = payload.caseImage
+				state.formObj.caseClass = payload.caseClass
 			}
 		},
 		actions: {

@@ -16,14 +16,14 @@ export default {
 	},
 	computed: {},
 	created() {
-		this.asideObj = this.asideOptions.map(opt => {
+		this.asideObj = this.asideOptions.map((opt, i) => {
 			let output = {}
 			output.optionName = opt
+			output.id = i + 1
 			output.clicked = false
 			output.style = ''
 			return output
 		})
-		console.log(this.asideObj)
 	},
 	methods: {
 		handleClick(index) {
@@ -45,6 +45,7 @@ export default {
 				})
 				this.asideObj[index].style = ''
 			}
+			console.log(this.asideObj[index])
 		}
 	}
 }

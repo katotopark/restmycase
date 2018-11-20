@@ -38,10 +38,10 @@
       <el-row :gutter="10">
         <el-form-item>
           <el-col :span="12">
-            <el-button type="submit" size="mini" @click="$emit('submit')" >Submit</el-button>
+            <el-button type="submit" @click="$emit('submit')" >Submit</el-button>
           </el-col>
           <el-col :span="12">
-            <el-button type="submit" size="mini" @click="$emit('clear')" >Clear</el-button>
+            <el-button type="submit" @click="$emit('clear')">Clear</el-button>
           </el-col>
         </el-form-item>
       </el-row>
@@ -95,7 +95,7 @@ export default {
 	width: 100%;
 	height: 4rem;
 	border: 0px;
-	background-color: rgb(247, 244, 209);
+	background-color: rgb(247, 244, 204);
 	color: black;
 	border: 2px solid black;
 }
@@ -106,7 +106,7 @@ export default {
 }
 .el-button:visited {
 	color: black;
-	background-color: rgb(247, 244, 209);
+	background-color: rgb(247, 244, 204);
 	font-family: InputMonoCondensed;
 }
 .input-label {
