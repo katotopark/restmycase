@@ -7,7 +7,7 @@
       <el-col id="container" :span="12" :offset="6">
         <h3>{{ group.value }}</h3>
         <loba-component v-for="(elem, i) in lobaObj" id="loba-component" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
-        <el-row>
+        <el-row id="button">
           <el-col :span="24">
             <el-button @click="onSubmit">Next</el-button>
           </el-col>
@@ -15,7 +15,6 @@
       </el-col>
     </el-row>
   </el-row>
-
 </template>
 <script>
 import LobaComponent from './LobaComponent.vue'
@@ -99,6 +98,12 @@ export default {
 }
 </script>
 <style scoped>
+.el-row:nth-of-type(1) {
+	margin-top: 40px;
+}
+.el-row#button {
+	margin-top: 0px;
+}
 h3 {
 	color: white;
 	background-color: black;

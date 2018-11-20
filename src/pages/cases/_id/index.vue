@@ -4,51 +4,46 @@
     <el-col v-if="theCase === null" :span="12" :offset="6" class="container">
       <span class="large-text loading">Loading case...</span>
     </el-col>
-    <el-col v-else :span="14" :offset="5" class="container">
+    <el-col v-else :sm="18" :offset="3" class="container">
       <el-row :gutter="10">
-        <el-col id="image" :span="12">
+        <el-col id="top-left" :sm="24" :md="12">
           <!-- <case-card :the-case="theCase" /> -->
-          <div/>
-          <img :src="theCase.caseImage">
-          <case-card-graph style="background-color: black; height:200px;"/>
+          <img id="case-image" :src="theCase.caseImage">
+          <case-card-graph id="case-graph" style="background-color: black; height:200px;"/>
         </el-col>
-        <el-col id="top-right" :sm="12" :md="12">
-          <el-row id="title" class="large-text">
-            <el-col :span="12">
-              <span>_{{ theCase.caseName }}</span>
+        <el-col id="top-right" :sm="24" :md="12">
+          <el-row id="title">
+            <el-col>
+              <p>_{{ theCase.caseName }}</p>
             </el-col>
           </el-row>
           <el-row id="data">
-            <el-col v-for="elem in 4" :key="elem.key" :span="24">
+            <el-col v-for="elem in 4" :key="elem.key">
               <p><span>NAME:</span> {{ theCase.caseDescription }}</p>
             </el-col>
           </el-row>
         </el-col>
       </el-row>
-      <div ref="hiya">
-        <el-row :gutter="20">
-          <el-col :span="8">
+      <el-row id="bottom" :gutter="20">
+        <div ref="hiya">
+          <el-col id="mini-graph" :sm="24" :md="10">
             <el-row>
-              <div style="background-color: black; height: 200px; border:1px solid black;"/>
+              <div style="height: 200px; border:1px solid black;"/>
             </el-row>
             <el-row>
-              <div style="background-color: purple; height: 200px; border:1px solid purple;">
-                <el-col :span="20" :offset="2">
-                  <loba-graph/>
-                </el-col>
+              <div style="height: 200px; border:1px solid purple;"/>
+            </el-row>
+            <el-row>
+              <!-- <loba-graph/> -->
+              <div style="height: 200px; border:1px solid black;"/>
+            </el-row>
 
-              </div>
-            </el-row>
-            <el-row>
-              <div style="background-color: black; height: 200px; border:1px solid black;"/>
-            </el-row>
           </el-col>
-          <el-col :span="16">
-            <case-card-metadata id="meta-data" :the-case="theCase" :long="dim"/>
-          </el-col>
-        </el-row>
-      </div>
-
+        </div>
+        <el-col :sm="24" :md="14">
+          <case-card-metadata id="meta-data" :the-case="theCase"/>
+        </el-col>
+      </el-row>
     </el-col>
   </el-row>
 </template>
@@ -100,40 +95,63 @@ export default {
 .container {
 	border: 2px solid black;
 	margin-top: 40px;
+	/* box-shadow: 4px 4px 1px; */
 }
 
 #top-left {
 	min-height: 100%;
-	/* margin-top: 10px; */
+	margin-top: 60px;
+	/* border: 2px solid black; */
+	transform: scale(0.9);
 }
-
+img {
+	/* width: 100%; */
+	margin-bottom: 40px;
+}
+#case-image,
+#case-graph {
+	width: 100%;
+	border: 2px solid black;
+	/* margin-left: 20px; */
+	/* margin-bottom: 20px; */
+}
 #top-right {
 	margin-top: 150px;
 }
-
-#title,
-.large-text {
-	font-size: 2.5rem;
-	font-weight: bold;
+#title {
+	font-size: 2.1rem;
+	font-family: InputMonoCondensed;
 	color: black;
 	margin-left: 5px;
 	margin-bottom: 20px;
+	hyphens: auto;
+	display: block;
+}
+#bottom {
+	margin-bottom: 40px;
 }
 
-.el-row#data p {
+#data p {
 	color: black;
 	hyphens: auto;
-	border-bottom: 2px solid black;
+	font-family: InputMonoCondensedItalic;
+	/* border-bottom: 2px solid black; */
 	margin-left: 15px;
 }
-#image {
-	/* border: 2px solid purple; */
-	height: 400px;
-	margin-top: 30px;
+
+#meta-data {
+	margin-top: 50px;
+	margin-right: 20px;
+	margin-left: 20px;
+	border: 2px solid black;
+	/* border-right: 0px; */
 }
-img {
-	max-width: 100%;
-	max-height: 100%;
+#mini-graph {
+	margin-top: 50px;
+	transform: scale(0.9);
+}
+#mini-graph div {
+	/* margin-left: 10px; */
 }
 
 .loading {

@@ -49,6 +49,9 @@ html {
 	box-sizing: border-box;
 	/* margin: 0; */
 }
+body {
+	margin: 0px;
+}
 
 .button--green {
 	display: inline-block;

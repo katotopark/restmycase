@@ -118,7 +118,7 @@ div.image {
 	/* margin-top: 10px; */
 	margin-bottom: 8px;
 	padding-right: 0px;
-	height: 45px;
+	height: 60px;
 	align-items: center;
 	/* border: 2px solid black; */
 }

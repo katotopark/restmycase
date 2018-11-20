@@ -1,14 +1,19 @@
 <template>
   <div v-if="byteSort.length > 0" :style="styleObj" class="content">
     <el-row v-if="theCase" id="transition" >
-      <el-row>
-        <div ref="dataRef">
-          <span>{{ byteSort }}</span>
-        </div>
-      </el-row>
-      <el-row>
-        <el-button @click="handleClick">Next</el-button>
-      </el-row>
+      <el-col :span="22" :offset="1">
+        <el-row>
+          <div ref="dataRef">
+            <p><span>{{ byteSort }}</span></p>
+          </div>
+        </el-row>
+
+      </el-col>
+      <el-col :span="24">
+        <el-row>
+          <el-button @click="handleClick">Next</el-button>
+        </el-row>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -28,12 +33,12 @@ export default {
 		theCase: {
 			required: true,
 			type: Object
-		},
-		long: {
-			required: false,
-			default: 400,
-			type: Number
 		}
+		// long: {
+		// 	required: false,
+		// 	default: 400,
+		// 	type: Number
+		// }
 	},
 	data() {
 		return {
@@ -64,16 +69,13 @@ export default {
 			this.styleObj = `height: ${this.ySize}px;`
 		}
 	},
-	mounted() {
-		//do something after mounting vue instance
-	},
 	updated() {
 		this.$nextTick(() => {
 			this.ySize = this.long
 			// console.log('height is ', this.height)
 			// console.log(this.$refs.dataRef.clientHeight)
 		})
-		console.log(this.long)
+		// console.log(this.long)
 	},
 
 	methods: {
@@ -92,8 +94,13 @@ export default {
 }
 </script>
 <style scoped>
+.content {
+	/* border: 2px solid black; */
+}
 span {
 	border-bottom: 2px solid black;
+}
+p {
 	font-size: 1.1rem;
 	color: black;
 	margin-bottom: 20px;
@@ -107,7 +114,7 @@ span {
 	border-radius: 0px;
 	font-family: InputMonoCondensed;
 	font-size: 1.1rem;
-	height: 4rem;
+	height: 80px;
 	margin-top: 10px;
 	color: black;
 	background-color: rgb(247, 244, 204);
@@ -119,8 +126,8 @@ span {
 	font-family: InputMonoCondensedItalic;
 }
 
-.el-button:visited {
+/* .el-button:visited {
 	color: black;
 	background-color: rgb(247, 244, 204);
-}
+} */
 </style>

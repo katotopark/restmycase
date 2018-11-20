@@ -2,7 +2,7 @@
   <div>
     <header-component/>
     <el-row type="flex" justify="center">
-      <el-col :sm="10" :md="12">
+      <el-col :sm="16" :md="12">
         <error-component :err-arr="errors"/>
         <new-input-component id="new-input" :data-obj.sync="newQ" :select-options="qGroupsArr" :input-props="inputProps" @catch-input-a="onCatchTitle" @submit="onSubmit" @clear="onClear" @catch-select="onCatchGroup"/>
         <el-select v-model="filterGroup" clearable placeholder="Filter by group" @change="filterByGroup">
@@ -149,5 +149,8 @@ export default {
 #new-input {
 	margin-top: 30px;
 	margin-bottom: 30px;
+}
+#questions-table {
+	border: 2px solid black;
 }
 </style>

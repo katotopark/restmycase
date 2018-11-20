@@ -2,7 +2,7 @@
   <div>
     <header-component/>
     <el-row type="flex" justify="center">
-      <el-col ::sm="10" :md="12">
+      <el-col :sm="16" :md="12">
         <error-component :err-arr="errors"/>
         <new-input-component id="new-input" :data-obj="newLoc" :select-options="locClassArr" :input-props="inputProps" @catch-input-a="onCatchName" @catch-input-b="onCatchAddress" @catch-select="onCatchClass" @submit="onSubmit" @clear="onClear"/>
         <table-component :props-arr="tableProps" :data-obj="locArr" :voteable="true" @handle-click="handleClick"/>

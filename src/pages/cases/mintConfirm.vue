@@ -13,10 +13,8 @@
               <case-card :the-case="theCase"/>
             </el-row>
             <el-row class="text">
-              <el-col :span="24">
-                <!-- <el-button plain>Go Meta!</el-button> -->
-                <case-card-metadata :the-case="theCase"/>
-              </el-col>
+              <!-- <el-button plain>Go Meta!</el-button> -->
+              <case-card-metadata :the-case="theCase"/>
             </el-row>
           </el-col>
         </el-row>
@@ -71,11 +69,11 @@ export default {
 </script>
 <style scoped>
 .text {
-	max-width: 500px;
-	word-wrap: break-word;
+	/* max-width: 500px; */
+	/* word-wrap: break-word; */
 	border: 2px solid black;
 	color: black;
-	margin-bottom: 0px;
+	margin-bottom: 50px;
 }
 #card {
 	margin-top: 20px;

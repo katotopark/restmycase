@@ -2,11 +2,15 @@
   <el-container>
     <header-component/>
     <el-container>
-      <el-aside>
+      <el-aside width="200px">
         <aside-component/>
       </el-aside>
       <el-main>
-        <case-card v-for="elem in cases" ref="test" :key="elem.id" :the-case="elem"/>
+        <el-row :gutter="10">
+          <el-col v-for="elem in cases" ref="test" :md="12" :sm="24" :key="elem.id">
+            <case-card id="case-card" :the-case="elem"/>
+          </el-col>
+        </el-row>
       </el-main>
     </el-container>
     <el-footer/>
@@ -27,7 +31,6 @@ export default {
 	},
 	data() {
 		return {
-			labelPosition: 'right',
 			cases: []
 		}
 	},
@@ -60,4 +63,20 @@ export default {
 }
 </script>
 <style scoped>
+.el-main {
+	padding: 0px;
+}
+.el-aside {
+	/* border-right: 2px solid black; */
+	background-color: none;
+	padding: 0px;
+	border: 0px;
+}
+#case-card {
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+.el-col {
+	border-bottom: 2px solid black;
+}
 </style>
