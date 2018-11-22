@@ -7,7 +7,7 @@
         </el-row>
         <el-row type="flex" justify="end" >
           <el-col id="case-class" :span="24">
-            <h4>C.{{ theCase.id }}</h4>
+            <h4>C.{{ theCase.caseClass.value }}</h4>
           </el-col>
         </el-row>
       </div>
@@ -68,9 +68,6 @@ export default {
 			return this.$router.currentRoute.path !== '/cases/' ? false : true
 		}
 	},
-	created() {
-		console.log(this.$router.currentRoute.path)
-	},
 	mounted() {
 		this.dims.x = this.$refs.test.offsetWidth
 		this.dims.y = this.$refs.test.offsetHeight
@@ -113,10 +110,10 @@ div.image {
 #case-id {
 	color: black;
 	/* background-color: rgb(247, 244, 204); */
-	font-size: 1.4rem;
-	font-family: InputMonoCondensedLightItalic;
+	font-size: 1.8rem;
+	font-family: InputMonoCondensedItalic;
 	/* margin-top: 10px; */
-	margin-bottom: 8px;
+	margin-bottom: 12px;
 	padding-right: 0px;
 	height: 60px;
 	align-items: center;

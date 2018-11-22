@@ -5,7 +5,7 @@
         <error-component :err-arr="errors"/>
       </el-row>
       <el-row class="row">
-        <h3 class="label">Case name: _{{ caseName }}</h3>
+        <h3 class="label">Name: _{{ caseName }}</h3>
         <el-input
           v-model="caseName"
           :rows="2"
@@ -13,7 +13,7 @@
           placeholder="e.g., Bureaupanique"/>
       </el-row>
       <el-row>
-        <h3 class="label">Case description: </h3>
+        <h3 class="label">Description: </h3>
         <el-input
           v-model="caseDescription"
           :autosize="{ minRows: 4, maxRows: 8}"
@@ -21,7 +21,7 @@
           placeholder="e.g., pre-breakfast absolute total shitstorm"/>
       </el-row>
       <el-row>
-        <h3 class="label">Case class: C.{{ caseClass.value }} </h3>
+        <h3 class="label">Class: C.{{ caseClass.value }} </h3>
         <el-select v-model="caseClass" :placeholder="caseClass.label" clearable @change="handleChange">
           <el-option v-for="loc in locClassArr" :key="loc.value" :value="loc.value" :label="`${loc.label}`"/>
         </el-select>
@@ -74,10 +74,7 @@ export default {
 					label: 'Professional'
 				}
 			],
-			caseClass: {
-				value: '',
-				label: ''
-			},
+			caseClass: { value: '', label: '' },
 			caseClassOutput: '',
 			errors: []
 		}
@@ -152,6 +149,9 @@ h3 {
 .el-input {
 	border-radius: 0px;
 }
+div.el-textarea:focus {
+	border: 2px solid red !important;
+}
 .el-select {
 	margin-bottom: 20px;
 	width: 100%;
@@ -165,7 +165,7 @@ h3 {
 	height: 4rem;
 	font-family: InputMonoCondensed;
 	font-size: 1.1rem;
-	background-color: rgb(247, 244, 209);
+	background-color: rgb(247, 244, 204);
 	color: black;
 }
 .el-button:hover {
