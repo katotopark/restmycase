@@ -2,8 +2,34 @@
   <el-row>
     <el-form :model="dataObj">
       <div class="container">
-        <el-row>
-          <h2 class="input-label">_{{ inputProps.inputA.toUpperCase() }}</h2>
+        <!-- <el-row v-if="!selectOptions">
+          <el-row class="input-label">
+            <h2>_{{ inputProps.toUpperCase() }}</h2>
+          </el-row>
+          <el-row class="input-text" type="flex" justify="center" >
+            <el-col :span="20">
+              <el-form-item>
+                <el-input v-model="dataObj.inputProps" :placeholder="inputProps" type="textarea" @change="$emit('catch-input', dataObj.inputProps)"/>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-row>
+        <el-row v-else-if="selectOptions">
+          <el-row class="input-label">
+            <h2>_{{ inputProps.toUpperCase() }}</h2>
+          </el-row>
+          <el-row class="input-text" type="flex" justify="center" >
+            <el-col :span="20">
+              <el-form-item>
+                <el-select v-model="dataObj.inputProps" :placeholder="inputProps" style="width: 100%;" @change="$emit('catch-input', dataObj.inputProps)">
+                  <el-option v-for="elem in selectOptions" :key="elem.key" :value="elem.value" :label="`${elem.value}: ${elem.label}`"/>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-row> -->
+        <el-row class="input-label">
+          <h2>_{{ inputProps.inputA.toUpperCase() }}</h2>
         </el-row>
         <el-row :gutter="10" class="input-text">
           <el-col :span="22" :offset="1">
@@ -12,8 +38,8 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row v-if="routePath">
-          <h2 class="input-label">_{{ inputProps.inputB.toUpperCase() }}</h2>
+        <el-row v-if="routePath" class="input-label">
+          <h2>_{{ inputProps.inputB.toUpperCase() }}</h2>
         </el-row>
         <el-row v-if="routePath" :gutter="10">
           <el-col :span="22" :offset="1">
@@ -22,8 +48,8 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row>
-          <h2 class="input-label">_{{ inputProps.select.toUpperCase() }}</h2>
+        <el-row class="input-label">
+          <h2>_{{ inputProps.select.toUpperCase() }}</h2>
         </el-row>
         <el-row :gutter="10" class="input-text">
           <el-col :span="22" :offset="1">
@@ -69,7 +95,7 @@ export default {
 	},
 	computed: {
 		routePath() {
-			return this.$router.currentRoute.path == '/alp' ? true : false
+			return this.$router.currentRoute.path == '/alp/' ? true : false
 		}
 	}
 }
@@ -109,7 +135,7 @@ export default {
 	background-color: rgb(247, 244, 204);
 	font-family: InputMonoCondensed;
 }
-.input-label {
+.input-label h2 {
 	font-size: 1.1rem;
 	font-family: InputMonoCondensed;
 	background-color: black;
@@ -117,7 +143,7 @@ export default {
 	width: 100%;
 	padding: 5px 5px;
 	margin-top: 0px;
-	margin-bottom: 15px;
+	/* margin-bottom: 15px; */
 	/* border: 2px solid red; */
 }
 </style>

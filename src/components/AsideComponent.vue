@@ -1,7 +1,7 @@
 <template>
-  <el-menu :max="1" :min="0" background-color="rgb(247, 244, 204)" @select="handleClick">
+  <el-menu :max="1" :min="0" background-color="rgb(247, 244, 204)">
     <el-menu-item v-for="(elem,i) in asideObj" :key="elem.key" :index="i.toString()">
-      <el-button :style="elem.style" type="">{{ elem.optionName }}</el-button>
+      <el-button :style="elem.style" @click="$emit('handle-filter', elem)">{{ elem.optionName }}</el-button>
     </el-menu-item>
   </el-menu>
 </template>
@@ -10,7 +10,7 @@ export default {
 	data() {
 		return {
 			checked: [],
-			asideOptions: ['Class', 'Location', 'LobaLoba'],
+			asideOptions: ['Class', 'Duration', 'Distance', 'LobaLoba'],
 			asideObj: {}
 		}
 	},
@@ -45,7 +45,7 @@ export default {
 				})
 				this.asideObj[index].style = ''
 			}
-			console.log(this.asideObj[index])
+			// console.log(this.asideObj[index])
 		}
 	}
 }

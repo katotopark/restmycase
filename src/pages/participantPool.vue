@@ -1,25 +1,18 @@
 <template>
   <el-row>
-    <el-col :span="12" :offset="6">
-      <el-table :data="participantData">
-        <el-table-column prop="id" label="ID"/>
-        <el-table-column prop="name" label="NAME"/>
-        <el-table-column prop="attending" label="ATTENDING"/>
-      </el-table>
-    </el-col>
+    <el-form :model="someModel">
+      <el-form-item label=""/>
+    </el-form>
+    
   </el-row>
 </template>
 <script>
 export default {
+	components: {},
 	data() {
 		return {
-			participantData: [
-				{
-					id: 1,
-					name: 'husnu',
-					attending: 'yes'
-				}
-			]
+			someModel: {},
+			inputObj: ''
 		}
 	}
 }

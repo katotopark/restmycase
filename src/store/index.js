@@ -23,13 +23,13 @@ const createStore = () => {
 			formObj: {
 				caseName: '',
 				caseDescription: '',
-				caseClass: {},
+				caseClass: '',
 				tDistance: '',
 				tDuration: '',
 				lobas: {},
-				caseImage: null
+				caseImage: null,
+				totalScore: 0
 			},
-			totalScore: 0,
 			ipfsHash: '',
 			txHash: '',
 			blockHash: '',
@@ -70,7 +70,7 @@ const createStore = () => {
 				})
 			},
 			updateScore(state, payload) {
-				state.totalScore += payload
+				state.formObj.totalScore += payload
 			},
 			setLocations(state) {
 				state.locationsArray = locations_0.map(item => {
@@ -130,7 +130,7 @@ const createStore = () => {
 				context.commit('formatLobaQuestions')
 			},
 			updateScore(context, payload) {
-				console.log('new score is: ', context.state.totalScore)
+				console.log('new score is: ', context.state.formObj.totalScore)
 				context.commit('updateScore', payload)
 			},
 			setLocations(context) {

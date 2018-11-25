@@ -51,6 +51,7 @@ html {
 }
 body {
 	margin: 0px;
+	padding-bottom: 30px;
 }
 
 .button--green {
@@ -80,5 +81,45 @@ body {
 .button--grey:hover {
 	color: #fff;
 	background-color: #35495e;
+}
+
+/* Custom form styles */
+
+.el-select .el-input__inner,
+textarea {
+	border: 2px solid black !important;
+	border-radius: 0px !important;
+
+	font-family: 'InputMonoCondensed', monospace !important;
+}
+
+.el-table__body td {
+	border-bottom: 2px solid black;
+}
+.el-table__body tr:last-child td {
+	border-bottom: 0px !important;
+}
+
+.el-table__body tr:not(:nth-last-child(2)),
+.el-table__body td {
+	background-color: rgb(247, 244, 204) !important;
+	color: black !important;
+}
+
+.el-table--striped .el-table__body tr.el-table__row--striped.current-row td,
+.el-table__body tr.current-row > td,
+.el-table__body tr.hover-row.current-row > td,
+.el-table__body tr.hover-row.el-table__row--striped.current-row > td,
+.el-table__body tr.hover-row.el-table__row--striped > td,
+.el-table__body tr.hover-row > td {
+	color: white !important;
+	background-color: black !important;
+	border-bottom: 0px;
+}
+
+.el-table__header tr,
+.el-table__header th {
+	color: white !important;
+	background-color: black !important;
 }
 </style>

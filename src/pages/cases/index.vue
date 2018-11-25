@@ -3,11 +3,11 @@
     <header-component/>
     <el-container>
       <el-aside width="200px">
-        <aside-component/>
+        <aside-component @handle-filter="onHandleFilter"/>
       </el-aside>
       <el-main>
         <el-row :gutter="10">
-          <el-col v-for="elem in cases" ref="test" :md="12" :sm="24" :key="elem.id">
+          <el-col v-for="(elem) in cases" ref="test" :md="12" :sm="24" :key="elem.id">
             <case-card id="case-card" :the-case="elem"/>
           </el-col>
         </el-row>
@@ -58,7 +58,60 @@ export default {
 		this.cases = cases
 	},
 	methods: {
-		...mapActions(['getUsersCases', 'getCaseHash', 'caseHashToData'])
+		...mapActions(['getUsersCases', 'getCaseHash', 'caseHashToData']),
+		onHandleFilter(e) {
+			let index = e.id - 1
+			switch (index) {
+				case 0:
+					this.filterByClass()
+					break
+				case 1:
+					this.filterByDuration()
+					break
+				case 2:
+					this.filterByDistance()
+					break
+				case 3:
+					this.filterByLobaloba()
+					break
+			}
+		},
+		sortBy(field, reverse, primer) {
+			var key = primer
+				? function(x) {
+						return primer(x[field])
+				  }
+				: function(x) {
+						return x[field]
+				  }
+
+			reverse = !reverse ? 1 : -1
+
+			return function(a, b) {
+				return (a = key(a)), (b = key(b)), reverse * ((a > b) - (b > a))
+			}
+		},
+		filterByClass() {
+			let output = []
+			output = this.cases.sort(this.sortBy('caseClass', false, parseInt))
+			console.log(output)
+			return output
+		},
+		filterByDuration() {
+			let output = []
+			output = this.cases.sort(this.sortBy('tDuration', true, parseInt))
+			return output
+		},
+		filterByDistance() {
+			let output = []
+			output = this.cases.sort(this.sortBy('tDistance', true, parseInt))
+			return output
+		},
+		filterByLobaloba() {
+			let output = []
+			output = this.cases.sort(this.sortBy('totalScore', true, parseInt))
+			return output
+		}
 	}
 }
 </script>

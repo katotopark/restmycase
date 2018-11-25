@@ -1,10 +1,10 @@
 <template>
   <el-row>
-    <el-col :span="12" :offset="6">
+    <el-col :span="22" :offset="1">
       <error-component :err-arr="errors"/>
     </el-col>
     <el-row>
-      <el-col id="container" :span="12" :offset="6">
+      <el-col id="container" :span="22" :offset="1">
         <h3>{{ group.value }}</h3>
         <loba-component v-for="(elem, i) in lobaObj" id="loba-component" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
         <!-- <loba-component v-for="(elem, i) in lobaObj" id="loba-component" :key="elem.key" :data-obj="elem" @handle-click="(e)=> onCatchInput(e,i)"/> -->
@@ -65,7 +65,7 @@ export default {
 		})
 	},
 	methods: {
-		...mapActions(['setLobas', 'setQuestions']),
+		...mapActions(['setLobas', 'setQuestions', 'updateScore']),
 		onCatchInput(e, i) {
 			this.lobaObj[i].rated = true
 			console.log(
@@ -85,6 +85,9 @@ export default {
 					})
 				})
 				console.log(this.formObj.lobas)
+				this.lobaObj.forEach(item => {
+					this.updateScore(Number(item.score))
+				})
 				this.$router.push(this.next)
 			}
 		},

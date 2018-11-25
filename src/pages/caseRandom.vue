@@ -68,10 +68,7 @@ export default {
 			this.describeCase({
 				caseName: Faker.lorem.word(),
 				caseDescription: Faker.lorem.sentences(1),
-				caseClass: {
-					value: Faker.random.number(5),
-					label: Faker.lorem.word
-				}
+				caseClass: Faker.random.number(5)
 				// caseImage: Faker.image.abstract()
 			})
 

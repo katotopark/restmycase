@@ -3,12 +3,11 @@
     <el-table-column label="#" width="40" type="index"/>
     <el-table-column v-for="item in propsArr" :label="item.value.toUpperCase()" :key="item.key" :prop="item.value" :width="item.width"/>
     <el-table-column
-      v-if="voteable"
       fixed="right"
       label="VOTE"
       width="60">
       <template slot-scope="scope">
-        <el-button size="small" type="text" @click="$emit('handle-click', scope.$index)">
+        <el-button type="text" @click="$emit('handle-click', scope.$index)">
           <i class="el-icon-plus"/>
         </el-button>
       </template>
@@ -25,10 +24,6 @@ export default {
 		propsArr: {
 			required: true,
 			type: Array
-		},
-		voteable: {
-			required: true,
-			type: Boolean
 		}
 	},
 	data() {

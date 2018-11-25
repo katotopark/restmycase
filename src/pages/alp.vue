@@ -4,8 +4,9 @@
     <el-row type="flex" justify="center">
       <el-col :sm="16" :md="12">
         <error-component :err-arr="errors"/>
+        <text-component :text-strings="textString"/>
         <new-input-component id="new-input" :data-obj="newLoc" :select-options="locClassArr" :input-props="inputProps" @catch-input-a="onCatchName" @catch-input-b="onCatchAddress" @catch-select="onCatchClass" @submit="onSubmit" @clear="onClear"/>
-        <table-component :props-arr="tableProps" :data-obj="locArr" :voteable="true" @handle-click="handleClick"/>
+        <table-component :props-arr="tableProps" :data-obj="locArr" @handle-click="handleClick"/>
       </el-col>
     </el-row>
   </div>
@@ -14,6 +15,7 @@
 import HeaderComponent from '../components/HeaderComponent.vue'
 import NewInputComponent from '../components/NewInputComponent.vue'
 import TableComponent from '../components/TableComponent.vue'
+import TextComponent from '../components/TextComponent.vue'
 import ErrorComponent from '../components/ErrorComponent.vue'
 import Faker from 'faker'
 // import VueMomentLib from 'VueMomentLib'
@@ -24,10 +26,13 @@ export default {
 		HeaderComponent,
 		NewInputComponent,
 		ErrorComponent,
-		TableComponent
+		TableComponent,
+		TextComponent
 	},
 	data() {
 		return {
+			textString:
+				"ALP is an address pool for institutional locations. It stands for 'Autonomous Location Pool'. Here, you can log a new location or vote for one on the list.",
 			tableProps: [
 				{ value: 'name', width: '100' },
 				{ value: 'address', width: '' },

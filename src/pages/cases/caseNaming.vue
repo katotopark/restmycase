@@ -4,29 +4,49 @@
       <el-row>
         <error-component :err-arr="errors"/>
       </el-row>
-      <el-row class="row">
-        <h3 class="label">Name: _{{ caseName }}</h3>
-        <el-input
-          v-model="caseName"
-          :rows="2"
-          type="textarea"
-          placeholder="e.g., Bureaupanique"/>
+      <el-row id="container">
+        <el-row>
+          <el-row class="input-label">
+            <h2>_NAME</h2>
+          </el-row>
+          <el-row class="input-area" type="flex" justify="center">
+            <el-col :span="22">
+              <el-input
+                v-model="caseName"
+                :rows="2"
+                type="textarea"
+                placeholder="e.g., Bureaupanique"/>
+            </el-col>
+          </el-row>
+        </el-row>
+        <el-row>
+          <el-row class="input-label">
+            <h2>_DESCRIPTION</h2>
+          </el-row>
+          <el-row class="input-area" type="flex" justify="center">
+            <el-col :span="22">
+              <el-input
+                v-model="caseDescription"
+                :autosize="{ minRows: 2, maxRows: 4}"
+                type="textarea"
+                placeholder="e.g., pre-breakfast absolute total shitstorm"/>
+            </el-col>
+          </el-row>
+        </el-row>
+        <el-row>
+          <el-row class="input-label">
+            <h2>_CLASS<span v-if="caseClass">: C.{{ caseClass }}</span></h2>
+          </el-row>
+          <el-row class="input-area" type="flex" justify="center">
+            <el-col :span="22">
+              <el-select v-model="caseClass" :placeholder="caseClass.label" clearable @change="handleChange">
+                <el-option v-for="loc in locClassArr" :key="loc.value" :value="loc.value" :label="`${loc.label}`"/>
+              </el-select>
+            </el-col>
+          </el-row>
+        </el-row>
       </el-row>
-      <el-row>
-        <h3 class="label">Description: </h3>
-        <el-input
-          v-model="caseDescription"
-          :autosize="{ minRows: 4, maxRows: 8}"
-          type="textarea"
-          placeholder="e.g., pre-breakfast absolute total shitstorm"/>
-      </el-row>
-      <el-row>
-        <h3 class="label">Class: C.{{ caseClass.value }} </h3>
-        <el-select v-model="caseClass" :placeholder="caseClass.label" clearable @change="handleChange">
-          <el-option v-for="loc in locClassArr" :key="loc.value" :value="loc.value" :label="`${loc.label}`"/>
-        </el-select>
-      </el-row>
-      <el-row :gutter="10">
+      <el-row :gutter="10" type="flex" justify="center">
         <el-col :span="12">
           <el-button plain @click="onSubmit">Mint</el-button>
         </el-col>
@@ -74,8 +94,9 @@ export default {
 					label: 'Professional'
 				}
 			],
-			caseClass: { value: '', label: '' },
+			caseClass: '',
 			caseClassOutput: '',
+			textStrings: ['Name it.', 'Describe it.', 'Classify it.'],
 			errors: []
 		}
 	},
@@ -106,29 +127,23 @@ export default {
 			}
 		},
 		handleChange(index) {
-			this.caseClass = {
-				value: this.locClassArr[index - 1]['value'],
-				label: this.locClassArr[index - 1]['label']
-			}
+			this.caseClass = this.locClassArr[index - 1]['value']
 		},
 		onClear() {
 			console.log('cleared')
 			this.caseName = ''
 			this.caseDescription = ''
-			this.caseClass = {
-				value: '',
-				label: ''
-			}
+			this.caseClass = ''
 		},
 		checkInput() {
 			this.errors = []
 			if (
 				!this.caseName ||
 				!this.caseDescription ||
+				!this.caseClass ||
 				this.caseName.length == 0 ||
 				this.caseDescription.length == 0 ||
-				!this.caseClass.value ||
-				!this.caseClass.label
+				this.caseClass == 0
 			) {
 				this.errors.push('Fill those!')
 			}
@@ -137,14 +152,9 @@ export default {
 }
 </script>
 <style scoped>
-.el-row {
-	margin-bottom: 20px;
-}
-h3 {
-	margin: 0px 0px 10px 0px;
-	word-wrap: break-word;
-	display: block;
-	font-weight: normal;
+.el-row#container {
+	border: 2px solid black;
+	margin-top: 40px;
 }
 .el-input {
 	border-radius: 0px;
@@ -153,7 +163,6 @@ div.el-textarea:focus {
 	border: 2px solid red !important;
 }
 .el-select {
-	margin-bottom: 20px;
 	width: 100%;
 }
 .el-button,
@@ -167,11 +176,27 @@ div.el-textarea:focus {
 	font-size: 1.1rem;
 	background-color: rgb(247, 244, 204);
 	color: black;
+	margin-top: 10px;
 }
 .el-button:hover {
 	background: black;
 	color: white;
 	font-family: InputMonoCondensedItalic;
 	border: 2px solid black;
+}
+.input-label h2 {
+	font-size: 1.1rem;
+	font-family: InputMonoCondensed;
+	background-color: black;
+	color: white;
+	width: 100%;
+	padding: 5px 5px;
+	margin-top: 0px;
+	margin-bottom: 15px;
+	word-wrap: break-word;
+	/* border: 2px solid red; */
+}
+.el-row.input-area {
+	margin-bottom: 20px;
 }
 </style>

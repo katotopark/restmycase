@@ -1,42 +1,42 @@
 {
-  "name": "nuxt-web3-boilerplate",
-  "version": "1.0.0",
-  "description": "Nuxt.js and web3 template project",
-  "author": "pyyding <kaspar.pyyding@gmail.com>",
-  "private": true,
-  "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore --ignore-pattern migrations/ --ignore-pattern test/ .",
-    "precommit": "npm run lint"
-  },
-  "dependencies": {
-    "buffer": "^5.2.0",
-    "chance": "^1.0.16",
-    "element-ui": "^2.4.6",
-    "ipfs-api": "^23.0.0",
-    "moment": "^2.22.2",
-    "nuxt": "^1.0.0",
-    "openzeppelin-solidity": "1.12.0",
-    "vue-faker": "^1.0.1",
-    "vue-moment-lib": "^1.2.2",
-    "vue-p5": "^0.7.1",
-    "vuex-localstorage": "^1.0.0",
-    "web3": "^1.0.0-beta.34",
-    "web3-eth-abi": "^1.0.0-beta.34",
-    "websocket": "^1.0.26"
-  },
-  "devDependencies": {
-    "babel-eslint": "^8.2.3",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-vue": "^4.5.0",
-    "prettier": "^1.14.2"
-  }
+	"name": "nuxt-web3-boilerplate",
+	"version": "1.0.0",
+	"description": "Nuxt.js and web3 template project",
+	"author": "pyyding <kaspar.pyyding@gmail.com>",
+	"private": true,
+	"scripts": {
+		"dev": "nuxt --hostname 0.0.0.0",
+		"build": "nuxt build",
+		"start": "nuxt start",
+		"generate": "nuxt generate",
+		"lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+		"lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore --ignore-pattern migrations/ --ignore-pattern test/ .",
+		"precommit": "npm run lint"
+	},
+	"dependencies": {
+		"buffer": "^5.2.0",
+		"chance": "^1.0.16",
+		"element-ui": "^2.4.6",
+		"ipfs-api": "^23.0.0",
+		"moment": "^2.22.2",
+		"nuxt": "^1.0.0",
+		"openzeppelin-solidity": "1.12.0",
+		"vue-faker": "^1.0.1",
+		"vue-moment-lib": "^1.2.2",
+		"vue-p5": "^0.7.1",
+		"vuex-localstorage": "^1.0.0",
+		"web3": "^1.0.0-beta.34",
+		"web3-eth-abi": "^1.0.0-beta.34",
+		"websocket": "^1.0.26"
+	},
+	"devDependencies": {
+		"babel-eslint": "^8.2.3",
+		"eslint": "^4.19.1",
+		"eslint-config-prettier": "^2.9.0",
+		"eslint-friendly-formatter": "^3.0.0",
+		"eslint-loader": "^1.9.0",
+		"eslint-plugin-prettier": "^2.6.0",
+		"eslint-plugin-vue": "^4.5.0",
+		"prettier": "^1.14.2"
+	}
 }

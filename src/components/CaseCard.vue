@@ -7,7 +7,7 @@
         </el-row>
         <el-row type="flex" justify="end" >
           <el-col id="case-class" :span="24">
-            <h4>C.{{ theCase.caseClass.value }}</h4>
+            <h4>C.{{ theCase.caseClass }}</h4>
           </el-col>
         </el-row>
       </div>

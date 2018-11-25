@@ -4,11 +4,12 @@
     <el-row type="flex" justify="center">
       <el-col :sm="16" :md="12">
         <error-component :err-arr="errors"/>
+        <text-component :text-strings="textString"/>
         <new-input-component id="new-input" :data-obj.sync="newQ" :select-options="qGroupsArr" :input-props="inputProps" @catch-input-a="onCatchTitle" @submit="onSubmit" @clear="onClear" @catch-select="onCatchGroup"/>
         <el-select v-model="filterGroup" clearable placeholder="Filter by group" @change="filterByGroup">
           <el-option v-for="item in qGroupsArr" :key="item.value" :value="item.value" :label="`${item.value}: ${item.label}`"/>
         </el-select>
-        <table-component id="questions-table" :data-obj="qArr" :props-arr="tableProps" :voteable="true" @handle-click="handleClick"/>
+        <table-component id="questions-table" :data-obj="qArr" :props-arr="tableProps" @handle-click="handleClick"/>
       </el-col>
     </el-row>
   </div>
@@ -17,6 +18,7 @@
 import NewInputComponent from '../components/NewInputComponent.vue'
 import HeaderComponent from '../components/HeaderComponent.vue'
 import TableComponent from '../components/TableComponent.vue'
+import TextComponent from '../components/TextComponent.vue'
 import ErrorComponent from '../components/ErrorComponent.vue'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
@@ -25,10 +27,14 @@ export default {
 		NewInputComponent,
 		TableComponent,
 		ErrorComponent,
-		HeaderComponent
+		HeaderComponent,
+		TextComponent
 	},
 	data() {
 		return {
+			textString:
+				'AQP is a collectively run pool of questions. It stands for Autonomous Question Pool. Here, you can log a new question or vote for one on the list.',
+			styleObj: 'height: 50px;',
 			tableProps: [
 				{ value: 'value', width: '' },
 				{ value: 'group', width: '' },
