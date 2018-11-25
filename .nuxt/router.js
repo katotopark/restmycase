@@ -3,23 +3,23 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _3e439394 = () => import('../src/pages/pfive.vue' /* webpackChunkName: "pages/pfive" */).then(m => m.default || m)
-const _fcabfda2 = () => import('../src/pages/caseRandom.vue' /* webpackChunkName: "pages/caseRandom" */).then(m => m.default || m)
-const _6e71a639 = () => import('../src/pages/alp.vue' /* webpackChunkName: "pages/alp" */).then(m => m.default || m)
-const _644a25be = () => import('../src/pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
-const _76f9e154 = () => import('../src/pages/aqp.vue' /* webpackChunkName: "pages/aqp" */).then(m => m.default || m)
-const _46bfe9d7 = () => import('../src/pages/cases.vue' /* webpackChunkName: "pages/cases" */).then(m => m.default || m)
-const _0895731a = () => import('../src/pages/cases/index.vue' /* webpackChunkName: "pages/cases/index" */).then(m => m.default || m)
-const _2aa49846 = () => import('../src/pages/cases/mintConfirm.vue' /* webpackChunkName: "pages/cases/mintConfirm" */).then(m => m.default || m)
-const _8e50838e = () => import('../src/pages/cases/loba3.vue' /* webpackChunkName: "pages/cases/loba3" */).then(m => m.default || m)
-const _8e88e192 = () => import('../src/pages/cases/loba1.vue' /* webpackChunkName: "pages/cases/loba1" */).then(m => m.default || m)
-const _2a75f080 = () => import('../src/pages/cases/caseNaming.vue' /* webpackChunkName: "pages/cases/caseNaming" */).then(m => m.default || m)
-const _8e6cb290 = () => import('../src/pages/cases/loba2.vue' /* webpackChunkName: "pages/cases/loba2" */).then(m => m.default || m)
-const _8744c30e = () => import('../src/pages/cases/lobas.vue' /* webpackChunkName: "pages/cases/lobas" */).then(m => m.default || m)
-const _41397402 = () => import('../src/pages/cases/_id.vue' /* webpackChunkName: "pages/cases/_id" */).then(m => m.default || m)
-const _fa291df6 = () => import('../src/pages/cases/_id/index.vue' /* webpackChunkName: "pages/cases/_id/index" */).then(m => m.default || m)
-const _adb170fa = () => import('../src/pages/participantPool.vue' /* webpackChunkName: "pages/participantPool" */).then(m => m.default || m)
-const _24da7034 = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+const _6b29e33c = () => import('../src/pages/pfive.vue' /* webpackChunkName: "pages/pfive" */).then(m => m.default || m)
+const _dd0d36fa = () => import('../src/pages/caseRandom.vue' /* webpackChunkName: "pages/caseRandom" */).then(m => m.default || m)
+const _b922cd36 = () => import('../src/pages/alp.vue' /* webpackChunkName: "pages/alp" */).then(m => m.default || m)
+const _91307566 = () => import('../src/pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
+const _a8125700 = () => import('../src/pages/aqp.vue' /* webpackChunkName: "pages/aqp" */).then(m => m.default || m)
+const _304cc203 = () => import('../src/pages/cases.vue' /* webpackChunkName: "pages/cases" */).then(m => m.default || m)
+const _1a9b0b74 = () => import('../src/pages/cases/index.vue' /* webpackChunkName: "pages/cases/index" */).then(m => m.default || m)
+const _a39ae31c = () => import('../src/pages/cases/mintConfirm.vue' /* webpackChunkName: "pages/cases/mintConfirm" */).then(m => m.default || m)
+const _ba167536 = () => import('../src/pages/cases/loba3.vue' /* webpackChunkName: "pages/cases/loba3" */).then(m => m.default || m)
+const _ba4ed33a = () => import('../src/pages/cases/loba1.vue' /* webpackChunkName: "pages/cases/loba1" */).then(m => m.default || m)
+const _07c99c14 = () => import('../src/pages/cases/caseNaming.vue' /* webpackChunkName: "pages/cases/caseNaming" */).then(m => m.default || m)
+const _ba32a438 = () => import('../src/pages/cases/loba2.vue' /* webpackChunkName: "pages/cases/loba2" */).then(m => m.default || m)
+const _b30ab4b6 = () => import('../src/pages/cases/lobas.vue' /* webpackChunkName: "pages/cases/lobas" */).then(m => m.default || m)
+const _6b06562e = () => import('../src/pages/cases/_id.vue' /* webpackChunkName: "pages/cases/_id" */).then(m => m.default || m)
+const _7b990231 = () => import('../src/pages/cases/_id/index.vue' /* webpackChunkName: "pages/cases/_id/index" */).then(m => m.default || m)
+const _bc564ea2 = () => import('../src/pages/participantPool.vue' /* webpackChunkName: "pages/participantPool" */).then(m => m.default || m)
+const _51c0bfdc = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
 
@@ -81,75 +81,75 @@ export function createRouter () {
     routes: [
 		{
 			path: "/pfive",
-			component: _3e439394,
+			component: _6b29e33c,
 			name: "pfive"
 		},
 		{
 			path: "/caseRandom",
-			component: _fcabfda2,
+			component: _dd0d36fa,
 			name: "caseRandom"
 		},
 		{
 			path: "/alp",
-			component: _6e71a639,
+			component: _b922cd36,
 			name: "alp"
 		},
 		{
 			path: "/about",
-			component: _644a25be,
+			component: _91307566,
 			name: "about"
 		},
 		{
 			path: "/aqp",
-			component: _76f9e154,
+			component: _a8125700,
 			name: "aqp"
 		},
 		{
 			path: "/cases",
-			component: _46bfe9d7,
+			component: _304cc203,
 			children: [
 				{
 					path: "",
-					component: _0895731a,
+					component: _1a9b0b74,
 					name: "cases"
 				},
 				{
 					path: "mintConfirm",
-					component: _2aa49846,
+					component: _a39ae31c,
 					name: "cases-mintConfirm"
 				},
 				{
 					path: "loba3",
-					component: _8e50838e,
+					component: _ba167536,
 					name: "cases-loba3"
 				},
 				{
 					path: "loba1",
-					component: _8e88e192,
+					component: _ba4ed33a,
 					name: "cases-loba1"
 				},
 				{
 					path: "caseNaming",
-					component: _2a75f080,
+					component: _07c99c14,
 					name: "cases-caseNaming"
 				},
 				{
 					path: "loba2",
-					component: _8e6cb290,
+					component: _ba32a438,
 					name: "cases-loba2"
 				},
 				{
 					path: "lobas",
-					component: _8744c30e,
+					component: _b30ab4b6,
 					name: "cases-lobas"
 				},
 				{
 					path: ":id",
-					component: _41397402,
+					component: _6b06562e,
 					children: [
 						{
 							path: "",
-							component: _fa291df6,
+							component: _7b990231,
 							name: "cases-id"
 						}
 					]
@@ -158,12 +158,12 @@ export function createRouter () {
 		},
 		{
 			path: "/participantPool",
-			component: _adb170fa,
+			component: _bc564ea2,
 			name: "participantPool"
 		},
 		{
 			path: "/",
-			component: _24da7034,
+			component: _51c0bfdc,
 			name: "index"
 		}
     ],
