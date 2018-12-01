@@ -1,21 +1,40 @@
 <html>
 <head>
 <style>
+@font-face {
+	font-family: InputMonoCondensedLight;
+	src: url('../src/assets/Input_Fonts/InputMono/InputMonoCondensed/InputMonoCondensed-Light.ttf');
+}
+@font-face {
+	font-family: InputMonoCondensedLightItalic;
+	src: url('../src/assets/Input_Fonts/InputMono/InputMonoCondensed/InputMonoCondensed-LightItalic.ttf');
+}
+
 * {
 	word-break: break-all;
-margin:0;
-padding:0;
-box-sizing:border-box;
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
 }
-
 #thestring {
-	text-decoration:underline;
+	/* text-decoration:underline; */
+	border-bottom: 1px solid black;
+	padding-bottom: 3px;
+	/* font-family: InputMonoCondensedLightItalic; */
 }
+/* #naber:not(#thestring)), #nasilsin {
+	border-bottom: 1px solid red;
+} */
 
 div {
-	margin:40px;
-	border: 1px solid black;
-	font-family:monospace;
+	margin:60px;
+	/* border: 1px solid black; */
+	font-family: InputMonoCondensedLight;
+	line-height: 25px;
+	word-wrap: break-word;
+	display: block;
+	/* height: 100% */
+	align-items: center;
 }
 
 @page {
@@ -32,21 +51,41 @@ div {
 
 </style>
 </head>
-<body>
-<div>
-oXA7wDWZ5GBXjWLpxLOpUp7OG3Yst8kKhqlS4EXHavmMiJ9Bt3BBUPiDRIbLZeZHbqYo252x86kH6FhNDQZU9du4X9qJr2ZMvHqDvzJ6fAvYpiSCV5pJ2zQNF6Yv3hE1kdqr2oXrQQTWPgKatnsDU17R91l2KDDyHb0mls4e5KSdIhTGPXGeVHyM3gnxkhQcihUMll2aahGNB0VVdBSDW8oaA68LDnb07jIdTZYEr5I0mQVmDhgxhWDHcB6A07jbn3HKzVGgulkTkzeaw7qmbmGjmSlyMsOPgpCNqxsTdbJ65Z67uFBIBhlukZa1cbqOKbXMZcgIjcO8c9Bc8ztOrwhGOKKfpYbqK1RoQ34hnPLYSpyWYDRyHm5pc93NKeBofF6hkr4Xz4l4ykNBG6KFLvOK1DhKxhgxrSLqXstuIrkJFc4g64lQEB4PpoayAk2EGYvpZnN347WqrWMxHYA5p5MYtLqiDBv6n17tBS3403cLUtb9Ibv8b1pdyGhDzpHaq55ntmBZukPFhWeYqO6W9mjpczOmzAdLQyoYT107eDocckZhCwFEtGAD2xBwgN8M3yHIH8REbuDoTKg5qycPFReLqu2fGyiZjF79nbwHjBdPre1SNH7VGBGZm48ux3oZWcXQICqOvf4gBw6Wv8zC6D7H9fCxzD<span id="thestring">Xo3JV4pVyJm9NwzU6NXH4nL</span>JTAKFPlk5QgMe1FOWgxyadAS4EfgjMklMzsJ4OR4UZvGssT3lcJyYOZwDmaXGv90kvvRINQFixxVphpN3Ps2XcuYE80g2t5orVD3Mi0sz7375CayQCthcV8K3b4VR1q3kXIBG3NEDWxeyZL66OUwzcjqFxp8pQevAF7HmxHWx7B9C7qRPiZ4dPFR0o6vDDi45VhGnR87vlmxFbWvjFu5pYZThBz92tYuEt5vhZa7tQUjClbXrgrkaOzFIEauM84xfyKRjRO3GnwJUYYPBPVtyjZE88XuuOgj5wzhFWND6O8pz3a6oupgbMqyxtbh8PHSYqDlalRJJAPxaZRSs5l9RsOOxxDfZpOvMk1GAgviqQZ7LcCKsAeTyPpfbNBUoXSnZadniBM4oFoMGUbK0ubaYCuIqpjhiF6BNvwrFARGAmlLcgT1v9SIPHxoZ6V10poukI1UCCn5pNZneKHBsRbrH6BLljC2aHpFWFXuCT9WSZtKrqQMWHDrFGVLoiRIaz5Tzb9iJ5EfXeOUAP9sXrMiBnQa8Wxr1hsk7WThMB2XxD6VYCtow1XAEIBK2cgc23JPstBb3Qy2iDy8bIEvC5peN2CJgCa7MX8Okj69zq3beQfzU9qmmCOS3qUcygXetzlIZDqlZV0xpyfOGcl7sUs6wmDA3V7kw8GMNVfFUSHdCqS7yo0BWZkJCXGOa0AIiWat6n07Srsrk3imJCCXsouu7DpIDlOdgg9kgUyhGsn86uLTSozYVnMe0CTMCaoM6jfQ116Ju6w2YPnEBqvUeqHFzk4cMA8cu4BajbesbpY
+	<body>
+		<div>
+			<span id="naber"></span>
+			<span id="thestring"></span>
+			<span id="nasilsin"></span>
+		</div>
+		<script>
+		var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-</div>
+		let content = [];
+		for(let i = 0; i < 25; i++) {
+			let r = Array(46).join().split(',').map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
+			content.push(r)
+		}
+		console.log("random", content);
 
-<script>
+		const urlParams = new URLSearchParams(window.location.search);
+		const myParam = urlParams.get('hash');
+		console.log(myParam)
 
-const urlParams = new URLSearchParams(window.location.search);
-const myParam = urlParams.get('hash');
+		function getRandomInt(min, max) {
+		  min = Math.ceil(min);
+		  max = Math.floor(max);
+		  return Math.floor(Math.random() * (max - min)) + min;
+		}
 
-var el = document.getElementById("thestring")
-el.innerHTML = myParam;
-</script>
+		let randomIndex = getRandomInt(2, content.length-1)
+		content.splice(randomIndex, 1, myParam);
 
-
-      </body>
-      </html>
+		var el = document.getElementById("thestring");
+		el.innerHTML = content[randomIndex];
+		var rand = document.getElementById("naber");
+		rand.innerHTML = content.slice(0,randomIndex).join('');
+		var rand2 = document.getElementById("nasilsin");
+		rand2.innerHTML = content.slice(randomIndex+1,content.length).join('');
+		</script>
+	</body>
+</html>

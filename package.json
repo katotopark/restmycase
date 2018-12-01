@@ -18,6 +18,8 @@
 		"chance": "^1.0.16",
 		"element-ui": "^2.4.6",
 		"ipfs-api": "^23.0.0",
+		"libp2p-crypto": "^0.14.1",
+		"line-reader": "^0.4.0",
 		"moment": "^2.22.2",
 		"nuxt": "^1.0.0",
 		"openzeppelin-solidity": "1.12.0",
@@ -27,6 +29,7 @@
 		"vuex-localstorage": "^1.0.0",
 		"web3": "^1.0.0-beta.34",
 		"web3-eth-abi": "^1.0.0-beta.34",
+		"webcrypto-shim": "^0.1.4",
 		"websocket": "^1.0.26"
 	},
 	"devDependencies": {

@@ -2,6 +2,7 @@ import Vuex from 'vuex'
 import web3 from '~/plugins/web3'
 import web3Abi from 'web3-eth-abi'
 import NonFungibleCase from '../../build/contracts/NonFungibleCase'
+// import AutonomousQuestionPool from '../../build/contracts/AutonomousQuestionPool'
 import * as questions_0 from './questionsDefault'
 import * as locations_0 from './locationsDefault'
 
@@ -11,6 +12,9 @@ const ipfs = IPFS()
 
 const tokenAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10'
 const aNFC = new web3.eth.Contract(NonFungibleCase.abi, tokenAddress)
+
+// const aqpTokenAddress = '0x30753e4a8aad7f8597332e813735def5dd395028'
+// const aAQP = new web3.eth.Contract(AutonomousQuestionPool.abi, aqpTokenAddress)
 
 async function getAccount() {
 	let accounts = await web3.eth.getAccounts()
@@ -29,6 +33,16 @@ const createStore = () => {
 				lobas: {},
 				caseImage: null,
 				totalScore: 0
+			},
+			qObj: {
+				value: '',
+				group: '',
+				voteCount: 0
+			},
+			locObj: {
+				name: '',
+				address: '',
+				class: ''
 			},
 			ipfsHash: '',
 			txHash: '',
@@ -114,6 +128,16 @@ const createStore = () => {
 				state.formObj.caseDescription = payload.caseDescription
 				state.formObj.caseImage = payload.caseImage
 				state.formObj.caseClass = payload.caseClass
+			},
+			inputQ(state, payload) {
+				state.qObj.value = payload.value
+				state.qObj.group = payload.group
+				state.qObj.voteCount = payload.voteCount
+			},
+			inputLoc(state, payload) {
+				state.locObj.name = payload.name
+				state.locObj.address = payload.address
+				state.locObj.class = payload.class
 			}
 		},
 		actions: {
@@ -153,6 +177,46 @@ const createStore = () => {
 			},
 			async getTokenName() {
 				return await aNFC.methods.name().call({ from: getAccount() })
+			},
+			async addLoc(context, payload) {
+				context.commit('inputLoc', payload)
+
+				const contextBuffer = Buffer.from(JSON.stringify(context.state.locObj))
+				return ipfs.files
+					.add(contextBuffer)
+					.then(res => {
+						return res.map(file => {
+							console.log(
+								'Writing location to IPFS returned the hash',
+								file.hash
+							)
+							console.log(context.state.locObj)
+							return file.hash
+						})
+					})
+					.catch(err => {
+						return console.log('ipfs add fail', err)
+					})
+			},
+			async addQ(context, payload) {
+				context.commit('inputQ', payload)
+
+				const contextBuffer = Buffer.from(JSON.stringify(context.state.qObj))
+				return ipfs.files
+					.add(contextBuffer)
+					.then(res => {
+						return res.map(file => {
+							console.log(
+								'Writing question to IPFS returned the hash',
+								file.hash
+							)
+							console.log(context.state.qObj)
+							return file.hash
+						})
+					})
+					.catch(err => {
+						return console.error('ipfs add fail', err)
+					})
 			},
 			async mintComposed(context) {
 				await context.dispatch('addForm')

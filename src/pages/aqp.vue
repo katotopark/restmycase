@@ -86,7 +86,7 @@ export default {
 		this.qArr = this.questionsArray
 	},
 	methods: {
-		...mapActions(['setQuestions', 'addQuestion', 'voteQuestion']),
+		...mapActions(['setQuestions', 'addQuestion', 'voteQuestion', 'addQ']),
 		onCatchGroup(e) {
 			this.newGroup.value = e
 		},
@@ -98,13 +98,15 @@ export default {
 		},
 		onSubmit() {
 			this.checkForm()
+
 			if (this.errors.length == 0) {
 				this.newQ = {
 					value: this.newTitle,
 					group: this.newGroup.value,
 					voteCount: 0
 				}
-				this.addQuestion(this.newQ)
+				this.addQuestion(this.newQ) // should be removed after
+				this.addQ(this.newQ)
 				this.newQ = {}
 				this.qSubmitted = true
 			} else {

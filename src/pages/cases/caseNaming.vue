@@ -1,6 +1,6 @@
 <template>
   <el-row type="flex" justify="center">
-    <el-col :span="12">
+    <el-col :span="22" :offset="1">
       <el-row>
         <error-component :err-arr="errors"/>
       </el-row>

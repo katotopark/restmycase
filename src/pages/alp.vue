@@ -106,7 +106,7 @@ export default {
 		// console.log(Object.values(this.tableData))
 	},
 	methods: {
-		...mapActions(['setLocations', 'addLocation', 'voteLocation']),
+		...mapActions(['setLocations', 'addLocation', 'voteLocation', 'addLoc']),
 		onCatchName(e) {
 			this.newLocName = e
 			console.log('got name: ', this.newLocName)
@@ -131,7 +131,8 @@ export default {
 					class: this.newLocClass.value,
 					voteCount: 0
 				}
-				this.addLocation(this.newLoc)
+				this.addLocation(this.newLoc) // should be removed after
+				this.addLoc(this.newLoc)
 				this.newLoc = {}
 				this.locSubmitted = true
 				console.log('location submitted')

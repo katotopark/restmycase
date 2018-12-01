@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "faker": "^4.1.0",
     "fs": "0.0.1-security",
     "ipfs-api": "^26.1.2",
-    "line-reader": "^0.4.0"
+    "line-reader": "^0.4.0",
+    "sleep": "^5.2.3"
   }
 }
