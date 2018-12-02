@@ -27,21 +27,19 @@
         </el-row>
         <el-row id="bottom" :gutter="20">
           <div ref="hiya">
-            <el-col id="mini-graph" :sm="24" :md="10">
-              <el-row>
-                <div style="height: 200px; border:1px solid black;"/>
+            <el-col id="mini-graph" :sm="12" :md="8">
+              <el-row type="flex" justify="center">
+                <loba-graph class="loba-graph"/>
               </el-row>
-              <el-row>
-                <div style="height: 200px; border:1px solid purple;"/>
+              <el-row type="flex" justify="center">
+                <loba-graph class="loba-graph"/>
               </el-row>
-              <el-row>
-                <!-- <loba-graph/> -->
-                <div style="height: 200px; border:1px solid black;"/>
+              <el-row type="flex" justify="center">
+                <loba-graph class="loba-graph"/>
               </el-row>
-
             </el-col>
           </div>
-          <el-col :sm="24" :md="14">
+          <el-col :sm="12" :md="16">
             <case-card-metadata id="meta-data" :the-case="theCase"/>
           </el-col>
         </el-row>
