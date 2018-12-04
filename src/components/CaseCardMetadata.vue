@@ -45,7 +45,7 @@ export default {
 			newBytes: [],
 			hash: '',
 			counter: 1,
-			dataSize: 80,
+			dataSize: 180,
 			ySize: 0,
 			styleObj: ''
 		}
@@ -111,6 +111,7 @@ p {
 .el-button {
 	width: 100%;
 	border: 0px;
+	border-top: 2px solid black;
 	border-radius: 0px;
 	font-family: InputMonoCondensed;
 	font-size: 1.1rem;

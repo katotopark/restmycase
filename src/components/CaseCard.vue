@@ -69,9 +69,10 @@ export default {
 			return this.$router.currentRoute.path !== '/cases/' ? false : true
 		}
 	},
-	mounted() {
+	async mounted() {
 		this.dims.x = this.$refs.test.offsetWidth
 		this.dims.y = this.$refs.test.offsetHeight
+
 		this.lobas = this.theCase.lobas
 	},
 	methods: {

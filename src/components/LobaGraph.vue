@@ -29,7 +29,8 @@ export default {
 			margin: 50,
 			rectSize: 250,
 			interval: 50,
-			sum: 0
+			sum: 0,
+			myFont: null
 		}
 	},
 	watch: {
@@ -55,6 +56,7 @@ export default {
 
 			s.stroke(0, 0, 0)
 			s.strokeWeight(2)
+			s.fill(0, 85)
 			s.push()
 			s.translate(this.margin / 2, this.margin / 2 + this.rectSize)
 
@@ -63,7 +65,8 @@ export default {
 			this.dataArr.forEach((val, i) => {
 				s.vertex((i + 1) * this.interval, -(val * this.interval))
 			})
-			s.endShape()
+			s.vertex(this.interval * this.dataArr.length, 0)
+			s.endShape(s.CLOSE)
 
 			// points
 			s.fill(0)
@@ -77,10 +80,11 @@ export default {
 		setup(sk) {
 			this.sk = sk
 			const s = this.sk
+			// const myFont = s.loadFont('../assets/InputMonoCondensed-Light.ttf')
 
 			// draw borders
 			s.createCanvas(300, 300)
-			s.background(0, 0)
+			// s.background(255, 0, 0, 80)
 			s.rectMode(s.CENTER)
 			s.noFill()
 			s.stroke(0)
@@ -106,6 +110,17 @@ export default {
 					5,
 					-this.margin / 2 - i * this.interval
 				)
+			}
+
+			// draw numbers
+			// s.textFont(myFont)
+			s.textSize(12)
+			s.textAlign(s.CENTER)
+			for (let i = 0; i < 6; i++) {
+				s.text(i, this.interval * i, -this.margin / 2 + 18)
+			}
+			for (let i = 1; i < 6; i++) {
+				s.text(i, -12, -this.interval * i - this.margin / 2 + 4)
 			}
 			s.pop()
 

@@ -20,7 +20,7 @@ export default {
 			test: 0,
 			testWidth: 0,
 			sk: null,
-			s: 400,
+			s: 200,
 			values: [0.4, 0.2, 0.4],
 			polygonList: []
 		}
@@ -40,16 +40,18 @@ export default {
 			this.sk.createCanvas(500, 500)
 			this.init()
 
-			this.sk.background(255)
+			// this.sk.background(255)
 			this.sk.translate(50, 50)
 
-			this.sk.stroke(0)
+			this.sk.stroke(247, 244, 204)
+			this.sk.strokeWeight(8)
+			this.sk.fill(0)
 			console.log(this.polygonList)
 			console.log(this.values)
 
 			for (let poly of this.polygonList) {
 				this.sk.beginShape()
-				this.sk.fill(100, this.sk.random(155), 40, 40)
+				// this.sk.fill(100, this.sk.random(155), 40, 40)
 				for (let po of poly) {
 					this.sk.vertex(po.x * this.s, po.y * this.s)
 				}

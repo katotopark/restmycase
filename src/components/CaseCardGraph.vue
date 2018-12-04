@@ -33,7 +33,6 @@ export default {
 	},
 	watch: {
 		lobas() {
-			console.log('got lobas')
 			let values = Object.values(this.lobas)
 
 			let output = values.map(val => {
@@ -50,8 +49,9 @@ export default {
 			}
 		},
 		dataArr() {
-			console.log('data array received.', this.dataArr)
+			// console.log('data array received. drawing graph...')
 			this.drawGraph()
+			// console.log('graph drawn')
 		}
 	},
 	created() {
@@ -60,26 +60,8 @@ export default {
 		this.rectSizeX = this.canvasWidth * 0.9
 		this.rectSizeY = this.canvasHeight * 0.9
 	},
-	mounted() {
-		// let values = Object.values(this.lobas)
-		// let output = []
-		// let vals
-		//
-		// values.map(val => {
-		// 	vals = Object.values(val)
-		// 	vals.forEach(v => {
-		// 		output.push(v)
-		// 	})
-		// })
-		//
-		// this.dataArr = output
-	},
-	updated() {
-		// this.drawGraph()
-	},
 	methods: {
 		setup(sk) {
-			// const s = this.sk
 			this.sk = sk
 
 			// draw borders
@@ -139,24 +121,26 @@ export default {
 		},
 		drawGraph() {
 			this.sk.strokeWeight(2)
+			this.sk.fill(0, 85)
 			this.sk.push()
 			this.sk.translate(
 				this.sk.width / 2 - this.rectSizeX / 2,
 				this.sk.height / 2 + this.rectSizeY / 2
 			)
+			this.sk.fill(0, 85)
 			this.sk.beginShape()
 			this.sk.vertex(0, 0)
 			this.dataArr.forEach((val, i) => {
 				this.sk.vertex((i + 1) * this.intervalX, -val * this.intervalY)
 			})
-			this.sk.endShape()
+			this.sk.vertex(this.intervalX * this.dataArr.length, 0)
+			this.sk.endShape(this.sk.CLOSE)
 			this.sk.fill(0)
 			this.sk.noStroke()
 			// this.sk.strokeWeight(0.5)
 			this.dataArr.forEach((val, i) => {
-				this.sk.ellipse((i + 1) * this.intervalX, -(val * this.intervalY), 8, 8)
+				this.sk.ellipse((i + 1) * this.intervalX, -(val * this.intervalY), 6, 6)
 			})
-
 			this.sk.pop()
 		}
 	}

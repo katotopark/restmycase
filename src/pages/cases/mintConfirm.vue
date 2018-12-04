@@ -10,7 +10,9 @@
         <el-row v-else>
           <el-col :span="24" class="container">
             <el-row id="card">
-              <case-card :the-case="theCase"/>
+              <case-card 
+                :the-case="theCase"
+                :case-lobas="lobas"/>
             </el-row>
             <el-row class="text">
               <!-- <el-button plain>Go Meta!</el-button> -->
@@ -35,7 +37,8 @@ export default {
 	data() {
 		return {
 			theCase: {},
-			confirmed: false
+			confirmed: false,
+			lobas: {}
 		}
 	},
 	computed: {
@@ -43,7 +46,8 @@ export default {
 	},
 	watch: {
 		async txHash() {
-			await this.composeCaseCard()
+			this.theCase = await this.composeCaseCard()
+			console.log('result is ', this.theCase)
 		}
 	},
 	methods: {
@@ -51,18 +55,19 @@ export default {
 		async composeCaseCard() {
 			this.confirmed = true
 
-			const caseId = await this.getCaseId(this.ipfsHash)
+			let caseID = await this.getCaseId(this.ipfsHash)
 			let data = await this.caseHashToData(this.ipfsHash)
 			let parsedData = JSON.parse(data.toString('utf8'))
 
 			console.log('parsed data is', parsedData)
 
 			let theCase = Object.assign(parsedData, {
-				id: caseId
+				id: caseID
 			})
-			this.theCase = theCase
 
-			console.log('the case is', this.theCase)
+			// return theCase
+			this.lobas = theCase.lobas
+			return theCase
 		}
 	}
 }

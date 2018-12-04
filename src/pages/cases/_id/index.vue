@@ -28,9 +28,9 @@
             </el-row>
           </el-col>
         </el-row>
-        <el-row id="bottom" :gutter="20">
+        <el-row id="bottom" :gutter="5">
           <div ref="hiya">
-            <el-col id="mini-graph" :sm="12" :md="8">
+            <el-col :xs="24" :sm="12" :md="10" class="mini-graph">
               <el-row type="flex" justify="center">
                 <loba-graph
                   :lobas="lobas"
@@ -51,7 +51,7 @@
               </el-row>
             </el-col>
           </div>
-          <el-col :sm="12" :md="16">
+          <el-col :xs="24" :sm="12" :md="14">
             <case-card-metadata id="meta-data" :the-case="theCase"/>
           </el-col>
         </el-row>
@@ -162,11 +162,12 @@ img {
 	border: 2px solid black;
 	/* border-right: 0px; */
 }
-#mini-graph {
+.mini-graph {
 	margin-top: 50px;
-	transform: scale(0.9);
+	transform: scale(1);
+	border: 2px solid black;
 }
-#mini-graph div {
+.mini-graph div {
 	/* margin-left: 10px; */
 }
 
