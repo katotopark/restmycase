@@ -62,7 +62,7 @@ export default {
 			})
 			this.theCase = theCase
 
-			// console.log(this.theCase)
+			console.log('the case is', this.theCase)
 		}
 	}
 }

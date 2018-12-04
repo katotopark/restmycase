@@ -24,7 +24,7 @@
                   <p id="case-description">{{ theCase.caseDescription }}</p>
                 </el-row>
                 <el-row id="case-graph">
-                  <case-card-graph style="color: black;"/>
+                  <case-card-graph :lobas="lobas"/>
                 </el-row>
               </el-col>
             </el-row>
@@ -60,7 +60,8 @@ export default {
 	data() {
 		return {
 			fade: true,
-			dims: {}
+			dims: {},
+			lobas: {}
 		}
 	},
 	computed: {
@@ -71,6 +72,7 @@ export default {
 	mounted() {
 		this.dims.x = this.$refs.test.offsetWidth
 		this.dims.y = this.$refs.test.offsetHeight
+		this.lobas = this.theCase.lobas
 	},
 	methods: {
 		...mapActions(['buyCase']),
@@ -151,7 +153,7 @@ div.image {
 	color: black;
 }
 #case-graph {
-	background-color: black;
+	/* background-color: black; */
 	height: 100px;
 	margin-top: 10px;
 }

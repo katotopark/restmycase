@@ -8,9 +8,12 @@
       <el-col :sm="18" class="container">
         <el-row :gutter="10">
           <el-col id="top-left" :sm="24" :md="12">
-            <!-- <case-card :the-case="theCase" /> -->
             <img id="case-image" :src="theCase.caseImage">
-            <case-card-graph id="case-graph" style="background-color: black; height:200px;"/>
+            <div ref="graph">
+              <case-card-graph
+                id="case-graph"
+                :lobas="lobas"/>
+            </div>
           </el-col>
           <el-col id="top-right" :sm="24" :md="12">
             <el-row id="title">
@@ -29,13 +32,22 @@
           <div ref="hiya">
             <el-col id="mini-graph" :sm="12" :md="8">
               <el-row type="flex" justify="center">
-                <loba-graph class="loba-graph"/>
+                <loba-graph
+                  :lobas="lobas"
+                  group-val="A"
+                  class="loba-graph"/>
               </el-row>
               <el-row type="flex" justify="center">
-                <loba-graph class="loba-graph"/>
+                <loba-graph
+                  :lobas="lobas"
+                  group-val="B"
+                  class="loba-graph"/>
               </el-row>
               <el-row type="flex" justify="center">
-                <loba-graph class="loba-graph"/>
+                <loba-graph
+                  :lobas="lobas"
+                  group-val="C"
+                  class="loba-graph"/>
               </el-row>
             </el-col>
           </div>
@@ -69,7 +81,8 @@ export default {
 		return {
 			theCase: {},
 			metadata: '',
-			dim: 0
+			dim: 0,
+			lobas: {}
 		}
 	},
 	async created() {
@@ -83,10 +96,12 @@ export default {
 
 		this.metadata = Object.values(encodedData)
 		this.theCase = Object.assign(caseData, { id: caseId })
+		this.lobas = this.theCase.lobas
 	},
 	mounted() {
 		this.dim = this.$refs.hiya.clientHeight
 	},
+	updated() {},
 	methods: {
 		...mapActions(['getUsersCases', 'getCaseHash', 'caseHashToData'])
 	}

@@ -1,13 +1,163 @@
 <template>
-  <div>
-    <span style="color: white;">{{ msg }}</span>
-  </div>
+  <el-row type="flex" justify="center">
+    <vue-p5 v-on="{ setup, draw }"/>
+  </el-row>
 </template>
 <script>
+var components = {}
+if (process.client) {
+	const VueP5 = require('vue-p5')
+	components.VueP5 = VueP5
+}
+
 export default {
+	components: components,
+	props: {
+		lobas: {
+			required: true,
+			type: Object
+		}
+	},
 	data() {
 		return {
-			msg: 'hello from graph'
+			sk: null,
+			canvasWidth: 360,
+			canvasHeight: 120,
+			intervalX: 0,
+			intervalY: 0,
+			rectSizeX: 0,
+			rectSizeY: 0,
+			dataArr: [],
+			gotData: false
+		}
+	},
+	watch: {
+		lobas() {
+			console.log('got lobas')
+			let values = Object.values(this.lobas)
+
+			let output = values.map(val => {
+				let v = Object.values(val)
+				return v
+			})
+
+			for (let i in output) {
+				for (let j in output[i]) {
+					let res = output[i][j]
+					let float = parseFloat(res)
+					this.dataArr.push(float)
+				}
+			}
+		},
+		dataArr() {
+			console.log('data array received.', this.dataArr)
+			this.drawGraph()
+		}
+	},
+	created() {
+		this.intervalX = (this.canvasWidth * 0.9) / 15
+		this.intervalY = (this.canvasHeight * 0.9) / 5
+		this.rectSizeX = this.canvasWidth * 0.9
+		this.rectSizeY = this.canvasHeight * 0.9
+	},
+	mounted() {
+		// let values = Object.values(this.lobas)
+		// let output = []
+		// let vals
+		//
+		// values.map(val => {
+		// 	vals = Object.values(val)
+		// 	vals.forEach(v => {
+		// 		output.push(v)
+		// 	})
+		// })
+		//
+		// this.dataArr = output
+	},
+	updated() {
+		// this.drawGraph()
+	},
+	methods: {
+		setup(sk) {
+			// const s = this.sk
+			this.sk = sk
+
+			// draw borders
+			sk.createCanvas(this.canvasWidth, this.canvasHeight)
+			// sk.background(55)
+			sk.rectMode(sk.CENTER)
+			sk.noFill()
+			sk.stroke(0)
+			sk.strokeCap(sk.ROUND)
+			sk.strokeWeight(2)
+			sk.push()
+			sk.translate(sk.width / 2, sk.height / 2)
+			sk.rect(0, 0, this.rectSizeX, this.rectSizeY)
+			sk.pop()
+
+			// draw ticks
+			sk.stroke(0)
+			sk.strokeWeight(1.8)
+			sk.push()
+			sk.translate(
+				sk.width / 2 - this.rectSizeX / 2,
+				sk.height / 2 + this.rectSizeY / 2
+			)
+			// sk.rect(0, 0, 10, 10)
+			for (let i = 1; i < 15; i++) {
+				sk.line(i * this.intervalX, -5, i * this.intervalX, 0)
+			}
+			for (let i = 1; i < 5; i++) {
+				sk.line(0, -i * this.intervalY, 5, -i * this.intervalY)
+			}
+			sk.pop()
+
+			// draw dots
+			sk.stroke(0)
+			sk.strokeWeight(2)
+			sk.push()
+			sk.translate(
+				sk.width / 2 - this.rectSizeX / 2,
+				sk.height / 2 + this.rectSizeY / 2
+			)
+			for (let i = 1; i < 15; i++) {
+				for (let j = 1; j < 10; j++) {
+					sk.point(i * this.intervalX, -(j * this.intervalY))
+				}
+			}
+			sk.strokeWeight(1)
+			for (let i = 1; i < 30; i++) {
+				for (let j = 1; j < 20; j++) {
+					sk.point((i * this.intervalX) / 2, -((j * this.intervalY) / 2))
+				}
+			}
+			sk.pop()
+		},
+		draw() {
+			this.sk.noLoop()
+			// this.drawGraph()
+		},
+		drawGraph() {
+			this.sk.strokeWeight(2)
+			this.sk.push()
+			this.sk.translate(
+				this.sk.width / 2 - this.rectSizeX / 2,
+				this.sk.height / 2 + this.rectSizeY / 2
+			)
+			this.sk.beginShape()
+			this.sk.vertex(0, 0)
+			this.dataArr.forEach((val, i) => {
+				this.sk.vertex((i + 1) * this.intervalX, -val * this.intervalY)
+			})
+			this.sk.endShape()
+			this.sk.fill(0)
+			this.sk.noStroke()
+			// this.sk.strokeWeight(0.5)
+			this.dataArr.forEach((val, i) => {
+				this.sk.ellipse((i + 1) * this.intervalX, -(val * this.intervalY), 8, 8)
+			})
+
+			this.sk.pop()
 		}
 	}
 }
