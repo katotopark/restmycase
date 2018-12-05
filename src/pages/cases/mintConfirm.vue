@@ -10,12 +10,11 @@
         <el-row v-else>
           <el-col :span="24" class="container">
             <el-row id="card">
-              <case-card 
-                :the-case="theCase"
-                :case-lobas="lobas"/>
+              <case-card
+                v-if="theCase.lobas !== undefined"
+                :the-case="theCase"/>
             </el-row>
             <el-row class="text">
-              <!-- <el-button plain>Go Meta!</el-button> -->
               <case-card-metadata :the-case="theCase"/>
             </el-row>
           </el-col>
@@ -47,7 +46,6 @@ export default {
 	watch: {
 		async txHash() {
 			this.theCase = await this.composeCaseCard()
-			console.log('result is ', this.theCase)
 		}
 	},
 	methods: {
@@ -73,6 +71,9 @@ export default {
 }
 </script>
 <style scoped>
+.container {
+	margin-top: 20px;
+}
 .text {
 	/* max-width: 500px; */
 	/* word-wrap: break-word; */

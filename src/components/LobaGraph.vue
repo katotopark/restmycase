@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-p5 v-on="{ setup, draw }"/>
+    <vue-p5 v-on="{ setup, draw, preload }"/>
   </div>
 </template>
 <script>
@@ -30,7 +30,8 @@ export default {
 			rectSize: 250,
 			interval: 50,
 			sum: 0,
-			myFont: null
+			myFont: null,
+			fontIsReady: false
 		}
 	},
 	watch: {
@@ -40,10 +41,13 @@ export default {
 
 			this.dataArr = values.map(val => {
 				let float = parseFloat(val)
-				this.dataArr.push()
+
+				this.dataArr.push(float.toFixed(2))
 				this.sum += float
 				return float
 			})
+			this.sum = this.sum.toFixed(2)
+
 			console.log(
 				`For group ${this.groupVal} => data array is: [${
 					this.dataArr
@@ -77,10 +81,19 @@ export default {
 		}
 	},
 	methods: {
+		fontReady() {
+			console.log('font is ready, args', arguments)
+			this.fontIsReady = true
+		},
+		preload(sk) {
+			this.myFont = sk.loadFont(
+				'/_nuxt/fonts/InputMonoCondensed-Regular.b211fb8.ttf',
+				this.fontReady
+			)
+		},
 		setup(sk) {
 			this.sk = sk
 			const s = this.sk
-			// const myFont = s.loadFont('../assets/InputMonoCondensed-Light.ttf')
 
 			// draw borders
 			s.createCanvas(300, 300)
@@ -113,7 +126,7 @@ export default {
 			}
 
 			// draw numbers
-			// s.textFont(myFont)
+			s.textFont(this.myFont)
 			s.textSize(12)
 			s.textAlign(s.CENTER)
 			for (let i = 0; i < 6; i++) {
@@ -143,6 +156,8 @@ export default {
 			s.pop()
 		},
 		draw() {
+			// if (this.fontIsReady) {
+			// }
 			this.sk.noLoop()
 		}
 	}

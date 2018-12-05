@@ -1,28 +1,30 @@
 <template>
   <div ref="kaka">
-    <dissection-component/>
+    <el-col>
+      <vue-p5 v-on="{setup, draw}"/>
+    </el-col>
   </div>
 </template>
 <script>
-import DissectionComponent from '../components/DissectionComponent.vue'
-
 var components = {}
-components.DissectionComponent = DissectionComponent
+if (process.browser) {
+	const VueP5 = require('vue-p5')
+	components.VueP5 = VueP5
+}
 
 export default {
 	components: components,
 	data() {
 		return {
-			fakerImg: null,
 			test: 0,
 			testWidth: 0,
 			sk: null,
-			s: 200,
+			s: 100,
 			values: [0.4, 0.2, 0.4],
 			polygonList: []
 		}
-	}
-	/*	watch: {},
+	},
+	watch: {},
 	mounted() {
 		this.testWidth = this.$refs.kaka.offsetWidth
 	},
@@ -163,7 +165,7 @@ export default {
 			let val = origin.div(pointList.length)
 			return val
 		}
-	}*/
+	}
 }
 </script>
 <style scoped>

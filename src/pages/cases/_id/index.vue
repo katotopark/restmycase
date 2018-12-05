@@ -8,7 +8,11 @@
       <el-col :sm="18" class="container">
         <el-row :gutter="10">
           <el-col id="top-left" :sm="24" :md="12">
-            <img id="case-image" :src="theCase.caseImage">
+            <!-- <img id="case-image" :src="theCase.caseImage"> -->
+            <data-viz-component
+              :distance="tDistance"
+              :duration="tDuration"
+              :lobas="lobas"/>
             <div ref="graph">
               <case-card-graph
                 id="case-graph"
@@ -68,6 +72,7 @@ import HeaderComponent from '../../../components/HeaderComponent.vue'
 import CaseCardMetadata from '../../../components/CaseCardMetadata.vue'
 import CaseCardGraph from '../../../components/CaseCardGraph.vue'
 import LobaGraph from '../../../components/LobaGraph.vue'
+import DataVizComponent from '../../../components/DataVizComponent.vue'
 
 export default {
 	components: {
@@ -75,14 +80,17 @@ export default {
 		HeaderComponent,
 		CaseCardMetadata,
 		CaseCardGraph,
-		LobaGraph
+		LobaGraph,
+		DataVizComponent
 	},
 	data() {
 		return {
 			theCase: {},
 			metadata: '',
 			dim: 0,
-			lobas: {}
+			lobas: {},
+			tDuration: 0,
+			tDistance: 0
 		}
 	},
 	async created() {
@@ -96,7 +104,11 @@ export default {
 
 		this.metadata = Object.values(encodedData)
 		this.theCase = Object.assign(caseData, { id: caseId })
+
 		this.lobas = this.theCase.lobas
+
+		this.tDuration = parseFloat(this.theCase.tDuration)
+		this.tDistance = parseFloat(this.theCase.tDistance)
 	},
 	mounted() {
 		this.dim = this.$refs.hiya.clientHeight
@@ -165,7 +177,7 @@ img {
 .mini-graph {
 	margin-top: 50px;
 	transform: scale(1);
-	border: 2px solid black;
+	/* border: 2px solid black; */
 }
 .mini-graph div {
 	/* margin-left: 10px; */

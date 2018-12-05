@@ -2,9 +2,11 @@
   <el-row type="flex" justify="center">
     <el-col id="container">
       <div v-if="revealComponents">
-        <el-row id="case-id" type="flex" justify="center">
+        <el-row class="case-id" type="flex" justify="center">
           <h3>#{{ theCase.id }}</h3>
         </el-row>
+      </div>
+      <div>
         <el-row type="flex" justify="end" >
           <el-col id="case-class" :span="24">
             <h4>C.{{ theCase.caseClass }}</h4>
@@ -73,6 +75,11 @@ export default {
 		this.dims.x = this.$refs.test.offsetWidth
 		this.dims.y = this.$refs.test.offsetHeight
 
+		console.log(
+			`width is ${this.$refs.test.offsetWidth}; height is ${
+				this.$refs.test.offsetHeight
+			}`
+		)
 		this.lobas = this.theCase.lobas
 	},
 	methods: {
@@ -110,7 +117,7 @@ div.image {
 	border: 2px solid black;
 	/* background-color: black; */
 }
-#case-id {
+.case-id {
 	color: black;
 	/* background-color: rgb(247, 244, 204); */
 	font-size: 1.8rem;

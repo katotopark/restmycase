@@ -27,9 +27,6 @@ export default {
 			sk: null
 		}
 	},
-	mounted() {
-		console.log('data viz mounted. x:', this.x, 'y:', this.y)
-	},
 	methods: {
 		setup(sk) {
 			this.sk = sk
