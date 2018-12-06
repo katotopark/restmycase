@@ -4,10 +4,10 @@
     <el-col v-if="theCase === null" :span="12" :offset="6" class="container">
       <span class="large-text loading">Loading case...</span>
     </el-col>
-    <el-row v-else type="flex" justify="center">
-      <el-col :sm="18" class="container">
-        <el-row :gutter="10">
-          <el-col id="top-left" :sm="24" :md="12">
+    <el-row v-else :gutter="20" type="flex" justify="center">
+      <el-col :sm="18" :offset="0" class="container">
+        <el-row :gutter="10" type="flex" justify="center">
+          <el-col id="top-left" :sm="24" :md="14">
             <!-- <img id="case-image" :src="theCase.caseImage"> -->
             <data-viz-component
               :distance="tDistance"
@@ -19,15 +19,15 @@
                 :lobas="lobas"/>
             </div>
           </el-col>
-          <el-col id="top-right" :sm="24" :md="12">
+          <el-col id="top-right" :sm="24" :md="10">
             <el-row id="title">
               <el-col>
-                <p>_{{ theCase.caseName }}</p>
+                <p><span>NAME:</span> _{{ theCase.caseName }}</p>
               </el-col>
             </el-row>
             <el-row id="data">
-              <el-col v-for="elem in 4" :key="elem.key">
-                <p><span>NAME:</span> {{ theCase.caseDescription }}</p>
+              <el-col v-for="elem in 1" :key="elem.key">
+                <p><span>DESCRIPTION:</span> {{ theCase.caseDescription }}</p>
               </el-col>
             </el-row>
           </el-col>
@@ -61,7 +61,6 @@
         </el-row>
       </el-col>
     </el-row>
-
   </el-row>
 </template>
 
@@ -87,7 +86,7 @@ export default {
 		return {
 			theCase: {},
 			metadata: '',
-			dim: 0,
+			dims: {},
 			lobas: {},
 			tDuration: 0,
 			tDistance: 0
@@ -111,7 +110,11 @@ export default {
 		this.tDistance = parseFloat(this.theCase.tDistance)
 	},
 	mounted() {
-		this.dim = this.$refs.hiya.clientHeight
+		// this.dim = this.$refs.hiya.clientHeight
+		this.dims = {
+			x: 330,
+			y: 240
+		}
 	},
 	updated() {},
 	methods: {
@@ -123,12 +126,12 @@ export default {
 .container {
 	border: 2px solid black;
 	margin-top: 40px;
-	/* box-shadow: 4px 4px 1px; */
+	box-shadow: 2px 2px 4px;
 }
 
 #top-left {
 	min-height: 100%;
-	margin-top: 60px;
+	margin-top: 120px;
 	/* border: 2px solid black; */
 	transform: scale(0.9);
 }
@@ -143,15 +146,20 @@ img {
 	/* margin-left: 20px; */
 	/* margin-bottom: 20px; */
 }
+#case-graph {
+	margin-top: 50px;
+	padding: 50px 0px;
+}
 #top-right {
-	margin-top: 150px;
+	margin-top: 250px;
+	margin-bottom: 50px;
 }
 #title {
-	font-size: 2.1rem;
-	font-family: InputMonoCondensed;
+	font-size: 3rem;
+	font-family: InputMonoCondensedLight;
 	color: black;
 	margin-left: 5px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	hyphens: auto;
 	display: block;
 }
@@ -165,6 +173,8 @@ img {
 	font-family: InputMonoCondensedItalic;
 	/* border-bottom: 2px solid black; */
 	margin-left: 15px;
+	padding: 10px;
+	font-size: 1.5rem;
 }
 
 #meta-data {

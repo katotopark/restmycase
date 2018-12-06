@@ -36,14 +36,15 @@ export default {
 			this.sk = sk
 		},
 		draw() {
-			this.sk.createCanvas(500, 500)
+			this.sk.createCanvas(300, 50)
 			this.init()
+			this.sk.frameRate(1)
 
-			// this.sk.background(255)
-			this.sk.translate(50, 50)
+			this.sk.background(255)
+			// this.sk.translate(50, 50)
 
 			this.sk.stroke(247, 244, 204)
-			this.sk.strokeWeight(8)
+			this.sk.strokeWeight(2)
 			this.sk.fill(0)
 			console.log(this.polygonList)
 			console.log(this.values)
@@ -56,15 +57,15 @@ export default {
 				}
 				this.sk.endShape(this.sk.CLOSE)
 			}
-			this.sk.noLoop()
+			// this.sk.noLoop()
 		},
 		init() {
 			this.polygonList = []
 			let list = []
 
-			let vec1 = this.sk.createVector(0, 1)
-			let vec2 = this.sk.createVector(1, 1)
-			let vec3 = this.sk.createVector(1, 0)
+			let vec1 = this.sk.createVector(0, 0.5)
+			let vec2 = this.sk.createVector(3, 0.5)
+			let vec3 = this.sk.createVector(3, 0)
 			let vec4 = this.sk.createVector(0, 0)
 
 			list.push(vec1)
@@ -88,7 +89,10 @@ export default {
 			let p1 = this.randomPointOnLine(a.x, a.y, b.x, b.y)
 			poly.push(p1)
 			pointList.push(p1)
-			this.sortCCW(pointList, p1)
+
+			let r = this.sk.floor(this.sk.random(2)) == 0 ? -1 : 1
+
+			this.sort(pointList, p1, r)
 
 			let value = this.values[d]
 
@@ -141,15 +145,15 @@ export default {
 			arr.push.apply(arr, arr.splice(0, count))
 			return arr
 		},
-		sortCCW(pointList, first) {
+		sort(pointList, first, direction) {
 			let m = this.calculateOrigin(pointList)
 
 			pointList.sort((o1, o2) => {
 				let angle1 = Math.atan2(o1.y - m.y, o1.x - m.x)
 				let angle2 = Math.atan2(o2.y - m.y, o2.x - m.x)
 				//ccw
-				if (angle1 < angle2) return 1
-				else if (angle2 < angle1) return -1
+				if (angle1 < angle2) return 1 * direction
+				else if (angle2 < angle1) return -1 * direction
 				return 0
 			})
 

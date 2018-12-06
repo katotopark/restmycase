@@ -1,7 +1,7 @@
 <template>
   <el-row :gutter="10">
     <el-col :span="12">
-      <el-button @click="$emit('show-details')">Fetch Case</el-button>
+      <el-button @click="$emit('show-details')">View Case</el-button>
     </el-col>
     <el-col :span="12">
       <el-button @click="$emit('buy-case')">Buy Case</el-button>

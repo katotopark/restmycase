@@ -20,6 +20,11 @@
               <el-col id="case-img" :span="20" :offset="2">
                 <div ref="test" class="image">
                   <img :src="theCase.caseImage">
+                  <!-- <data-viz-component
+                    :dimensions="dims"
+                    :lobas="lobas"
+                    :duration="tDuration"
+                    :distance="tDistance"/> -->
                 </div>
                 <el-row>
                   <span id="case-name">_{{ theCase.caseName }}</span>
@@ -42,6 +47,7 @@
 <script>
 import CaseCardMetadata from './CaseCardMetadata.vue'
 import CaseCardDataViz from './CaseCardDataViz.vue'
+import DataVizComponent from './DataVizComponent.vue'
 import CaseCardGraph from './CaseCardGraph.vue'
 import CaseCardButtons from './CaseCardButtons.vue'
 import { mapActions } from 'vuex'
@@ -51,7 +57,8 @@ export default {
 		CaseCardMetadata,
 		CaseCardButtons,
 		CaseCardDataViz,
-		CaseCardGraph
+		CaseCardGraph,
+		DataVizComponent
 	},
 	props: {
 		theCase: {
@@ -63,7 +70,9 @@ export default {
 		return {
 			fade: true,
 			dims: {},
-			lobas: {}
+			lobas: {},
+			tDuration: 0,
+			tDistance: 0
 		}
 	},
 	computed: {
@@ -72,6 +81,11 @@ export default {
 		}
 	},
 	async mounted() {
+		// props for the child components
+		this.lobas = this.theCase.lobas
+		this.tDuration = parseFloat(this.theCase.tDuration)
+		this.distance = parseFloat(this.theCase.tDistance)
+
 		this.dims.x = this.$refs.test.offsetWidth
 		this.dims.y = this.$refs.test.offsetHeight
 
@@ -80,7 +94,6 @@ export default {
 				this.$refs.test.offsetHeight
 			}`
 		)
-		this.lobas = this.theCase.lobas
 	},
 	methods: {
 		...mapActions(['buyCase']),
@@ -166,6 +179,6 @@ div.image {
 	margin-top: 10px;
 }
 #case-buttons {
-	margin: 0px auto 30px auto;
+	margin: 10px auto 30px auto;
 }
 </style>

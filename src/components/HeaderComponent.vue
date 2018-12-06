@@ -9,22 +9,22 @@
           </el-menu-item>
         </el-col>
         <!-- <el-col :span="6">
-          <el-menu-item index="1">
-            <el-button type=""/>
+          <el-menu-item index="0">
+            <el-button><dissection-component/></el-button>
           </el-menu-item>
         </el-col>
         <el-col :span="6">
-          <el-menu-item index="2">
+          <el-menu-item index="1">
             <el-button type="">AQP</el-button>
           </el-menu-item>
         </el-col>
         <el-col :span="6">
-          <el-menu-item index="3">
+          <el-menu-item index="2">
             <el-button type="">ALP</el-button>
           </el-menu-item>
         </el-col>
         <el-col :span="6">
-          <el-menu-item index="4">
+          <el-menu-item index="3">
             <el-button type="" >About</el-button>
           </el-menu-item>
         </el-col> -->

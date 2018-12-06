@@ -82,7 +82,7 @@ export default {
 	},
 	methods: {
 		fontReady() {
-			console.log('font is ready, args', arguments)
+			// console.log('font is ready, args', arguments)
 			this.fontIsReady = true
 		},
 		preload(sk) {
