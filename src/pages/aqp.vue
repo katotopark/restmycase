@@ -4,10 +4,10 @@
     <el-row type="flex" justify="center">
       <el-col :sm="16" :md="12">
         <error-component :err-arr="errors"/>
-        <text-component :text-strings="textString"/>
+        <text-component :text-strings="textString" :style-obj="textStyle"/>
         <new-input-component id="new-input" :data-obj.sync="newQ" :select-options="qGroupsArr" :input-props="inputProps" @catch-input-a="onCatchTitle" @submit="onSubmit" @clear="onClear" @catch-select="onCatchGroup"/>
         <el-select v-model="filterGroup" clearable placeholder="Filter by group" @change="filterByGroup">
-          <el-option v-for="item in qGroupsArr" :key="item.value" :value="item.value" :label="`${item.value}: ${item.label}`"/>
+          <el-option v-for="item in qGroupsArr" :key="item.value" :value="item.value" :label="item.label"/>
         </el-select>
         <table-component id="questions-table" :data-obj="qArr" :props-arr="tableProps" @handle-click="handleClick"/>
       </el-col>
@@ -37,8 +37,8 @@ export default {
 			styleObj: 'height: 50px;',
 			tableProps: [
 				{ value: 'value', width: '' },
-				{ value: 'group', width: '' },
-				{ value: 'voteCount' }
+				{ value: 'group', width: '80' },
+				{ value: 'voteCount', width: '100' }
 			],
 			inputProps: {
 				inputA: 'title',
@@ -55,7 +55,7 @@ export default {
 				},
 				{
 					value: 'C',
-					label: 'individual'
+					label: 'administered'
 				}
 			],
 			newQ: {
@@ -73,8 +73,14 @@ export default {
 			qSubmitted: false,
 			errors: [],
 			qArr: [],
-
-			filterGroup: ''
+			filterGroup: '',
+			textStyle: {
+				fontFamily: 'InputMonoCondensedLightItalic',
+				fontSize: '1rem',
+				marginTop: '20px',
+				marginBottom: '5px',
+				wordWrap: 'breakword'
+			}
 		}
 	},
 	computed: {

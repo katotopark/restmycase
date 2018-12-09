@@ -1,7 +1,14 @@
 <template>
   <div>
-    <vue-p5 v-on="{ setup, draw, preload }"/>
+    <el-row type="flex" justify="center">
+      <vue-p5 v-on="{ setup, draw, preload }"/>
+    </el-row>
+    <el-row type="flex" justify="center">
+      <h4>{{ groupVal }}: {{ dataArr }}</h4>
+    </el-row>
   </div>
+
+
 </template>
 <script>
 var components = {}
@@ -53,6 +60,7 @@ export default {
 					this.dataArr
 				}], sum is: ${this.sum}`
 			)
+			console.log('number of lobas:', this.dataArr.length)
 			return this.dataArr
 		},
 		dataArr() {
@@ -164,4 +172,11 @@ export default {
 }
 </script>
 <style scoped>
+h4 {
+	font-family: InputMonoCondensedLight;
+	width: 100%;
+	background-color: black;
+	color: white;
+	padding: 4px 6px;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <el-table id="container" :data="dataObj" @cell-mouse-enter="mouseEnter" @cell-mouse-leave="mouseLeave">
+  <el-table id="container" :data="dataObj">
     <el-table-column label="#" width="40" type="index"/>
     <el-table-column v-for="item in propsArr" :label="item.value.toUpperCase()" :key="item.key" :prop="item.value" :width="item.width"/>
     <el-table-column
@@ -32,12 +32,12 @@ export default {
 		}
 	},
 	methods: {
-		mouseEnter(row) {
-			console.log('mouse entered: ', row)
-		},
-		mouseLeave(row) {
-			console.log('mouse left: ', row)
-		}
+		// mouseEnter(row) {
+		// 	console.log('mouse entered: ', row)
+		// },
+		// mouseLeave(row) {
+		// 	console.log('mouse left: ', row)
+		// }
 	}
 }
 </script>

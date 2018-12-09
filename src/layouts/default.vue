@@ -100,7 +100,12 @@ textarea {
 	border-bottom: 0px !important;
 }
 
-.el-table__body tr:not(:nth-last-child(2)),
+.el-table__body {
+	border-top: 0px;
+	border-bottom: 0px;
+}
+
+.el-table__body,
 .el-table__body td {
 	background-color: rgb(247, 244, 204) !important;
 	color: black !important;
@@ -115,11 +120,34 @@ textarea {
 	color: white !important;
 	background-color: black !important;
 	border-bottom: 0px;
+	border-top: 0px;
+}
+
+.el-table__row,
+.hover-row,
+.el-select-dropdown {
+	border: 0px;
 }
 
 .el-table__header tr,
 .el-table__header th {
 	color: white !important;
 	background-color: black !important;
+}
+.el-select-dropdown__item {
+	background-color: white;
+	color: black;
+}
+
+.el-scrollbar__view,
+.el-select-dropdown__list {
+	padding: 0px;
+	border: 2px solid black;
+}
+.el-select-dropdown__item.selected,
+.el-select-dropdown__item.hover {
+	color: white;
+	background-color: black;
+	font-family: InputMonoCondensedLightItalic;
 }
 </style>

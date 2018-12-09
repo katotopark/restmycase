@@ -7,8 +7,8 @@
       </el-aside>
       <el-main>
         <el-row :gutter="10">
-          <el-col v-for="(elem) in cases" ref="test" :md="12" :sm="24" :key="elem.id">
-            <case-card id="case-card" :the-case="elem"/>
+          <el-col v-for="(elem, i) in cases" ref="test" :md="12" :sm="24" :key="elem.id">
+            <case-card id="case-card" :the-case="elem" :index="i"/>
           </el-col>
         </el-row>
       </el-main>

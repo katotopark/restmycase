@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!-- <dissection-component/> -->
     <vue-p5 v-on="{ setup, draw }"/>
-
   </div>
 </template>
 <script>
@@ -34,6 +32,7 @@ export default {
 	data() {
 		return {
 			sk: null,
+			skCanvas: null,
 			rectSize: 100,
 			tDuration: 0,
 			tDistance: 0,
@@ -93,12 +92,6 @@ export default {
 			})
 			console.log('the total area is: ', this.totalArea)
 
-			console.log(
-				`area a => ${this.areaA}; area b => ${this.areaB}; area c => ${
-					this.areaC
-				}`
-			)
-
 			const locOutput = this.mapLocations(
 				this.sk,
 				this.tDistance,
@@ -114,7 +107,7 @@ export default {
 	methods: {
 		setup(sk) {
 			this.sk = sk
-			this.sk.createCanvas(330, 240)
+			this.skCanvas = this.sk.createCanvas(330, 240)
 			this.sk.rectMode(sk.CENTER)
 			this.sk.noFill()
 			this.sk.stroke(0)
@@ -123,6 +116,8 @@ export default {
 		},
 		draw() {
 			this.sk.noLoop()
+			console.log(this.skCanvas.canvas)
+			// return this.skCanvas.canvas.toDataURL('image/jpeg')
 		},
 		drawStuff(locOutput) {
 			this.init()
@@ -132,16 +127,16 @@ export default {
 			// 	(this.rectSize / 3) * 2,
 			// 	this.rectSize + this.rectSize / 4
 			// )
-			console.log('locOutput is', locOutput)
+			// console.log('locOutput is', locOutput)
 			// this.sk.translate(0, 0)
 
 			this.sk.stroke(247, 244, 204)
 
 			// this.sk.stroke(255, 0, 0)
-			this.sk.strokeWeight(3)
+			this.sk.strokeWeight(5)
 			this.sk.fill(0)
-			console.log(this.polygonList)
-			console.log('values are: ', this.values)
+			// console.log(this.polygonList)
+			// console.log('values are: ', this.values)
 
 			this.sk.push()
 			this.sk.translate(locOutput.x, locOutput.y)
@@ -326,7 +321,6 @@ export default {
 			)
 			output.x = parseFloat(distance.toFixed(2))
 			output.y = parseFloat(duration.toFixed(2))
-			console.log('pixel locations are: ', output)
 			return output
 		},
 		mapAreas(sk, values) {
@@ -337,11 +331,13 @@ export default {
 				result = parseFloat(result)
 				return result
 			})
-			console.log('the surface areas are: ', this.values)
 			return this.values
 		}
 	}
 }
 </script>
 <style scoped>
+div {
+	/* display: none; */
+}
 </style>

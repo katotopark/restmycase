@@ -1,13 +1,13 @@
 <template>
   <div v-if="byteSort.length > 0" :style="styleObj" class="content">
     <el-row v-if="theCase" id="transition" >
+      <div style="background-color: black; width:100%; height:3rem;"/>
       <el-col :span="22" :offset="1">
         <el-row>
           <div ref="dataRef">
             <p><span>{{ byteSort }}</span></p>
           </div>
         </el-row>
-
       </el-col>
       <el-col :span="24">
         <el-row>

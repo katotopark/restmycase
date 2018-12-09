@@ -4,7 +4,7 @@
     <el-row type="flex" justify="center">
       <el-col :sm="16" :md="12">
         <error-component :err-arr="errors"/>
-        <text-component :text-strings="textString"/>
+        <text-component :text-strings="textString" :style-obj="textStyle"/>
         <new-input-component id="new-input" :data-obj="newLoc" :select-options="locClassArr" :input-props="inputProps" @catch-input-a="onCatchName" @catch-input-b="onCatchAddress" @catch-select="onCatchClass" @submit="onSubmit" @clear="onClear"/>
         <table-component :props-arr="tableProps" :data-obj="locArr" @handle-click="handleClick"/>
       </el-col>
@@ -32,12 +32,12 @@ export default {
 	data() {
 		return {
 			textString:
-				"ALP is an address pool for institutional locations. It stands for 'Autonomous Location Pool'. Here, you can log a new location or vote for one on the list.",
+				"ALP is a collectively run pool of institutional locations. It stands for 'Autonomous Location Pool'. Here, you can log a new location or vote for one on the list.",
 			tableProps: [
-				{ value: 'name', width: '100' },
+				{ value: 'name', width: '' },
 				{ value: 'address', width: '' },
-				{ value: 'class' },
-				{ value: 'voteCount' }
+				{ value: 'class', width: '80' },
+				{ value: 'voteCount', width: '100' }
 			],
 			inputProps: {
 				inputA: 'name',
@@ -81,7 +81,14 @@ export default {
 			},
 			voted: false,
 			locSubmitted: false,
-			errors: []
+			errors: [],
+			textStyle: {
+				fontFamily: 'InputMonoCondensedLightItalic',
+				fontSize: '1rem',
+				marginTop: '20px',
+				marginBottom: '5px',
+				wordWrap: 'breakword'
+			}
 		}
 	},
 	computed: {

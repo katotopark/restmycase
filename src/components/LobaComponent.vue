@@ -37,7 +37,7 @@ export default {
 		}
 	},
 	created() {
-		this.fakeSub = Faker.lorem.sentences(3)
+		this.fakeSub = Faker.lorem.sentences(1)
 	},
 	methods: {
 		handleClick(e) {

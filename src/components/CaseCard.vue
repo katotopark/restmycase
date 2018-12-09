@@ -3,7 +3,7 @@
     <el-col id="container">
       <div v-if="revealComponents">
         <el-row class="case-id" type="flex" justify="center">
-          <h3>#{{ theCase.id }}</h3>
+          <h3>#{{ index + 1 }}</h3>
         </el-row>
       </div>
       <div>
@@ -31,7 +31,7 @@
                   <p id="case-description">{{ theCase.caseDescription }}</p>
                 </el-row>
                 <el-row id="case-graph">
-                  <case-card-graph :lobas="lobas"/>
+                  <case-card-graph :lobas="lobas" :dimensions="dims"/>
                 </el-row>
               </el-col>
             </el-row>
@@ -64,13 +64,22 @@ export default {
 		theCase: {
 			required: true,
 			type: Object
+		},
+		index: {
+			type: Number,
+			required: false,
+			default: 0
 		}
 	},
 	data() {
 		return {
 			fade: true,
-			dims: {},
+			dims: {
+				x: 360,
+				y: 120
+			},
 			lobas: {},
+			// lobaCounter: 0,
 			tDuration: 0,
 			tDistance: 0
 		}
@@ -86,14 +95,21 @@ export default {
 		this.tDuration = parseFloat(this.theCase.tDuration)
 		this.distance = parseFloat(this.theCase.tDistance)
 
-		this.dims.x = this.$refs.test.offsetWidth
-		this.dims.y = this.$refs.test.offsetHeight
+		// this.dims.x = this.$refs.test.offsetWidth
+		// this.dims.y = this.$refs.test.offsetHeight
 
 		console.log(
 			`width is ${this.$refs.test.offsetWidth}; height is ${
 				this.$refs.test.offsetHeight
 			}`
 		)
+		// this.lobaCounter = 1
+		// for (let i in this.lobas) {
+		// 	for (let j in this.lobas[i]) {
+		// 		console.log(j)
+		// 		this.lobaCounter++
+		// 	}
+		// }
 	},
 	methods: {
 		...mapActions(['buyCase']),
@@ -114,7 +130,7 @@ export default {
 .case-card {
 	background-color: rgb(247, 244, 204);
 	border: 2px solid black;
-	height: 500px;
+	height: 550px;
 	width: 100%;
 	margin-bottom: 8px;
 }
@@ -176,7 +192,7 @@ div.image {
 #case-graph {
 	/* background-color: black; */
 	height: 100px;
-	margin-top: 10px;
+	margin-top: 25px;
 }
 #case-buttons {
 	margin: 10px auto 30px auto;

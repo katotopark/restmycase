@@ -11,12 +11,13 @@ const _644a25be = () => import('../src/pages/about.vue' /* webpackChunkName: "pa
 const _76f9e154 = () => import('../src/pages/aqp.vue' /* webpackChunkName: "pages/aqp" */).then(m => m.default || m)
 const _46bfe9d7 = () => import('../src/pages/cases.vue' /* webpackChunkName: "pages/cases" */).then(m => m.default || m)
 const _0895731a = () => import('../src/pages/cases/index.vue' /* webpackChunkName: "pages/cases/index" */).then(m => m.default || m)
-const _2aa49846 = () => import('../src/pages/cases/mintConfirm.vue' /* webpackChunkName: "pages/cases/mintConfirm" */).then(m => m.default || m)
-const _8e50838e = () => import('../src/pages/cases/loba3.vue' /* webpackChunkName: "pages/cases/loba3" */).then(m => m.default || m)
-const _8e88e192 = () => import('../src/pages/cases/loba1.vue' /* webpackChunkName: "pages/cases/loba1" */).then(m => m.default || m)
-const _2a75f080 = () => import('../src/pages/cases/caseNaming.vue' /* webpackChunkName: "pages/cases/caseNaming" */).then(m => m.default || m)
-const _8e6cb290 = () => import('../src/pages/cases/loba2.vue' /* webpackChunkName: "pages/cases/loba2" */).then(m => m.default || m)
+const _8c6672ac = () => import('../src/pages/cases/start.vue' /* webpackChunkName: "pages/cases/start" */).then(m => m.default || m)
 const _8744c30e = () => import('../src/pages/cases/lobas.vue' /* webpackChunkName: "pages/cases/lobas" */).then(m => m.default || m)
+const _8e6cb290 = () => import('../src/pages/cases/loba2.vue' /* webpackChunkName: "pages/cases/loba2" */).then(m => m.default || m)
+const _2a75f080 = () => import('../src/pages/cases/caseNaming.vue' /* webpackChunkName: "pages/cases/caseNaming" */).then(m => m.default || m)
+const _8e88e192 = () => import('../src/pages/cases/loba1.vue' /* webpackChunkName: "pages/cases/loba1" */).then(m => m.default || m)
+const _8e50838e = () => import('../src/pages/cases/loba3.vue' /* webpackChunkName: "pages/cases/loba3" */).then(m => m.default || m)
+const _2aa49846 = () => import('../src/pages/cases/mintConfirm.vue' /* webpackChunkName: "pages/cases/mintConfirm" */).then(m => m.default || m)
 const _41397402 = () => import('../src/pages/cases/_id.vue' /* webpackChunkName: "pages/cases/_id" */).then(m => m.default || m)
 const _fa291df6 = () => import('../src/pages/cases/_id/index.vue' /* webpackChunkName: "pages/cases/_id/index" */).then(m => m.default || m)
 const _24da7034 = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
@@ -119,24 +120,14 @@ export function createRouter () {
 					name: "cases"
 				},
 				{
-					path: "mintConfirm",
-					component: _2aa49846,
-					name: "cases-mintConfirm"
+					path: "start",
+					component: _8c6672ac,
+					name: "cases-start"
 				},
 				{
-					path: "loba3",
-					component: _8e50838e,
-					name: "cases-loba3"
-				},
-				{
-					path: "loba1",
-					component: _8e88e192,
-					name: "cases-loba1"
-				},
-				{
-					path: "caseNaming",
-					component: _2a75f080,
-					name: "cases-caseNaming"
+					path: "lobas",
+					component: _8744c30e,
+					name: "cases-lobas"
 				},
 				{
 					path: "loba2",
@@ -144,9 +135,24 @@ export function createRouter () {
 					name: "cases-loba2"
 				},
 				{
-					path: "lobas",
-					component: _8744c30e,
-					name: "cases-lobas"
+					path: "caseNaming",
+					component: _2a75f080,
+					name: "cases-caseNaming"
+				},
+				{
+					path: "loba1",
+					component: _8e88e192,
+					name: "cases-loba1"
+				},
+				{
+					path: "loba3",
+					component: _8e50838e,
+					name: "cases-loba3"
+				},
+				{
+					path: "mintConfirm",
+					component: _2aa49846,
+					name: "cases-mintConfirm"
 				},
 				{
 					path: ":id",

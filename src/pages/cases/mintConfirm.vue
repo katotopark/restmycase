@@ -9,10 +9,14 @@
         </el-row>
         <el-row v-else>
           <el-col :span="24" class="container">
-            <el-row id="card">
-              <case-card
-                v-if="theCase.lobas !== undefined"
-                :the-case="theCase"/>
+
+            <el-row type="flex" justify="center" class="card">
+              <el-col :span="16">
+                <case-card
+                  v-if="propCheck"
+                  :the-case="theCase"/>
+                <el-button @click="handleClick">View Case</el-button>
+              </el-col>
             </el-row>
             <el-row class="text">
               <case-card-metadata :the-case="theCase"/>
@@ -37,7 +41,8 @@ export default {
 		return {
 			theCase: {},
 			confirmed: false,
-			lobas: {}
+			lobas: {},
+			propCheck: false
 		}
 	},
 	computed: {
@@ -46,6 +51,23 @@ export default {
 	watch: {
 		async txHash() {
 			this.theCase = await this.composeCaseCard()
+		},
+		async theCase() {
+			console.log('got case: ', this.theCase)
+			let lobas = await this.theCase.lobas
+			let distance = await this.theCase.tDistance
+			let duration = await this.theCase.tDuration
+
+			if (
+				lobas !== undefined &&
+				distance !== undefined &&
+				duration !== undefined
+			) {
+				this.propCheck = true
+				console.log('prop check: ', this.propCheck)
+			} else {
+				this.propCheck = false
+			}
 		}
 	},
 	methods: {
@@ -66,6 +88,15 @@ export default {
 			// return theCase
 			this.lobas = theCase.lobas
 			return theCase
+		},
+		handleClick() {
+			console.log('button clicked')
+			let id = this.theCase.id
+			if (id !== null) {
+				this.$router.push(`/cases/${id}`)
+			} else {
+				console.log('no id.')
+			}
 		}
 	}
 }
@@ -81,21 +112,29 @@ export default {
 	color: black;
 	margin-bottom: 50px;
 }
-#card {
+.card {
 	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 }
 .el-button {
 	border-radius: 0px;
-	border: 0px;
+	font-family: InputMonoCondensed;
+	font-size: 1.1rem;
+	padding: 8px;
+	background-color: rgb(247, 244, 204);
+	color: black;
+	border: 2px solid black;
 	width: 100%;
 	height: 4rem;
-	font-family: inherit;
-	font-size: 1rem;
+	margin-top: 10px;
+	display: block;
+	white-space: normal !important;
+	word-wrap: break-word;
 }
 .el-button:hover,
 .el-button:focus {
 	background: black;
 	color: white;
+	font-family: InputMonoCondensedItalic;
 }
 </style>

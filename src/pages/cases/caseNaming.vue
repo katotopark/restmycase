@@ -1,6 +1,6 @@
 <template>
   <el-row type="flex" justify="center">
-    <el-col :span="22" :offset="1">
+    <el-col :span="12">
       <el-row>
         <error-component :err-arr="errors"/>
       </el-row>
@@ -39,7 +39,7 @@
           </el-row>
           <el-row class="input-area" type="flex" justify="center">
             <el-col :span="22">
-              <el-select v-model="caseClass" :placeholder="caseClass.label" clearable @change="handleChange">
+              <el-select v-model="caseClass" :placeholder="caseClass.label" @change="handleChange">
                 <el-option v-for="loc in locClassArr" :key="loc.value" :value="loc.value" :label="`${loc.label}`"/>
               </el-select>
             </el-col>
@@ -56,16 +56,23 @@
       </el-row>
     </el-col>
     <case-card-data-viz ref="caseCardDataViz" :x="417" :y="240"/>
+    <!-- <data-viz-component
+      ref="caseCardDataViz"
+      :lobas="lobas"
+      :distance="tDistance"
+      :duration="tDuration"/> -->
   </el-row>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import CaseCardDataViz from '../../components/CaseCardDataViz.vue'
+import DataVizComponent from '../../components/DataVizComponent.vue'
 import ErrorComponent from '../../components/ErrorComponent.vue'
 
 export default {
 	components: {
 		CaseCardDataViz,
+		DataVizComponent,
 		ErrorComponent
 	},
 	data() {
@@ -96,16 +103,33 @@ export default {
 			],
 			caseClass: '',
 			caseClassOutput: '',
-			textStrings: ['Name it.', 'Describe it.', 'Classify it.'],
-			errors: []
+			errors: [],
+			tDistance: 0,
+			tDuration: 0,
+			lobas: {}
 		}
 	},
-	computed: {},
+	computed: {
+		...mapState(['formObj'])
+	},
 	methods: {
 		...mapActions(['describeCase', 'randomNum', 'mintComposed']),
 		async onSubmit() {
 			this.checkInput()
 			if (this.errors.length === 0) {
+				this.lobas = this.formObj.lobas
+				this.tDuration = parseFloat(this.formObj.tDuration)
+				this.tDistance = parseFloat(this.formObj.tDistance)
+
+				console.log(
+					`got prop data: distance => ${this.tDistance}; duration => ${
+						this.tDuration
+					}`
+				)
+				console.log('lobas are ', this.lobas)
+				// const boundDrawingMethod = this.$refs.caseCardDataViz.draw.bind(
+				// 	this.$refs.caseCardDataViz
+				// )
 				const boundDrawingMethod = this.$refs.caseCardDataViz.draw.bind(
 					this.$refs.caseCardDataViz
 				)
@@ -176,7 +200,7 @@ div.el-textarea:focus {
 	font-size: 1.1rem;
 	background-color: rgb(247, 244, 204);
 	color: black;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 .el-button:hover {
 	background: black;

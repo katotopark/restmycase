@@ -16,6 +16,10 @@ export default {
 		lobas: {
 			required: true,
 			type: Object
+		},
+		dimensions: {
+			type: Object,
+			required: true
 		}
 	},
 	data() {
@@ -28,7 +32,11 @@ export default {
 			rectSizeX: 0,
 			rectSizeY: 0,
 			dataArr: [],
-			gotData: false
+			gotData: false,
+			defaultDims: {
+				x: 360,
+				y: 120
+			}
 		}
 	},
 	watch: {
@@ -54,18 +62,17 @@ export default {
 			// console.log('graph drawn')
 		}
 	},
-	created() {
-		this.intervalX = (this.canvasWidth * 0.9) / 15
-		this.intervalY = (this.canvasHeight * 0.9) / 5
-		this.rectSizeX = this.canvasWidth * 0.9
-		this.rectSizeY = this.canvasHeight * 0.9
-	},
+	created() {},
 	methods: {
 		setup(sk) {
 			this.sk = sk
+			this.rectSizeX = this.dimensions.x * 0.9
+			this.rectSizeY = this.dimensions.y * 0.9
+			this.intervalX = (this.dimensions.x * 0.9) / 15
+			this.intervalY = (this.dimensions.y * 0.9) / 5
 
 			// draw borders
-			sk.createCanvas(this.canvasWidth, this.canvasHeight)
+			sk.createCanvas(this.dimensions.x, this.dimensions.y)
 			// sk.background(55)
 			sk.rectMode(sk.CENTER)
 			sk.noFill()
@@ -139,7 +146,12 @@ export default {
 			this.sk.noStroke()
 			// this.sk.strokeWeight(0.5)
 			this.dataArr.forEach((val, i) => {
-				this.sk.ellipse((i + 1) * this.intervalX, -(val * this.intervalY), 6, 6)
+				this.sk.ellipse(
+					(i + 1) * this.intervalX,
+					-(val * this.intervalY),
+					this.rectSizeX / 60,
+					this.rectSizeX / 60
+				)
 			})
 			this.sk.pop()
 		}

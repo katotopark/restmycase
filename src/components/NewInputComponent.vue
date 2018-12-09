@@ -49,13 +49,13 @@
           </el-col>
         </el-row>
         <el-row class="input-label">
-          <h2>_{{ inputProps.select.toUpperCase() }}</h2>
+          <h2>_{{ inputProps.select.toUpperCase() }}<span v-if="showLabel && labelString !== ''">{{ labelString }}</span></h2>
         </el-row>
         <el-row :gutter="10" class="input-text">
           <el-col :span="22" :offset="1">
             <el-form-item size="large" label="">
-              <el-select v-model="dataObj[inputProps.select]" :placeholder="inputProps.select" style="width: 100%;" clearable @change="$emit('catch-select', dataObj[inputProps.select])">
-                <el-option v-for="item in selectOptions" :key="item.value" :value="item.value" :label="`${item.value}: ${item.label}`"/>
+              <el-select v-model="dataObj[inputProps.select]" :placeholder="inputProps.select" style="width: 100%;" @change="$emit('catch-select', dataObj[inputProps.select])">
+                <el-option v-for="(item) in selectOptions" :key="item.value" :value="item.value" :label="item.label"/>
               </el-select>
             </el-form-item>
           </el-col>
@@ -64,7 +64,7 @@
       <el-row :gutter="10">
         <el-form-item>
           <el-col :span="12">
-            <el-button type="submit" @click="$emit('submit')" >Submit</el-button>
+            <el-button type="submit" @click="$emit('submit')">Submit</el-button>
           </el-col>
           <el-col :span="12">
             <el-button type="submit" @click="$emit('clear')">Clear</el-button>
@@ -91,12 +91,36 @@ export default {
 		}
 	},
 	data() {
-		return {}
+		return {
+			selectInput: '',
+			showLabel: false,
+			labelString: ''
+		}
 	},
 	computed: {
 		routePath() {
 			return this.$router.currentRoute.path == '/alp/' ? true : false
 		}
+	},
+	watch: {
+		selectInput() {
+			let input = this.dataObj[this.inputProps.select]
+
+			if (input !== '' && input !== undefined) {
+				this.showLabel = true
+
+				const prop = this.inputProps.select
+				const propFormat = prop[0].toUpperCase()
+				const val = this.dataObj[this.inputProps.select]
+				this.labelString = `: ${propFormat}.${val}`
+			} else {
+				this.showLabel = false
+				this.labelString = ''
+			}
+		}
+	},
+	updated() {
+		this.selectInput = this.dataObj[this.inputProps.select]
 	}
 }
 </script>

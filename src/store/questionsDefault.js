@@ -75,5 +75,4 @@ const questionsDefault = [
 		voteCount: 0
 	}
 ]
-
 module.exports = questionsDefault

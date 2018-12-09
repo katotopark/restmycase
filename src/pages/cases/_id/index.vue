@@ -5,31 +5,34 @@
       <span class="large-text loading">Loading case...</span>
     </el-col>
     <el-row v-else :gutter="20" type="flex" justify="center">
-      <el-col :sm="18" :offset="0" class="container">
+      <el-col :sm="24" :md="14" :offset="0" class="container">
         <el-row :gutter="10" type="flex" justify="center">
-          <el-col id="top-left" :sm="24" :md="14">
+          <el-col id="top-left" :sm="24" :md="16">
             <!-- <img id="case-image" :src="theCase.caseImage"> -->
             <data-viz-component
               :distance="tDistance"
               :duration="tDuration"
               :lobas="lobas"/>
-            <div ref="graph">
-              <case-card-graph
-                id="case-graph"
-                :lobas="lobas"/>
-            </div>
           </el-col>
           <el-col id="top-right" :sm="24" :md="10">
             <el-row id="title">
               <el-col>
-                <p><span>NAME:</span> _{{ theCase.caseName }}</p>
+                <p>_{{ theCase.caseName }}</p>
               </el-col>
             </el-row>
             <el-row id="data">
               <el-col v-for="elem in 1" :key="elem.key">
-                <p><span>DESCRIPTION:</span> {{ theCase.caseDescription }}</p>
+                <p>{{ theCase.caseDescription }}</p>
               </el-col>
             </el-row>
+          </el-col>
+        </el-row>
+        <el-row type="flex" justify="center">
+          <el-col ref="graph" :span="22">
+            <case-card-graph
+              id="case-graph"
+              :lobas="lobas"
+              :dimensions="dims"/>
           </el-col>
         </el-row>
         <el-row id="bottom" :gutter="5">
@@ -86,7 +89,10 @@ export default {
 		return {
 			theCase: {},
 			metadata: '',
-			dims: {},
+			dims: {
+				x: 720,
+				y: 240
+			},
 			lobas: {},
 			tDuration: 0,
 			tDistance: 0
@@ -111,10 +117,6 @@ export default {
 	},
 	mounted() {
 		// this.dim = this.$refs.hiya.clientHeight
-		this.dims = {
-			x: 330,
-			y: 240
-		}
 	},
 	updated() {},
 	methods: {
@@ -131,9 +133,9 @@ export default {
 
 #top-left {
 	min-height: 100%;
-	margin-top: 120px;
-	/* border: 2px solid black; */
-	transform: scale(0.9);
+	margin-top: 200px;
+	border: 2px solid black;
+	transform: scale(1);
 }
 img {
 	/* width: 100%; */
@@ -148,7 +150,7 @@ img {
 }
 #case-graph {
 	margin-top: 50px;
-	padding: 50px 0px;
+	padding: 20px 0px;
 }
 #top-right {
 	margin-top: 250px;

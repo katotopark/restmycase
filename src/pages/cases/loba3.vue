@@ -1,6 +1,6 @@
 <template>
   <el-row type="flex" justify="center">
-    <el-col :span="24">
+    <el-col :span="12">
       <loba-loba-component :questions="qArray" :group="group" next="caseNaming"/>
     </el-col>
   </el-row>
@@ -18,7 +18,7 @@ export default {
 			qArray: [],
 			group: {
 				value: 'C',
-				label: 'individual'
+				label: 'administered'
 			}
 		}
 	},

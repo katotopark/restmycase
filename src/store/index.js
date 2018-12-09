@@ -5,6 +5,7 @@ import NonFungibleCase from '../../build/contracts/NonFungibleCase'
 // import AutonomousQuestionPool from '../../build/contracts/AutonomousQuestionPool'
 import * as questions_0 from './questionsDefault'
 import * as locations_0 from './locationsDefault'
+import Faker from 'faker'
 
 const IPFS = require('ipfs-api')
 // const ipfs = IPFS('ipfs.infura.io', '5001', { protocol: 'https' })
@@ -66,7 +67,7 @@ const createStore = () => {
 					let output = {
 						value: `${item.value}?`,
 						group: item.group,
-						voteCount: item.voteCount
+						voteCount: Faker.random.number(10)
 					}
 					return output
 				})
@@ -87,13 +88,29 @@ const createStore = () => {
 				state.formObj.totalScore += payload
 			},
 			setLocations(state) {
-				state.locationsArray = locations_0.map(item => {
-					let output = {
-						name: item.name,
-						address: item.address,
-						class: item.class,
-						voteCount: item.voteCount
+				let output
+				state.locationsArray = locations_0.map((item, i) => {
+					if (i < 3) {
+						output = {
+							name: item.name,
+							address: item.address,
+							class: item.class,
+							voteCount: item.voteCount
+						}
+					} else {
+						let fakeLat = Faker.address.latitude()
+						let fakeLong = Faker.address.longitude()
+						let fakeClass = Faker.random.number(5)
+						if (fakeClass == 0) fakeClass = Faker.random.number(5)
+
+						output = {
+							name: Faker.company.companyName(),
+							address: `${fakeLat}, ${fakeLong}`,
+							class: fakeClass,
+							voteCount: Faker.random.number(10)
+						}
 					}
+
 					return output
 				})
 			},

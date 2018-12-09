@@ -19,8 +19,8 @@ export default {
 			test: 0,
 			testWidth: 0,
 			sk: null,
-			s: 100,
-			values: [0.4, 0.2, 0.4],
+			s: 300,
+			values: [0.1, 0.6, 0.3],
 			polygonList: []
 		}
 	},
@@ -36,7 +36,7 @@ export default {
 			this.sk = sk
 		},
 		draw() {
-			this.sk.createCanvas(300, 50)
+			this.sk.createCanvas(300, 300)
 			this.init()
 			this.sk.frameRate(1)
 
@@ -44,10 +44,10 @@ export default {
 			// this.sk.translate(50, 50)
 
 			this.sk.stroke(247, 244, 204)
-			this.sk.strokeWeight(2)
+			this.sk.strokeWeight(12)
 			this.sk.fill(0)
-			console.log(this.polygonList)
-			console.log(this.values)
+			// console.log(this.polygonList)
+			// console.log(this.values)
 
 			for (let poly of this.polygonList) {
 				this.sk.beginShape()
@@ -63,9 +63,9 @@ export default {
 			this.polygonList = []
 			let list = []
 
-			let vec1 = this.sk.createVector(0, 0.5)
-			let vec2 = this.sk.createVector(3, 0.5)
-			let vec3 = this.sk.createVector(3, 0)
+			let vec1 = this.sk.createVector(0, 1)
+			let vec2 = this.sk.createVector(1, 1)
+			let vec3 = this.sk.createVector(1, 0)
 			let vec4 = this.sk.createVector(0, 0)
 
 			list.push(vec1)
@@ -81,7 +81,7 @@ export default {
 		},
 		dissect(pointList, a, b, d) {
 			let poly = []
-			console.log(pointList.slice(0))
+			// console.log(pointList.slice(0))
 			if (d >= this.values.length - 1) {
 				this.polygonList.push(pointList)
 				return

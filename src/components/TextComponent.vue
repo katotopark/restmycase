@@ -1,6 +1,6 @@
 <template>
   <div v-if="textStrings">
-    <p>{{ textStrings }}</p>
+    <p :style="styleObj">{{ textStrings }}</p>
   </div>
 </template>
 <script>
@@ -8,6 +8,10 @@ export default {
 	props: {
 		textStrings: {
 			type: String,
+			required: true
+		},
+		styleObj: {
+			type: Object,
 			required: true
 		}
 	},
@@ -17,11 +21,4 @@ export default {
 }
 </script>
 <style scoped>
-p {
-	font-family: InputMonoCondensedLightItalic;
-	font-size: 1rem;
-	margin-top: 20px;
-	margin-bottom: 5px;
-	word-wrap: break-word;
-}
 </style>
