@@ -57,6 +57,7 @@ export default {
 			output['group'] = item.group
 			output['value'] = item.value
 			output['voteCount'] = item.voteCount
+			output['description'] = item.description
 			output['id'] = `Q${index + 1}`
 			output['score'] = 0
 			output['rated'] = false

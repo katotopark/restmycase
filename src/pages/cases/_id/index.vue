@@ -6,21 +6,19 @@
     </el-col>
     <el-row v-else :gutter="20" type="flex" justify="center">
       <el-col :sm="22" :md="16" :offset="0" class="container">
-        <el-row :gutter="10" type="flex" justify="center">
-          <el-col id="top-left" :sm="24" :md="18">
+        <el-row :gutter="0" type="flex" justify="center">
+          <el-col id="top-left" :sm="24" :md="16">
             <img id="case-image" :src="theCase.caseImage">
-            <!-- <data-viz-component :lobas="lobas" :duration="tDuration" :distance="tDistance"/> -->
           </el-col>
-          <!-- <el-row type="flex" justify="end"> -->
           <el-col id="top-right" :sm="24" :md="10">
-            <el-row id="title">
+            <el-row id="name">
               <el-col>
-                <p><span>Name:</span> _{{ theCase.caseName }}</p>
+                <p><span/> _{{ theCase.caseName }}</p>
               </el-col>
             </el-row>
             <el-row id="description">
               <el-col v-for="elem in 1" :key="elem.key">
-                <p><span>Description:</span> {{ theCase.caseDescription }}</p>
+                <p><span/> {{ theCase.caseDescription }}</p>
               </el-col>
             </el-row>
             <el-row>
@@ -30,18 +28,16 @@
               </el-col>
             </el-row>
           </el-col>
-          <!-- </el-row> -->
-
         </el-row>
         <el-row type="flex" justify="center">
-          <el-col ref="graph" :span="22">
+          <el-col ref="graph" :span="22" class="graph-group">
+            <el-col id="lobas" :span="24">
+              <h4><span>_LobaLobas:</span> {{ theCase.totalScore }}:75</h4>
+            </el-col>
             <case-card-graph
               id="case-graph"
               :lobas="lobas"
               :dimensions="dims"/>
-            <el-col id="lobas" :span="8">
-              <h4><span>LobaLobas:</span> {{ theCase.totalScore }}:75</h4>
-            </el-col>
           </el-col>
         </el-row>
         <el-row id="bottom" :gutter="5">
@@ -68,7 +64,14 @@
             </el-col>
           </div>
           <el-col :xs="24" :sm="12" :md="14">
-            <case-card-metadata id="meta-data" :the-case="theCase"/>
+            <el-row>
+              <case-card-metadata id="meta-data" :the-case="theCase"/>
+            </el-row>
+            <el-row type="flex" justify="end">
+              <div class="mouse-react" @mouseenter="changeString" @mouseleave="revertString">
+                <el-button id="buy-button">{{ defaultString }}</el-button>
+              </div>
+            </el-row>
           </el-col>
         </el-row>
       </el-col>
@@ -104,7 +107,9 @@ export default {
 			},
 			lobas: {},
 			tDuration: 0,
-			tDistance: 0
+			tDistance: 0,
+			defaultString: '0 ETH',
+			price: 0
 		}
 	},
 	async created() {
@@ -120,16 +125,29 @@ export default {
 		this.theCase = Object.assign(caseData, { id: caseId })
 
 		this.lobas = this.theCase.lobas
-
 		this.tDuration = parseFloat(this.theCase.tDuration)
 		this.tDistance = parseFloat(this.theCase.tDistance)
+
+		this.price =
+			(this.theCase.totalScore * this.tDuration * this.tDistance) / 1000
+		this.price = this.price.toFixed(2)
+		this.defaultString = `${this.price} ETH`
 	},
-	mounted() {
-		// this.dim = this.$refs.hiya.clientHeight
-	},
-	updated() {},
 	methods: {
-		...mapActions(['getUsersCases', 'getCaseHash', 'caseHashToData'])
+		...mapActions(['getUsersCases', 'getCaseHash', 'caseHashToData']),
+		changeString() {
+			console.log('string changed.')
+			let buyString = 'Buy Case'
+			let defaultString = `${this.price} ETH`
+			if (this.defaultString == defaultString)
+				return (this.defaultString = buyString)
+		},
+		revertString() {
+			let defaultString = `${this.price} ETH`
+			let buyString = 'Buy Case'
+			if (this.defaultString == buyString)
+				return (this.defaultString = defaultString)
+		}
 	}
 }
 </script>
@@ -142,20 +160,15 @@ export default {
 
 #top-left {
 	min-height: 100%;
-	margin-top: 200px;
+	margin-top: 150px;
 	/* border: 2px solid black; */
 	transform: scale(0.7);
+	align-items: center;
 }
 
-img {
-	/* width: 100%; */
-	margin-bottom: 10px;
-}
 #case-image {
 	width: 100%;
-	/* border: 2px solid black; */
-	/* margin-left: 20px; */
-	/* margin-bottom: 20px; */
+	border: 1px solid black;
 }
 #case-graph {
 	margin-top: 30px;
@@ -163,18 +176,23 @@ img {
 	width: 100%;
 	/* border: 2px solid black; */
 }
+.graph-group {
+	border: 2px solid black;
+}
 #top-right {
-	margin-top: 350px;
+	margin-top: 300px;
 	margin-bottom: 50px;
-	padding-right: 20px;
+	padding-right: 10px;
+	/* border: 2px solid black; */
 	/* text-align: right; */
 }
-#title {
-	font-size: 1.4rem;
+#name {
+	font-size: 1.6rem;
 	font-family: InputMonoCondensed;
+	font-weight: bold;
 	color: black;
 	margin-left: 5px;
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 	hyphens: auto;
 	display: block;
 }
@@ -187,10 +205,12 @@ img {
 	hyphens: auto;
 	font-family: InputMonoCondensedItalic;
 	/* border-bottom: 2px solid black; */
-	/* margin-left: 15px; */
+	margin-left: 5px;
 	/* padding: 10px; */
-	font-size: 1.1rem;
+	font-size: 1.4rem;
 	line-height: 30px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 #meta-data {
@@ -205,10 +225,6 @@ img {
 	transform: scale(1);
 	/* border: 2px solid black; */
 }
-.mini-graph div {
-	/* margin-left: 10px; */
-}
-
 .loading {
 	margin: 80px 20px;
 }
@@ -217,21 +233,47 @@ img {
 	color: white;
 	font-family: InputMonoCondensed;
 	font-weight: normal;
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 	text-transform: uppercase;
 	padding: 4px;
+	margin-top: 0px;
 }
 #time-distance p {
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 	color: white;
 	background-color: black;
 	font-family: InputMonoCondensed !important;
 	font-weight: normal;
 	text-transform: uppercase;
 	padding: 4px;
-	width: 50%;
+	width: 90%;
 }
 #time-distance {
 	margin-top: 20px;
+}
+div.mouse-react {
+	/* border: 2px solid black; */
+	margin-right: 50px;
+	margin-left: 20px;
+	width: 100%;
+	width: 20rem;
+	height: 12rem;
+	margin-top: 60px;
+}
+.el-button#buy-button {
+	font-family: InputMonoCondensed;
+	font-size: 1.4rem;
+	border-radius: 0px;
+	width: 20rem;
+	height: 12rem;
+	border: 0px;
+	background-color: rgb(247, 244, 204);
+	color: black;
+	border: 2px solid black;
+}
+.el-button#buy-button:hover {
+	background-color: black;
+	color: white;
+	font-family: InputMonoCondensedItalic;
 }
 </style>

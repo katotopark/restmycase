@@ -8,13 +8,12 @@
               <dissection-component/>
             </el-row>
             <el-row>
-              <text-component id="text-component" :style-obj="textStyle" :text-strings="textString"/>
+              <text-component id="text-component" :style-obj="textStyle" :text-strings="txString"/>
             </el-row>
           </el-col>
         </el-row>
         <el-row v-else>
           <el-col :span="24" class="container">
-
             <el-row type="flex" justify="center" class="card">
               <el-col :span="16">
                 <case-card
@@ -52,7 +51,9 @@ export default {
 			confirmed: false,
 			lobas: {},
 			propCheck: false,
-			textString: 'Waiting for the transaction...',
+			txString: 'Waiting for the transaction...',
+			geoString: 'Checking location with ALP...',
+			geoCheck: false,
 			textStyle: {
 				fontFamily: 'InputMonoCondensedLightItalic',
 				fontSize: '1.1rem',
@@ -120,7 +121,7 @@ export default {
 </script>
 <style scoped>
 .container {
-	margin-top: 75px;
+	margin-top: 50px;
 }
 .text {
 	/* max-width: 500px; */
@@ -130,7 +131,7 @@ export default {
 	margin-bottom: 50px;
 }
 .card {
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	margin-bottom: 40px;
 }
 .el-button {

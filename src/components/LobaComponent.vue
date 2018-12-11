@@ -11,7 +11,7 @@
               <p id="title">{{ dataObj.value }}</p>
             </el-row>
             <el-row>
-              <p id="sub-text">{{ fakeSub }}</p>
+              <p id="sub-text">{{ dataObj.description }}</p>
             </el-row>
           </el-col>
         </el-row>

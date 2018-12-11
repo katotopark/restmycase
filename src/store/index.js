@@ -67,7 +67,8 @@ const createStore = () => {
 					let output = {
 						value: `${item.value}?`,
 						group: item.group,
-						voteCount: Faker.random.number(10)
+						voteCount: Faker.random.number(10),
+						description: item.description
 					}
 					return output
 				})

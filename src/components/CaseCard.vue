@@ -39,7 +39,7 @@
         </el-col>
       </el-row>
       <div v-if="revealComponents">
-        <case-card-buttons id="case-buttons" @buy-case="buyACase" @show-details="showDetails"/>
+        <case-card-buttons id="case-buttons" :button-string="defaultString" @buy-case="buyACase" @show-details="showDetails" @mouse-enter="onMouseEnter" @mouse-leave="onMouseLeave"/>
       </div>
     </el-col>
   </el-row>
@@ -81,7 +81,9 @@ export default {
 			lobas: {},
 			// lobaCounter: 0,
 			tDuration: 0,
-			tDistance: 0
+			tDistance: 0,
+			defaultString: '0 ETH',
+			price: 0
 		}
 	},
 	computed: {
@@ -93,7 +95,7 @@ export default {
 		// props for the child components
 		this.lobas = this.theCase.lobas
 		this.tDuration = parseFloat(this.theCase.tDuration)
-		this.distance = parseFloat(this.theCase.tDistance)
+		this.tDistance = parseFloat(this.theCase.tDistance)
 
 		// this.dims.x = this.$refs.test.offsetWidth
 		// this.dims.y = this.$refs.test.offsetHeight
@@ -103,13 +105,12 @@ export default {
 				this.$refs.test.offsetHeight
 			}`
 		)
-		// this.lobaCounter = 1
-		// for (let i in this.lobas) {
-		// 	for (let j in this.lobas[i]) {
-		// 		console.log(j)
-		// 		this.lobaCounter++
-		// 	}
-		// }
+
+		this.price =
+			(this.theCase.totalScore * this.tDuration * this.tDistance) / 1000
+		console.log('price is ', this.price)
+		this.price = this.price.toFixed(2)
+		this.defaultString = `${this.price} ETH`
 	},
 	methods: {
 		...mapActions(['buyCase']),
@@ -118,7 +119,24 @@ export default {
 		},
 		buyACase() {
 			console.log('yo')
+			this.$router.push(`/cases/${this.theCase.id}`)
 			this.buyCase(this.theCase.id)
+		},
+		onMouseEnter() {
+			console.log('mouse entered')
+			let buyString = 'Buy Case'
+			let defaultString = `${this.price} ETH`
+			if (this.defaultString == defaultString) {
+				this.defaultString = buyString
+			}
+		},
+		onMouseLeave() {
+			console.log('mouse left')
+			let defaultString = `${this.price} ETH`
+			let buyString = 'Buy Case'
+			if (this.defaultString == buyString) {
+				this.defaultString = defaultString
+			}
 		}
 	}
 }
@@ -187,13 +205,14 @@ div.image {
 	word-wrap: break-word;
 	hyphens: auto;
 	font-size: 14px;
-	max-height: 100%;
+	height: 55px;
 	color: black;
+	/* border: 2px solid black; */
 }
 #case-graph {
 	/* background-color: black; */
 	height: 100px;
-	margin-top: 25px;
+	margin-top: 10px;
 }
 #case-buttons {
 	margin: 10px auto 30px auto;

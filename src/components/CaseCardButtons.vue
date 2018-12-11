@@ -4,12 +4,20 @@
       <el-button @click="$emit('show-details')">View Case</el-button>
     </el-col>
     <el-col :span="12">
-      <el-button @click="$emit('buy-case')">Buy Case</el-button>
+      <span @mouseenter="$emit('mouse-enter')" @mouseleave="$emit('mouse-leave')">
+        <el-button @click="$emit('buy-case')">{{ buttonString }}</el-button>
+      </span>
     </el-col>
   </el-row>
 </template>
 <script>
 export default {
+	props: {
+		buttonString: {
+			required: true,
+			type: String
+		}
+	},
 	data() {
 		return {}
 	}
