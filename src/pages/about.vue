@@ -1,8 +1,8 @@
 <template>
   <div>
     <header-component/>
-    <el-row type="flex" justify="center">
-      <el-col :sm="22" :md="16">
+    <el-row id="content" type="flex" justify="center">
+      <el-col :sm="22" :md="12">
         <div class="manifesto-header"/>
         <ul>
           <li v-for="elem in manifesto" :key="elem.key">{{ elem }}</li>
@@ -64,7 +64,7 @@ export default {
 ul li {
 	list-style-type: none;
 	font-family: InputMonoCondensed;
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	padding: 10px 5px 10px 20px;
 	line-height: 30px;
 }

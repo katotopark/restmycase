@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="display:none;">
     <vue-p5 v-on="{ setup, draw }"/>
   </div>
 </template>
@@ -37,9 +37,6 @@ export default {
 			tDuration: 0,
 			tDistance: 0,
 			dataArr: [],
-			areaA: 0,
-			areaB: 0,
-			areaC: 0,
 			areas: [],
 			values: [],
 			polygonList: [],
@@ -57,14 +54,20 @@ export default {
 		duration() {
 			// console.log('duration received => ', this.duration)
 			this.tDuration = this.duration
-		},
-		lobas() {
-			let values = Object.values(this.lobas)
+		}
+	},
+	methods: {
+		lobasMethod(duration, distance, lobas) {
+			let values = Object.values(lobas)
 
 			let output = values.map(val => {
 				let v = Object.values(val)
 				return v
 			})
+
+			let areaA = 0
+			let areaB = 0
+			let areaC = 0
 
 			for (let i in output) {
 				this.highestScore = output[i].length * 5
@@ -73,56 +76,59 @@ export default {
 					let float = parseFloat(res)
 					this.dataArr.push(float.toFixed(2))
 
-					if (i == 0) this.areaA += float
-					else if (i == 1) this.areaB += float
-					else if (i == 2) this.areaC += float
+					if (i == 0) areaA += float
+					else if (i == 1) areaB += float
+					else if (i == 2) areaC += float
 				}
 			}
 
-			const fixedFloat = x => x.toFixed(2)
-			this.areaA = fixedFloat(this.areaA)
-			this.areaB = fixedFloat(this.areaB)
-			this.areaC = fixedFloat(this.areaC)
-			this.areas.push(this.areaA)
-			this.areas.push(this.areaB)
-			this.areas.push(this.areaC)
+			const fixedFloat = x => {
+				console.log('fixedFloat', x)
+				return x.toFixed(2)
+			}
 
-			this.areas.forEach(a => {
-				this.totalArea += parseFloat(a)
+			areaA = fixedFloat(areaA)
+			areaB = fixedFloat(areaB)
+			areaC = fixedFloat(areaC)
+
+			let areas = [areaA, areaB, areaC]
+			let totalArea = 0
+
+			areas.forEach(a => {
+				totalArea += parseFloat(a)
 			})
-			console.log('the total area is: ', this.totalArea)
+			console.log('the total area is: ', totalArea)
 
-			const locOutput = this.mapLocations(
-				this.sk,
-				this.tDistance,
-				this.tDuration
-			)
+			const locOutput = this.mapLocations(this.sk, distance, duration)
 			console.log(locOutput)
-			this.mapAreas(this.sk, this.areas)
-			this.drawStuff(locOutput)
+			const mapAreasValues = this.mapAreas(this.sk, areas, totalArea)
+			this.drawStuff(locOutput, mapAreasValues)
 
 			this.drawData(this.sk, locOutput)
-		}
-	},
-	methods: {
+
+			return this.exportAsImage()
+		},
 		setup(sk) {
 			this.sk = sk
 			this.skCanvas = this.sk.createCanvas(330, 240)
+			this.sk.background(247, 244, 204)
 			this.sk.rectMode(sk.CENTER)
 			this.sk.noFill()
 			this.sk.stroke(0)
-			this.sk.strokeWeight(4)
+			this.sk.strokeWeight(2)
 			this.sk.rect(sk.width / 2, sk.height / 2, sk.width, sk.height)
 		},
 		draw() {
 			this.sk.noLoop()
-			console.log(this.skCanvas.canvas)
-			// return this.skCanvas.canvas.toDataURL('image/jpeg')
+			// console.log(this.skCanvas.canvas)
+			window.ourcanvase = this.skCanvas
 		},
-		drawStuff(locOutput) {
-			this.init()
+		exportAsImage() {
+			return this.skCanvas.canvas.toDataURL('image/jpeg')
+		},
+		drawStuff(locOutput, values) {
+			this.init(values)
 
-			this.sk.background(255, 0, 0, 0)
 			// this.sk.translate(
 			// 	(this.rectSize / 3) * 2,
 			// 	this.rectSize + this.rectSize / 4
@@ -152,7 +158,7 @@ export default {
 
 			// console.log('x value is: ', locOutput.x, 'y value is:', locOutput.y)
 		},
-		init() {
+		init(values) {
 			this.polygonList = []
 			let list = []
 
@@ -170,12 +176,12 @@ export default {
 			//	let i1 = r % 4
 			//	let i2 = (r + 1) % 4
 
-			this.dissect(list, list[0], list[1], 0)
+			this.dissect(list, list[0], list[1], 0, values)
 		},
-		dissect(pointList, a, b, d) {
+		dissect(pointList, a, b, d, values) {
 			let poly = []
 			// console.log(pointList.slice(0))
-			if (d >= this.values.length - 1) {
+			if (d >= values.length - 1) {
 				this.polygonList.push(pointList)
 				return
 			}
@@ -185,7 +191,7 @@ export default {
 			let r = this.sk.floor(this.sk.random(2)) == 0 ? -1 : 1
 			this.sort(pointList, p1, r)
 
-			let value = this.values[d]
+			let value = values[d]
 
 			let pointListNext = pointList.map(x => x)
 
@@ -206,7 +212,7 @@ export default {
 					pointListNext.push(p2)
 
 					this.polygonList.push(poly)
-					this.dissect(pointListNext, p2, p1, d + 1)
+					this.dissect(pointListNext, p2, p1, d + 1, values)
 					break
 				} else {
 					value -= area
@@ -270,7 +276,7 @@ export default {
 
 			// draw lines
 			sk.stroke(0)
-			sk.strokeWeight(3)
+			sk.strokeWeight(2)
 			sk.strokeCap(sk.PROJECT)
 
 			sk.line(
@@ -319,19 +325,20 @@ export default {
 				this.rectSize / 2 + padding,
 				sk.height - this.rectSize / 2 - padding
 			)
+
+			console.log('distane', distance, 'duration', duration)
 			output.x = parseFloat(distance.toFixed(2))
 			output.y = parseFloat(duration.toFixed(2))
 			return output
 		},
-		mapAreas(sk, values) {
-			const max = this.totalArea
+		mapAreas(sk, values, totalArea) {
+			const max = totalArea
 
-			this.values = values.map(val => {
+			return values.map(val => {
 				let result = sk.map(val, 0, max, 0, 1)
 				result = parseFloat(result)
 				return result
 			})
-			return this.values
 		}
 	}
 }

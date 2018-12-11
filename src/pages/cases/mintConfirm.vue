@@ -2,9 +2,14 @@
   <el-row type="flex" justify="center">
     <el-col :span="12">
       <el-col :span="24" class="container">
-        <el-row v-if="!confirmed" class="text">
-          <el-col :span="24">
-            <h5>Waiting for tx confirmation</h5>
+        <el-row v-if="!confirmed" type="flex" justify="center">
+          <el-col :span="20">
+            <el-row justify="center" type="flex">
+              <dissection-component/>
+            </el-row>
+            <el-row>
+              <text-component id="text-component" :style-obj="textStyle" :text-strings="textString"/>
+            </el-row>
           </el-col>
         </el-row>
         <el-row v-else>
@@ -31,18 +36,31 @@
 import { mapState, mapActions } from 'vuex'
 import CaseCard from '../../components/CaseCard.vue'
 import CaseCardMetadata from '../../components/CaseCardMetadata.vue'
+import DissectionComponent from '../../components/DissectionComponent.vue'
+import TextComponent from '../../components/TextComponent.vue'
 
 export default {
 	components: {
 		CaseCard,
-		CaseCardMetadata
+		DissectionComponent,
+		CaseCardMetadata,
+		TextComponent
 	},
 	data() {
 		return {
 			theCase: {},
 			confirmed: false,
 			lobas: {},
-			propCheck: false
+			propCheck: false,
+			textString: 'Waiting for the transaction...',
+			textStyle: {
+				fontFamily: 'InputMonoCondensedLightItalic',
+				fontSize: '1.1rem',
+				marginTop: '20px',
+				marginBottom: '15px',
+				wordWrap: 'breakword',
+				textAlign: 'center'
+			}
 		}
 	},
 	computed: {
@@ -53,7 +71,6 @@ export default {
 			this.theCase = await this.composeCaseCard()
 		},
 		async theCase() {
-			console.log('got case: ', this.theCase)
 			let lobas = await this.theCase.lobas
 			let distance = await this.theCase.tDistance
 			let duration = await this.theCase.tDuration
@@ -103,7 +120,7 @@ export default {
 </script>
 <style scoped>
 .container {
-	margin-top: 20px;
+	margin-top: 75px;
 }
 .text {
 	/* max-width: 500px; */

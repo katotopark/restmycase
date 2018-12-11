@@ -5,27 +5,33 @@
       <span class="large-text loading">Loading case...</span>
     </el-col>
     <el-row v-else :gutter="20" type="flex" justify="center">
-      <el-col :sm="24" :md="14" :offset="0" class="container">
+      <el-col :sm="22" :md="16" :offset="0" class="container">
         <el-row :gutter="10" type="flex" justify="center">
-          <el-col id="top-left" :sm="24" :md="16">
-            <!-- <img id="case-image" :src="theCase.caseImage"> -->
-            <data-viz-component
-              :distance="tDistance"
-              :duration="tDuration"
-              :lobas="lobas"/>
+          <el-col id="top-left" :sm="24" :md="18">
+            <img id="case-image" :src="theCase.caseImage">
+            <!-- <data-viz-component :lobas="lobas" :duration="tDuration" :distance="tDistance"/> -->
           </el-col>
+          <!-- <el-row type="flex" justify="end"> -->
           <el-col id="top-right" :sm="24" :md="10">
             <el-row id="title">
               <el-col>
-                <p>_{{ theCase.caseName }}</p>
+                <p><span>Name:</span> _{{ theCase.caseName }}</p>
               </el-col>
             </el-row>
-            <el-row id="data">
+            <el-row id="description">
               <el-col v-for="elem in 1" :key="elem.key">
-                <p>{{ theCase.caseDescription }}</p>
+                <p><span>Description:</span> {{ theCase.caseDescription }}</p>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col id="time-distance" :span="24">
+                <p><span>Duration:</span> {{ tDuration }} hrs</p>
+                <p><span>Distance:</span> {{ tDistance }} kms</p>
               </el-col>
             </el-row>
           </el-col>
+          <!-- </el-row> -->
+
         </el-row>
         <el-row type="flex" justify="center">
           <el-col ref="graph" :span="22">
@@ -33,6 +39,9 @@
               id="case-graph"
               :lobas="lobas"
               :dimensions="dims"/>
+            <el-col id="lobas" :span="8">
+              <h4><span>LobaLobas:</span> {{ theCase.totalScore }}:75</h4>
+            </el-col>
           </el-col>
         </el-row>
         <el-row id="bottom" :gutter="5">
@@ -134,31 +143,35 @@ export default {
 #top-left {
 	min-height: 100%;
 	margin-top: 200px;
-	border: 2px solid black;
-	transform: scale(1);
+	/* border: 2px solid black; */
+	transform: scale(0.7);
 }
+
 img {
 	/* width: 100%; */
-	margin-bottom: 40px;
+	margin-bottom: 10px;
 }
-#case-image,
-#case-graph {
+#case-image {
 	width: 100%;
-	border: 2px solid black;
+	/* border: 2px solid black; */
 	/* margin-left: 20px; */
 	/* margin-bottom: 20px; */
 }
 #case-graph {
-	margin-top: 50px;
+	margin-top: 30px;
 	padding: 20px 0px;
+	width: 100%;
+	/* border: 2px solid black; */
 }
 #top-right {
-	margin-top: 250px;
+	margin-top: 350px;
 	margin-bottom: 50px;
+	padding-right: 20px;
+	/* text-align: right; */
 }
 #title {
-	font-size: 3rem;
-	font-family: InputMonoCondensedLight;
+	font-size: 1.4rem;
+	font-family: InputMonoCondensed;
 	color: black;
 	margin-left: 5px;
 	margin-bottom: 10px;
@@ -169,14 +182,15 @@ img {
 	margin-bottom: 40px;
 }
 
-#data p {
+#description p {
 	color: black;
 	hyphens: auto;
 	font-family: InputMonoCondensedItalic;
 	/* border-bottom: 2px solid black; */
-	margin-left: 15px;
-	padding: 10px;
-	font-size: 1.5rem;
+	/* margin-left: 15px; */
+	/* padding: 10px; */
+	font-size: 1.1rem;
+	line-height: 30px;
 }
 
 #meta-data {
@@ -198,10 +212,26 @@ img {
 .loading {
 	margin: 80px 20px;
 }
-
-p > span {
-	font-size: 1.3rem;
+#lobas h4 {
+	background-color: black;
+	color: white;
+	font-family: InputMonoCondensed;
+	font-weight: normal;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	padding: 4px;
+}
+#time-distance p {
+	font-size: 1.2rem;
 	color: white;
 	background-color: black;
+	font-family: InputMonoCondensed !important;
+	font-weight: normal;
+	text-transform: uppercase;
+	padding: 4px;
+	width: 50%;
+}
+#time-distance {
+	margin-top: 20px;
 }
 </style>

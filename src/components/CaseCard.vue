@@ -139,11 +139,11 @@ img {
 	height: 100%;
 }
 div.image {
-	margin: 20px 0 20px 0;
+	margin: 30px 0 25px 0;
 	/* width: 100%; */
 	height: 15rem;
 	object-fit: fill;
-	border: 2px solid black;
+	border: 1px solid black;
 	/* background-color: black; */
 }
 .case-id {
@@ -179,6 +179,7 @@ div.image {
 	hyphens: auto;
 	max-height: 100%;
 	color: black;
+	text-transform: lowercase;
 }
 #case-description {
 	font-family: InputMonoCondensedItalic;

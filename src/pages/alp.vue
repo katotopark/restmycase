@@ -2,7 +2,7 @@
   <div>
     <header-component/>
     <el-row type="flex" justify="center">
-      <el-col :sm="16" :md="12">
+      <el-col id="content" :sm="16" :md="12">
         <error-component :err-arr="errors"/>
         <text-component :text-strings="textString" :style-obj="textStyle"/>
         <new-input-component id="new-input" :data-obj="newLoc" :select-options="locClassArr" :input-props="inputProps" @catch-input-a="onCatchName" @catch-input-b="onCatchAddress" @catch-select="onCatchClass" @submit="onSubmit" @clear="onClear"/>
@@ -190,5 +190,8 @@ ul#errors {
 	font-family: InputRegular;
 	margin-top: 0px;
 	margin-bottom: 0px;
+}
+#content {
+	margin-top: 20px;
 }
 </style>

@@ -15,7 +15,7 @@
         </el-row>
         <el-row class="location-text" type="flex" justify="center">
           <span v-if="!gotLoc">
-            <text-component :text-strings="geoMessage"/>
+            <text-component :text-strings="geoMessage" :style="textStyle"/>
           </span>
           <span v-else>
             <text-component :text-strings="locStrings" :style="textStyle"/>

@@ -55,12 +55,12 @@
         </el-col>
       </el-row>
     </el-col>
-    <case-card-data-viz ref="caseCardDataViz" :x="417" :y="240"/>
-    <!-- <data-viz-component
+    <!-- <case-card-data-viz ref="caseCardDataViz" :x="417" :y="240"/> -->
+    <data-viz-component
       ref="caseCardDataViz"
       :lobas="lobas"
       :distance="tDistance"
-      :duration="tDuration"/> -->
+      :duration="tDuration"/>
   </el-row>
 </template>
 <script>
@@ -118,25 +118,35 @@ export default {
 			this.checkInput()
 			if (this.errors.length === 0) {
 				this.lobas = this.formObj.lobas
+
+				await this.randomNum()
+
 				this.tDuration = parseFloat(this.formObj.tDuration)
 				this.tDistance = parseFloat(this.formObj.tDistance)
 
 				console.log(
-					`got prop data: distance => ${this.tDistance}; duration => ${
-						this.tDuration
+					`got prop data: distance => ${this.formObj.tDistance}; duration => ${
+						this.formObj.tDuration
 					}`
 				)
 				console.log('lobas are ', this.lobas)
 				// const boundDrawingMethod = this.$refs.caseCardDataViz.draw.bind(
 				// 	this.$refs.caseCardDataViz
 				// )
-				const boundDrawingMethod = this.$refs.caseCardDataViz.draw.bind(
+				const boundDrawingMethod = this.$refs.caseCardDataViz.lobasMethod.bind(
 					this.$refs.caseCardDataViz
 				)
 
 				//TODO
-				let caseData = {}
-				const imageData = boundDrawingMethod(caseData)
+				// let caseData = {}
+				//boundDrawingMethod(this.tDuration, this.tDistance, caseData)
+				const imageData = boundDrawingMethod(
+					this.tDuration,
+					this.tDistance,
+					this.formObj.lobas
+				)
+
+				console.log('imageData', imageData)
 
 				await this.describeCase({
 					caseName: this.caseName,
@@ -145,7 +155,6 @@ export default {
 					caseImage: imageData
 				})
 
-				await this.randomNum()
 				await this.mintComposed()
 				this.$router.push('mintConfirm')
 			}

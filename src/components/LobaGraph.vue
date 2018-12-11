@@ -173,7 +173,9 @@ export default {
 </script>
 <style scoped>
 h4 {
-	font-family: InputMonoCondensedLight;
+	font-family: InputMonoCondensed;
+	font-size: 1.1rem;
+	font-weight: normal;
 	width: 100%;
 	background-color: black;
 	color: white;
