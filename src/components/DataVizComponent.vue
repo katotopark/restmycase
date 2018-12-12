@@ -322,8 +322,8 @@ export default {
 				t,
 				0,
 				5,
-				this.rectSize / 2 + padding,
-				sk.height - this.rectSize / 2 - padding
+				sk.height - this.rectSize / 2 - padding,
+				this.rectSize / 2 + padding
 			)
 
 			console.log('distane', distance, 'duration', duration)

@@ -5,7 +5,7 @@
     </el-col>
     <el-row>
       <el-col id="container" :span="22" :offset="1">
-        <h3>{{ group.value }}</h3>
+        <h3>g.{{ group.value }}</h3>
         <loba-component v-for="(elem, i) in lobaObj" id="loba-component" :key="elem.key" :data-obj="elem" @catch-input="(e) => onCatchInput(e,i)"/>
         <!-- <loba-component v-for="(elem, i) in lobaObj" id="loba-component" :key="elem.key" :data-obj="elem" @handle-click="(e)=> onCatchInput(e,i)"/> -->
         <el-row id="button">

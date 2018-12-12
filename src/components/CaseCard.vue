@@ -107,9 +107,9 @@ export default {
 		)
 
 		this.price =
-			(this.theCase.totalScore * this.tDuration * this.tDistance) / 1000
+			(this.theCase.totalScore * this.tDuration * this.tDistance) / 10000
 		console.log('price is ', this.price)
-		this.price = this.price.toFixed(2)
+		this.price = this.price.toFixed(4)
 		this.defaultString = `${this.price} ETH`
 	},
 	methods: {

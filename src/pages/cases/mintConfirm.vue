@@ -131,7 +131,6 @@ export default {
 	margin-bottom: 50px;
 }
 .card {
-	/* margin-top: 20px; */
 	margin-bottom: 40px;
 }
 .el-button {

@@ -1,7 +1,9 @@
 <template>
   <div v-if="byteSort.length > 0" :style="styleObj" class="content">
     <el-row v-if="theCase" id="transition" >
-      <div style="background-color: black; width:100%; height:3rem;"/>
+      <div style="background-color: black; width:100%; height:3rem;" >
+        <p class="title">_METADATA</p>
+      </div>
       <el-col :span="22" :offset="1">
         <el-row>
           <div ref="dataRef">
@@ -100,8 +102,15 @@ export default {
 span {
 	border-bottom: 2px solid black;
 }
+p.title {
+	color: white;
+	margin: 0px 5px;
+	font-size: 1.2rem;
+}
+
 p {
 	font-size: 1.1rem;
+	font-family: InputMonoCondensed;
 	color: black;
 	margin-bottom: 20px;
 	width: 100%;

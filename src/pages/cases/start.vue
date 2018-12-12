@@ -88,7 +88,7 @@ export default {
 				this.$router.push('/cases/loba1')
 				console.log('now we start')
 			}
-			setTimeout(func, 5000)
+			setTimeout(func, 7000)
 		},
 		goFullscreen() {
 			function enterFullscreen(element) {

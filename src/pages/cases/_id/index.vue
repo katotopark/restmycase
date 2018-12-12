@@ -129,8 +129,8 @@ export default {
 		this.tDistance = parseFloat(this.theCase.tDistance)
 
 		this.price =
-			(this.theCase.totalScore * this.tDuration * this.tDistance) / 1000
-		this.price = this.price.toFixed(2)
+			(this.theCase.totalScore * this.tDuration * this.tDistance) / 10000
+		this.price = this.price.toFixed(4)
 		this.defaultString = `${this.price} ETH`
 	},
 	methods: {
@@ -207,7 +207,7 @@ export default {
 	/* border-bottom: 2px solid black; */
 	margin-left: 5px;
 	/* padding: 10px; */
-	font-size: 1.4rem;
+	font-size: 1.3rem;
 	line-height: 30px;
 	margin-top: 0px;
 	margin-bottom: 0px;

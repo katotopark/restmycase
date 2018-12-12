@@ -110,7 +110,13 @@ export default {
 				this.showLabel = true
 
 				const prop = this.inputProps.select
-				const propFormat = prop[0].toUpperCase()
+				let propFormat
+				if (this.inputProps.select !== 'group') {
+					propFormat = prop[0].toUpperCase()
+				} else if (this.inputProps.select == 'group') {
+					propFormat = prop[0]
+				}
+
 				const val = this.dataObj[this.inputProps.select]
 				this.labelString = `: ${propFormat}.${val}`
 			} else {
