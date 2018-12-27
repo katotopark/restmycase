@@ -1,105 +1,124 @@
 <template>
-  <section class="container">
-    <div>
-      <!-- <app-logo/> -->
-      <h3 class="paragraph-title">Get Token Name</h3>
-      <div class="row">
-        <div>
-          <button @click="getTokenName">Get Name</button>
-          <span style="margin-left: 10px">{{ tokenName }}</span>
-        </div>
-      </div>
-      <div>
-        <h3 class="paragraph-title">Transfer tokens</h3>
-        <div class="row">
-          Recipent Address: <input v-model="recipentAddress" title="Recipent">
-        </div>
-        <div class="row">
-          Amount: <input v-model="amount" title="Amount">
-        </div>
-        <div class="row">
-          <button @click="transfer">Send</button>
-        </div>
-        <div class="receipt-box">
-          Receipt:
-          <span style="color:green">{{ transferReceipt }}</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  <el-row type="flex" justify="center">
+    <el-col :span="18">
+      <el-row class="component">
+        <input-comp
+          :data-obj.sync="newQ"
+          :input-props="inputProps"
+          :select-options="filterObj.options"
+          @catch-input="onCatchInput"
+          @catch-select="onCatchSelect"/>
+      </el-row>
+      <el-row>
+        <button-comp :labels="buttonLabels" @handle-click="onClick"/>
+      </el-row>
+      <el-row class="component">
+        <table-comp
+          :data-obj="qArr"
+          :filter-obj="filterObj"
+          @handle-click="onVote"
+          @handle-filter="onHandleFilter"/>
+      </el-row>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
+import { mapState, mapGetters, mapActions } from 'vuex'
+import ButtonComp from '../components/ButtonComp.vue'
+import TableComp from '../components/TableComp.vue'
+import InputComp from '../components/InputComp.vue'
 
 export default {
 	components: {
-		AppLogo
+		TableComp,
+		ButtonComp,
+		InputComp
 	},
 	data() {
 		return {
-			tokenName: '',
-			recipentAddress: '',
-			transferReceipt: '',
-			amount: 0
+			buttonLabels: ['Submit', 'Clear'],
+			qArr: [],
+			filterObj: {
+				value: '',
+				options: [
+					{
+						value: 'A',
+						label: 'space'
+					},
+					{
+						value: 'B',
+						label: 'clerk'
+					},
+					{
+						value: 'C',
+						label: 'administered'
+					}
+				]
+			},
+			newQ: {
+				value: '',
+				group: '',
+				voteCount: 0
+			},
+			newTitle: '',
+			newGroup: '',
+			inputProps: {
+				value: { type: 'input' },
+				group: { type: 'select' }
+			}
 		}
 	},
+	computed: {
+		...mapState(['questionsArray']),
+		...mapGetters(['getQuestionsByGroup'])
+	},
+	created() {
+		this.setQuestions()
+		this.qArr = this.questionsArray
+	},
 	methods: {
-		async getTokenName() {
-			this.tokenName = await this.$store.dispatch('eip20/getName')
+		...mapActions(['setQuestions', 'addQuestion', 'voteQuestion']),
+		onClick(e) {
+			if (e.id == 0) this.onSubmit()
+			else if (e.id == 1) this.onClear()
 		},
-		async transfer() {
-			this.transferReceipt = await this.$store.dispatch('eip20/transfer', {
-				to: this.recipentAddress,
-				value: this.amount
-			})
+		onClear() {
+			this.newQ = {}
+		},
+		onSubmit() {
+			this.newQ = {
+				value: this.newTitle,
+				group: this.newGroup,
+				voteCount: 0
+			}
+			this.addQuestion(this.newQ)
+			console.log('submitted', this.newQ)
+		},
+		onVote(index) {
+			console.log(index)
+			this.voteQuestion(index)
+		},
+		onHandleFilter(e) {
+			this.filterObj.value = e
+			if (this.filterObj.value) {
+				this.qArr = this.getQuestionsByGroup(this.filterObj.value)
+			} else {
+				this.qArr = this.questionsArray
+			}
+		},
+		onCatchInput(e) {
+			this.newTitle = e.value
+		},
+		onCatchSelect(e) {
+			this.newGroup = e.value
 		}
 	}
 }
 </script>
-
 <style>
-.container {
-	min-height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-}
-
-.title {
-	font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-		'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* 1 */
-	display: block;
-	font-weight: 300;
-	font-size: 100px;
-	color: #35495e;
-	letter-spacing: 1px;
-}
-
-.subtitle {
-	font-weight: 300;
-	font-size: 42px;
-	color: #526488;
-	word-spacing: 5px;
-	padding-bottom: 15px;
-}
-
-.paragraph-title {
-	font-weight: 300;
-	font-size: 20px;
-	color: #35495e;
-	word-spacing: 5px;
-	padding: 15px 0;
-}
-
-.receipt-box {
-	padding-top: 15px;
-	width: 900px;
-	word-break: break-all;
-}
-
-.row {
-	padding: 10px;
+.el-row.component {
+	margin-top: 20px;
+	margin-bottom: 40px;
 }
 </style>

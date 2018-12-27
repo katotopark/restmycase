@@ -85,11 +85,10 @@ body {
 
 /* Custom form styles */
 
-.el-select .el-input__inner,
+.el-input__inner,
 textarea {
 	border: 2px solid black !important;
 	border-radius: 0px !important;
-
 	font-family: 'InputMonoCondensed', monospace !important;
 }
 

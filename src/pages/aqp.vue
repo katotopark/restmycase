@@ -5,11 +5,33 @@
       <el-col id="content" :sm="16" :md="12">
         <error-component :err-arr="errors"/>
         <text-component :text-strings="textString" :style-obj="textStyle"/>
-        <new-input-component id="new-input" :data-obj.sync="newQ" :select-options="qGroupsArr" :input-props="inputProps" @catch-input-a="onCatchTitle" @submit="onSubmit" @clear="onClear" @catch-select="onCatchGroup"/>
+        <el-row class="input-group">
+          <el-row id="input-component">
+            <input-comp
+              :data-obj.sync="newQ"
+              :input-props="inputOptions"
+              :select-options="filterObj.options"
+              @catch-input="onCatchTitle"
+              @catch-select="onCatchGroup"/>
+          </el-row>
+          <el-row id="button-component">
+            <button-comp
+              :labels="buttonLabels"
+              @handle-click="onClick"/>
+          </el-row>
+        </el-row>
+        <el-row id="table-component">
+          <table-comp
+            :data-obj="qArr"
+            :filter-obj="filterObj"
+            @handle-click="onVote"
+            @handle-filter="filterByGroup"/>
+        </el-row>
+        <!-- <new-input-component id="new-input" :data-obj.sync="newQ" :select-options="qGroupsArr" :input-props="inputProps" @catch-input-a="onCatchTitle" @submit="onSubmit" @clear="onClear" @catch-select="onCatchGroup"/>
         <el-select v-model="filterGroup" clearable placeholder="Filter by group" @change="filterByGroup">
           <el-option v-for="item in qGroupsArr" :key="item.value" :value="item.value" :label="item.label"/>
         </el-select>
-        <table-component id="questions-table" :data-obj="qArr" :props-arr="tableProps" @handle-click="handleClick"/>
+        <table-component id="questions-table" :data-obj="qArr" :props-arr="tableProps" @handle-click="handleClick"/> -->
       </el-col>
     </el-row>
   </div>
@@ -20,6 +42,9 @@ import HeaderComponent from '../components/HeaderComponent.vue'
 import TableComponent from '../components/TableComponent.vue'
 import TextComponent from '../components/TextComponent.vue'
 import ErrorComponent from '../components/ErrorComponent.vue'
+import TableComp from '../components/TableComp.vue'
+import InputComp from '../components/InputComp.vue'
+import ButtonComp from '../components/ButtonComp.vue'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -28,7 +53,10 @@ export default {
 		TableComponent,
 		ErrorComponent,
 		HeaderComponent,
-		TextComponent
+		TextComponent,
+		InputComp,
+		ButtonComp,
+		TableComp
 	},
 	data() {
 		return {
@@ -58,10 +86,32 @@ export default {
 					label: 'administered'
 				}
 			],
+			inputOptions: {
+				value: { type: 'input' },
+				group: { type: 'select' }
+			},
+			buttonLabels: ['Submit', 'Clear'],
 			newQ: {
-				title: '',
+				value: '',
 				group: '',
 				voteCount: 0
+			},
+			filterObj: {
+				value: '',
+				options: [
+					{
+						value: 'A',
+						label: 'space'
+					},
+					{
+						value: 'B',
+						label: 'clerk'
+					},
+					{
+						value: 'C',
+						label: 'administered'
+					}
+				]
 			},
 			currentRow: null,
 			newGroup: {
@@ -78,7 +128,7 @@ export default {
 				fontFamily: 'InputMonoCondensedLightItalic',
 				fontSize: '1rem',
 				marginTop: '20px',
-				marginBottom: '5px',
+				marginBottom: '40px',
 				wordWrap: 'breakword'
 			}
 		}
@@ -90,14 +140,21 @@ export default {
 	created() {
 		this.setQuestions()
 		this.qArr = this.questionsArray
+		console.log(this.qArr)
 	},
 	methods: {
 		...mapActions(['setQuestions', 'addQuestion', 'voteQuestion', 'addQ']),
 		onCatchGroup(e) {
-			this.newGroup.value = e
+			this.newGroup.value = e.value
+			console.log(this.newGroup.value)
 		},
 		onCatchTitle(e) {
-			this.newTitle = e
+			this.newTitle = e.value
+			console.log(this.newTitle)
+		},
+		onClick(e) {
+			if (e.id == 0) this.onSubmit()
+			else if (e.id == 1) this.onClear()
 		},
 		onClear() {
 			this.newQ = {}
@@ -134,7 +191,7 @@ export default {
 				this.errors.push('You have already submitted')
 			}
 		},
-		handleClick(index) {
+		onVote(index) {
 			console.log('clicked')
 			if (!this.voted) {
 				this.voted = true
@@ -169,5 +226,15 @@ export default {
 }
 #content {
 	margin-top: 20px;
+}
+.input-group {
+	border: 2px solid black;
+}
+#button-component {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+#input-component {
+	border-bottom: 2px solid black;
 }
 </style>
