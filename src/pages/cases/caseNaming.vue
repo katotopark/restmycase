@@ -19,58 +19,7 @@
             @handle-click="onClick"/>
         </el-row>
       </el-row>
-      <!-- <el-row id="container">
-        <el-row>
-          <el-row class="input-label">
-            <h2>_NAME</h2>
-          </el-row>
-          <el-row class="input-area" type="flex" justify="center">
-            <el-col :span="22">
-              <el-input
-                v-model="caseName"
-                :rows="2"
-                type="textarea"
-                placeholder="e.g., Bureaupanique"/>
-            </el-col>
-          </el-row>
-        </el-row>
-        <el-row>
-          <el-row class="input-label">
-            <h2>_DESCRIPTION</h2>
-          </el-row>
-          <el-row class="input-area" type="flex" justify="center">
-            <el-col :span="22">
-              <el-input
-                v-model="caseDescription"
-                :autosize="{ minRows: 2, maxRows: 4}"
-                type="textarea"
-                placeholder="e.g., pre-breakfast absolute total shitstorm"/>
-            </el-col>
-          </el-row>
-        </el-row>
-        <el-row>
-          <el-row class="input-label">
-            <h2>_CLASS<span v-if="caseClass">: C.{{ caseClass }}</span></h2>
-          </el-row>
-          <el-row class="input-area" type="flex" justify="center">
-            <el-col :span="22">
-              <el-select v-model="caseClass" :placeholder="caseClass.label" @change="handleChange">
-                <el-option v-for="loc in locClassArr" :key="loc.value" :value="loc.value" :label="`${loc.label}`"/>
-              </el-select>
-            </el-col>
-          </el-row>
-        </el-row>
-      </el-row>
-      <el-row :gutter="10" type="flex" justify="center">
-        <el-col :span="12">
-          <el-button plain @click="onSubmit">Mint</el-button>
-        </el-col>
-        <el-col :span="12">
-          <el-button plain @click="onClear">Clear</el-button>
-        </el-col>
-      </el-row> -->
     </el-col>
-    <!-- <case-card-data-viz ref="caseCardDataViz" :x="417" :y="240"/> -->
     <data-viz-component
       ref="caseCardDataViz"
       :lobas="lobas"
@@ -132,7 +81,6 @@ export default {
 					label: 'Professional'
 				}
 			],
-			caseClassOutput: '',
 			errors: [],
 			tDistance: 0,
 			tDuration: 0,
@@ -182,15 +130,10 @@ export default {
 					caseImage: imageData
 				}
 
-				console.log('case to write is ', this.newCase)
-
 				await this.describeCase(this.newCase)
 				await this.mintComposed()
 				this.$router.push('mintConfirm')
 			}
-		},
-		handleChange(index) {
-			this.caseClass = this.locClassArr[index - 1]['value']
 		},
 		onClear() {
 			this.newCase = {}
@@ -234,5 +177,39 @@ div.el-textarea:focus {
 }
 .el-select {
 	width: 100%;
+}
+.el-button,
+.el-button:active,
+.el-button:focus {
+	border-radius: 0px;
+	border: 2px solid black;
+	width: 100%;
+	height: 4rem;
+	font-family: InputMonoCondensed;
+	font-size: 1.1rem;
+	background-color: rgb(247, 244, 204);
+	color: black;
+	margin-top: 20px;
+}
+.el-button:hover {
+	background: black;
+	color: white;
+	font-family: InputMonoCondensedItalic;
+	border: 2px solid black;
+}
+.input-label h2 {
+	font-size: 1.1rem;
+	font-family: InputMonoCondensed;
+	background-color: black;
+	color: white;
+	width: 100%;
+	padding: 5px 5px;
+	margin-top: 0px;
+	margin-bottom: 15px;
+	word-wrap: break-word;
+	/* border: 2px solid red; */
+}
+.el-row.input-area {
+	margin-bottom: 20px;
 }
 </style>
