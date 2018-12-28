@@ -9,7 +9,7 @@
           <el-row id="input-component">
             <input-comp
               :data-obj.sync="newQ"
-              :input-props="inputOptions"
+              :input-props="inputProps"
               :select-options="filterObj.options"
               @catch-input="onCatchTitle"
               @catch-select="onCatchGroup"/>
@@ -27,30 +27,21 @@
             @handle-click="onVote"
             @handle-filter="filterByGroup"/>
         </el-row>
-        <!-- <new-input-component id="new-input" :data-obj.sync="newQ" :select-options="qGroupsArr" :input-props="inputProps" @catch-input-a="onCatchTitle" @submit="onSubmit" @clear="onClear" @catch-select="onCatchGroup"/>
-        <el-select v-model="filterGroup" clearable placeholder="Filter by group" @change="filterByGroup">
-          <el-option v-for="item in qGroupsArr" :key="item.value" :value="item.value" :label="item.label"/>
-        </el-select>
-        <table-component id="questions-table" :data-obj="qArr" :props-arr="tableProps" @handle-click="handleClick"/> -->
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
-import NewInputComponent from '../components/NewInputComponent.vue'
 import HeaderComponent from '../components/HeaderComponent.vue'
-import TableComponent from '../components/TableComponent.vue'
 import TextComponent from '../components/TextComponent.vue'
 import ErrorComponent from '../components/ErrorComponent.vue'
-import TableComp from '../components/TableComp.vue'
 import InputComp from '../components/InputComp.vue'
 import ButtonComp from '../components/ButtonComp.vue'
+import TableComp from '../components/TableComp.vue'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
-		NewInputComponent,
-		TableComponent,
 		ErrorComponent,
 		HeaderComponent,
 		TextComponent,
@@ -63,30 +54,7 @@ export default {
 			textString:
 				'AQP is a collectively run pool of questions. It stands for Autonomous Question Pool. Here, you can log a new question or vote for one on the list.',
 			styleObj: 'height: 50px;',
-			tableProps: [
-				{ value: 'value', width: '' },
-				{ value: 'group', width: '80' },
-				{ value: 'voteCount', width: '100' }
-			],
 			inputProps: {
-				inputA: 'title',
-				select: 'group'
-			},
-			qGroupsArr: [
-				{
-					value: 'A',
-					label: 'space'
-				},
-				{
-					value: 'B',
-					label: 'clerk'
-				},
-				{
-					value: 'C',
-					label: 'administered'
-				}
-			],
-			inputOptions: {
 				value: { type: 'input' },
 				group: { type: 'select' }
 			},
@@ -123,7 +91,6 @@ export default {
 			qSubmitted: false,
 			errors: [],
 			qArr: [],
-			filterGroup: '',
 			textStyle: {
 				fontFamily: 'InputMonoCondensedLightItalic',
 				fontSize: '1rem',
@@ -140,17 +107,14 @@ export default {
 	created() {
 		this.setQuestions()
 		this.qArr = this.questionsArray
-		console.log(this.qArr)
 	},
 	methods: {
 		...mapActions(['setQuestions', 'addQuestion', 'voteQuestion', 'addQ']),
 		onCatchGroup(e) {
 			this.newGroup.value = e.value
-			console.log(this.newGroup.value)
 		},
 		onCatchTitle(e) {
 			this.newTitle = e.value
-			console.log(this.newTitle)
 		},
 		onClick(e) {
 			if (e.id == 0) this.onSubmit()
@@ -212,18 +176,6 @@ export default {
 }
 </script>
 <style scoped>
-.el-select {
-	width: 100%;
-	margin-bottom: 20px;
-	border-radius: 0px !important;
-}
-#new-input {
-	margin-top: 30px;
-	margin-bottom: 30px;
-}
-#questions-table {
-	border: 2px solid black;
-}
 #content {
 	margin-top: 20px;
 }

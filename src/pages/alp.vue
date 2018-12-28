@@ -4,68 +4,88 @@
     <el-row type="flex" justify="center">
       <el-col id="content" :sm="16" :md="12">
         <error-component :err-arr="errors"/>
-        <text-component :text-strings="textString" :style-obj="textStyle"/>
-        <new-input-component id="new-input" :data-obj="newLoc" :select-options="locClassArr" :input-props="inputProps" @catch-input-a="onCatchName" @catch-input-b="onCatchAddress" @catch-select="onCatchClass" @submit="onSubmit" @clear="onClear"/>
-        <table-component :props-arr="tableProps" :data-obj="locArr" @handle-click="handleClick"/>
+        <text-component
+          :text-strings="textString"
+          :style-obj="textStyle"/>
+        <el-row class="input-group">
+          <el-row id="input-component">
+            <input-comp
+              :data-obj.sync="newLoc"
+              :input-props="inputProps"
+              :select-options="filterObj.options"
+              @catch-input="onCatchInput"
+              @catch-select="onCatchClass"/>
+          </el-row>
+          <el-row id="button-component">
+            <button-comp
+              :labels="buttonLabels"
+              @handle-click="onClick"/>
+          </el-row>
+        </el-row>
+        <el-row id="table-component">
+          <table-comp
+            :data-obj="locArr"
+            :filter-obj="filterObj"
+            @handle-click="onVote"
+            @handle-filter="filterByClass"/>
+        </el-row>
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
 import HeaderComponent from '../components/HeaderComponent.vue'
-import NewInputComponent from '../components/NewInputComponent.vue'
-import TableComponent from '../components/TableComponent.vue'
 import TextComponent from '../components/TextComponent.vue'
 import ErrorComponent from '../components/ErrorComponent.vue'
-import Faker from 'faker'
-// import VueMomentLib from 'VueMomentLib'
+import InputComp from '../components/InputComp.vue'
+import ButtonComp from '../components/ButtonComp.vue'
+import TableComp from '../components/TableComp.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {
 	components: {
 		HeaderComponent,
-		NewInputComponent,
 		ErrorComponent,
-		TableComponent,
-		TextComponent
+		TextComponent,
+		InputComp,
+		ButtonComp,
+		TableComp
 	},
 	data() {
 		return {
 			textString:
 				"ALP is a collectively run pool of institutional locations. It stands for 'Autonomous Location Pool'. Here, you can log a new location or vote for one on the list.",
-			tableProps: [
-				{ value: 'name', width: '' },
-				{ value: 'address', width: '' },
-				{ value: 'class', width: '80' },
-				{ value: 'voteCount', width: '100' }
-			],
 			inputProps: {
-				inputA: 'name',
-				inputB: 'address',
-				select: 'class'
+				name: { type: 'input' },
+				address: { type: 'input' },
+				class: { type: 'select' }
 			},
-			locClassArr: [
-				{
-					value: '1',
-					label: 'Governmental'
-				},
-				{
-					value: '2',
-					label: 'Legal'
-				},
-				{
-					value: '3',
-					label: 'Medical'
-				},
-				{
-					value: '4',
-					label: 'Academic'
-				},
-				{
-					value: '5',
-					label: 'Professional'
-				}
-			],
+			buttonLabels: ['Submit', 'Clear'],
+			filterObj: {
+				value: '',
+				options: [
+					{
+						value: '1',
+						label: 'Governmental'
+					},
+					{
+						value: '2',
+						label: 'Legal'
+					},
+					{
+						value: '3',
+						label: 'Medical'
+					},
+					{
+						value: '4',
+						label: 'Academic'
+					},
+					{
+						value: '5',
+						label: 'Professional'
+					}
+				]
+			},
 			locArr: [],
 			newLoc: {
 				name: '',
@@ -86,45 +106,30 @@ export default {
 				fontFamily: 'InputMonoCondensedLightItalic',
 				fontSize: '1rem',
 				marginTop: '20px',
-				marginBottom: '5px',
+				marginBottom: '40px',
 				wordWrap: 'breakword'
 			}
 		}
 	},
 	computed: {
 		...mapState(['locationsArray'])
-		// date() {
-		// 	// return this.$moment(Date.now()).format()
-		// 	return this.$time(Date.now()).format('DD/MM') // moment (alias)
-		// }
 	},
 	created() {
-		let someLong = Faker.address.longitude()
-		let someLat = Faker.address.latitude()
-		let someStr = Faker.address.streetAddress()
-		console.log('longitude: ', someLong)
-		console.log('latitude: ', someLat)
-		console.log('address: ', someStr)
-
 		this.setLocations()
 		this.locArr = this.locationsArray
-
-		// console.log(Object.values(this.inputProps))
-		// console.log(Object.values(this.tableData))
 	},
 	methods: {
 		...mapActions(['setLocations', 'addLocation', 'voteLocation', 'addLoc']),
-		onCatchName(e) {
-			this.newLocName = e
-			console.log('got name: ', this.newLocName)
+		onClick(e) {
+			if (e.id == 0) this.onSubmit()
+			else if (e.id == 1) this.onClear()
 		},
-		onCatchAddress(e) {
-			this.newLocAddress = e
-			console.log('got address: ', this.newLocAddress)
+		onCatchInput(e) {
+			if (e.prop == 'name') this.newLocName = e.value
+			else if (e.prop == 'address') this.newLocAddress = e.value
 		},
 		onCatchClass(e) {
-			this.newLocClass.value = e
-			console.log('got class: ', this.newLocClass.value)
+			this.newLocClass.value = e.value
 		},
 		onClear() {
 			this.newLoc = {}
@@ -167,7 +172,7 @@ export default {
 				this.errors.push('You have already submitted')
 			}
 		},
-		handleClick(index) {
+		onVote(index) {
 			console.log('clicked ', index)
 			if (!this.voted) {
 				this.voted = true
@@ -175,23 +180,34 @@ export default {
 			} else {
 				this.errors.push('You have already voted')
 			}
+		},
+		filterByClass(e) {
+			console.log('filtering by class', e)
+			if (e !== 0) {
+				return this.locArr.map(loc => {
+					if (loc.class == e) {
+						return loc
+					}
+				})
+			} else {
+				this.locArr = this.locationsArray
+			}
 		}
 	}
 }
 </script>
 <style scoped>
-#new-input {
-	margin-top: 30px;
-	margin-bottom: 30px;
-}
-ul#errors {
-	padding-left: 0px;
-	font-size: 1rem;
-	font-family: InputRegular;
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
 #content {
 	margin-top: 20px;
+}
+.input-group {
+	border: 2px solid black;
+}
+#button-component {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+#input-component {
+	border-bottom: 2px solid black;
 }
 </style>
