@@ -9,7 +9,7 @@
           :style-obj="textStyle"/>
         <el-row class="input-group">
           <el-row id="input-component">
-            <input-comp
+            <input-component
               :data-obj.sync="newLoc"
               :input-props="inputProps"
               :select-options="filterObj.options"
@@ -17,13 +17,13 @@
               @catch-select="onCatchClass"/>
           </el-row>
           <el-row id="button-component">
-            <button-comp
+            <button-component
               :labels="buttonLabels"
               @handle-click="onClick"/>
           </el-row>
         </el-row>
         <el-row id="table-component">
-          <table-comp
+          <table-component
             :data-obj="locArr"
             :filter-obj="filterObj"
             @handle-click="onVote"
@@ -37,9 +37,9 @@
 import HeaderComponent from '../components/HeaderComponent.vue'
 import TextComponent from '../components/TextComponent.vue'
 import ErrorComponent from '../components/ErrorComponent.vue'
-import InputComp from '../components/InputComp.vue'
-import ButtonComp from '../components/ButtonComp.vue'
-import TableComp from '../components/TableComp.vue'
+import InputComponent from '../components/InputComponent.vue'
+import ButtonComponent from '../components/ButtonComponent.vue'
+import TableComponent from '../components/TableComponent.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -47,9 +47,9 @@ export default {
 		HeaderComponent,
 		ErrorComponent,
 		TextComponent,
-		InputComp,
-		ButtonComp,
-		TableComp
+		InputComponent,
+		ButtonComponent,
+		TableComponent
 	},
 	data() {
 		return {
@@ -182,16 +182,8 @@ export default {
 			}
 		},
 		filterByClass(e) {
+			// should be the coming from the store/getters
 			console.log('filtering by class', e)
-			if (e !== 0) {
-				return this.locArr.map(loc => {
-					if (loc.class == e) {
-						return loc
-					}
-				})
-			} else {
-				this.locArr = this.locationsArray
-			}
 		}
 	}
 }

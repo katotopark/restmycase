@@ -7,7 +7,7 @@
         <text-component :text-strings="textString" :style-obj="textStyle"/>
         <el-row class="input-group">
           <el-row id="input-component">
-            <input-comp
+            <input-component
               :data-obj.sync="newQ"
               :input-props="inputProps"
               :select-options="filterObj.options"
@@ -15,13 +15,13 @@
               @catch-select="onCatchGroup"/>
           </el-row>
           <el-row id="button-component">
-            <button-comp
+            <button-component
               :labels="buttonLabels"
               @handle-click="onClick"/>
           </el-row>
         </el-row>
         <el-row id="table-component">
-          <table-comp
+          <table-component
             :data-obj="qArr"
             :filter-obj="filterObj"
             @handle-click="onVote"
@@ -35,9 +35,9 @@
 import HeaderComponent from '../components/HeaderComponent.vue'
 import TextComponent from '../components/TextComponent.vue'
 import ErrorComponent from '../components/ErrorComponent.vue'
-import InputComp from '../components/InputComp.vue'
-import ButtonComp from '../components/ButtonComp.vue'
-import TableComp from '../components/TableComp.vue'
+import InputComponent from '../components/InputComponent.vue'
+import ButtonComponent from '../components/ButtonComponent.vue'
+import TableComponent from '../components/TableComponent.vue'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -45,9 +45,9 @@ export default {
 		ErrorComponent,
 		HeaderComponent,
 		TextComponent,
-		InputComp,
-		ButtonComp,
-		TableComp
+		InputComponent,
+		ButtonComponent,
+		TableComponent
 	},
 	data() {
 		return {

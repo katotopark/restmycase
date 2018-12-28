@@ -2,7 +2,7 @@
   <el-row type="flex" justify="center">
     <el-col :span="18">
       <el-row class="component">
-        <input-comp
+        <input-component
           :data-obj.sync="newQ"
           :input-props="inputProps"
           :select-options="filterObj.options"
@@ -10,10 +10,10 @@
           @catch-select="onCatchSelect"/>
       </el-row>
       <el-row>
-        <button-comp :labels="buttonLabels" @handle-click="onClick"/>
+        <button-component :labels="buttonLabels" @handle-click="onClick"/>
       </el-row>
       <el-row class="component">
-        <table-comp
+        <table-component
           :data-obj="qArr"
           :filter-obj="filterObj"
           @handle-click="onVote"
@@ -25,15 +25,15 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import ButtonComp from '../components/ButtonComp.vue'
-import TableComp from '../components/TableComp.vue'
-import InputComp from '../components/InputComp.vue'
+import ButtonComponent from '../components/ButtonComponent.vue'
+import TableComponent from '../components/TableComponent.vue'
+import InputComponent from '../components/InputComponent.vue'
 
 export default {
 	components: {
-		TableComp,
-		ButtonComp,
-		InputComp
+		TableComponent,
+		ButtonComponent,
+		InputComponent
 	},
 	data() {
 		return {
