@@ -25,7 +25,7 @@
               @change="$emit('catch-select', {
                 value: dataObj[propsArr[index]],
                 prop: propsArr[index] })">
-              <el-option v-for="(item) in selectOptions" :key="item.value" :value="item.value" :label="item.label"/>
+              <el-option v-for="item in selectOptions" :key="item.value" :value="item.value" :label="item.label"/>
             </el-select>
           </el-col>
         </el-row>

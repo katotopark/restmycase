@@ -3,14 +3,15 @@ module.exports = {
 	** Headers of the page
 	*/
 	head: {
-		title: 'nuxt-web3-boilerplate',
+		title: 'Rest My Case',
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
 			{
 				hid: 'description',
 				name: 'description',
-				content: 'Nuxt.js and web3 template project'
+				content:
+					'A decentralized infrastructure for bureaucratic commodification'
 			}
 		],
 		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]

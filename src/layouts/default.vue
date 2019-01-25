@@ -33,7 +33,7 @@
 html {
 	font-family: 'InputMonoCondensed', monospace;
 	font-size: 16px;
-	background-color: rgb(247, 244, 209);
+	background-color: rgb(247, 244, 204);
 	color: black;
 	word-spacing: 1px;
 	-ms-text-size-adjust: 100%;

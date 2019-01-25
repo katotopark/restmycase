@@ -53,7 +53,6 @@ export default {
 			let props = this.dataObj.map(p => {
 				return Object.keys(p).filter(k => k !== 'description')
 			})
-
 			// prop count check
 			for (let i in props) {
 				let currentLength = props[i].length
