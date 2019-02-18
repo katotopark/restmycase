@@ -2,14 +2,14 @@
   <div class="container">
     <el-button id="fullscreen" @click="goFullscreen"/>
     <el-row v-if="!started" type="flex" justify="center">
-      <el-col :span="12">
+      <el-col :sm="22">
         <el-row type="flex" justify="center">
           <el-button id="commodification" @click="handleClick">Start Commodification</el-button>
         </el-row>
       </el-col>
     </el-row>
     <el-row v-else type="flex" justify="center">
-      <el-col :span="12">
+      <el-col :span="20">
         <el-row id="dissection-component" type="flex" justify="center">
           <dissection-component/>
         </el-row>
@@ -131,7 +131,7 @@ export default {
 	background-color: rgb(247, 244, 204);
 	color: black;
 	border: 2px solid black;
-	width: 40%;
+	width: 50%;
 	height: 15rem;
 	margin-top: 75px;
 	hyphens: auto;

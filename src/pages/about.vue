@@ -2,7 +2,7 @@
   <div>
     <header-component/>
     <el-row id="content" type="flex" justify="center">
-      <el-col :sm="22" :md="12">
+      <el-col :sm="16">
         <div class="manifesto-header"/>
         <ul>
           <li v-for="elem in manifesto" :key="elem.key">{{ elem }}</li>

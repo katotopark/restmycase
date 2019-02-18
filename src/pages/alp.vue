@@ -2,7 +2,7 @@
   <div>
     <header-component/>
     <el-row type="flex" justify="center">
-      <el-col id="content" :sm="16" :md="12">
+      <el-col id="content" :sm="16">
         <error-component :err-arr="errors"/>
         <text-component
           :text-strings="textString"

@@ -1,6 +1,6 @@
 <template>
   <el-row type="flex" justify="center">
-    <el-col :span="12">
+    <el-col :sm="22">
       <el-col :span="24" class="container">
         <el-row v-if="!confirmed" type="flex" justify="center">
           <el-col :span="20">
@@ -13,7 +13,7 @@
           </el-col>
         </el-row>
         <el-row v-else>
-          <el-col :span="24" class="container">
+          <el-col :sm="22" class="container">
             <el-row type="flex" justify="center" class="card">
               <el-col :span="16">
                 <case-card
@@ -121,7 +121,7 @@ export default {
 </script>
 <style scoped>
 .container {
-	margin-top: 50px;
+	margin-top: 40px;
 }
 .text {
 	/* max-width: 500px; */

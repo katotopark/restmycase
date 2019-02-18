@@ -1,6 +1,6 @@
 <template>
   <el-row type="flex" justify="center">
-    <el-col :span="12">
+    <el-col :sm="22">
       <loba-loba-component :questions="qArray" :group="group" next="caseNaming"/>
     </el-col>
   </el-row>
