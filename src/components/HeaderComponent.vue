@@ -36,7 +36,7 @@
 export default {
 	data() {
 		return {
-			menuItems: ['', 'AQP', 'ALP', 'About']
+			menuItems: ['RMC', 'AQP', 'ALP', 'About']
 		}
 	},
 	methods: {

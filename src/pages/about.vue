@@ -6,15 +6,6 @@
         <div class="manifesto-header"/>
         <ul>
           <li v-for="elem in manifesto" :key="elem.key">{{ elem }}</li>
-          <!-- <li>RMC is a decentralized infrastructure for bureaucratic commodification.</li>
-          <li>RMC is an individual revolt. It is a circumvention platform.</li>
-          <li>RMC is an autonomous organization. It is distributed, yet collective.</li>
-          <li>RMC is uncategorized. It is a meandering narrative.</li>
-          <li>RMC is a versatile hack. It is independent and stand-alone.</li>
-          <li>RMC is an exploitative tool. It doesn't abide typologies.</li>
-          <li>RMC is disruptive. It bends structures to its needs.</li>
-          <li>RMC is a resentful acceptance. It proposes no solution but an escape.</li>
-          <li>RMC is immutable. It is here to stay.</li> -->
         </ul>
       </el-col>
     </el-row>
